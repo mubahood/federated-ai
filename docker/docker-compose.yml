@@ -1,0 +1,198 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: federated_ai_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fed
+      MYSQL_USER: feduser
+      MYSQL_PASSWORD: fedpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - federated_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    container_name: federated_ai_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - federated_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MinIO (S3-compatible storage)
+  minio:
+    image: minio/minio:latest
+    container_name: federated_ai_minio
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      - federated_network
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # Django Server
+  django:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.server
+    container_name: federated_ai_django
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=dev-secret-key-change-in-production
+      - DB_NAME=fed
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - AWS_ACCESS_KEY_ID=minioadmin
+      - AWS_SECRET_ACCESS_KEY=minioadmin
+      - AWS_S3_ENDPOINT_URL=http://minio:9000
+      - AWS_STORAGE_BUCKET_NAME=federated-ai-models
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../server:/app/server
+      - ../shared:/app/shared
+      - ../web_interface:/app/web_interface
+      - media_data:/app/media
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - federated_network
+    command: >
+      sh -c "
+        echo 'Waiting for MySQL...' &&
+        sleep 5 &&
+        python server/manage.py migrate &&
+        python server/manage.py runserver 0.0.0.0:8000
+      "
+
+  # Celery Worker
+  celery:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.server
+    container_name: federated_ai_celery
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=dev-secret-key-change-in-production
+      - DB_NAME=fed
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    volumes:
+      - ../server:/app/server
+      - ../shared:/app/shared
+    depends_on:
+      - redis
+      - mysql
+    networks:
+      - federated_network
+    command: celery -A server.config worker -l info
+
+  # Flower Server (Federated Learning)
+  flower_server:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.server
+    container_name: federated_ai_flower
+    environment:
+      - FLOWER_SERVER_HOST=0.0.0.0
+      - FLOWER_SERVER_PORT=8080
+      - FLOWER_NUM_ROUNDS=100
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../server:/app/server
+      - ../shared:/app/shared
+    networks:
+      - federated_network
+    command: python server/fl_server/server.py
+
+  # Flower Client 1 (for testing)
+  flower_client_1:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.client
+    container_name: federated_ai_client_1
+    environment:
+      - FLOWER_SERVER_ADDRESS=flower_server:8080
+      - CLIENT_ID=client_1
+    volumes:
+      - ../client:/app/client
+      - ../shared:/app/shared
+      - client_1_data:/app/data
+    depends_on:
+      - flower_server
+    networks:
+      - federated_network
+    profiles:
+      - with-clients
+
+  # Flower Client 2 (for testing)
+  flower_client_2:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.client
+    container_name: federated_ai_client_2
+    environment:
+      - FLOWER_SERVER_ADDRESS=flower_server:8080
+      - CLIENT_ID=client_2
+    volumes:
+      - ../client:/app/client
+      - ../shared:/app/shared
+      - client_2_data:/app/data
+    depends_on:
+      - flower_server
+    networks:
+      - federated_network
+    profiles:
+      - with-clients
+
+networks:
+  federated_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  minio_data:
+  media_data:
+  client_1_data:
+  client_2_data:

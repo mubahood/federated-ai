@@ -19,61 +19,91 @@ A production-grade federated learning system for dynamic object detection that e
 
 ## 🛠️ Installation
 
-### 1. Clone the repository
+### Option 1: Docker (Recommended) 🐳
+
+**Prerequisites:**
+- Docker Desktop installed ([Download here](https://www.docker.com/products/docker-desktop))
+
+**Quick Start:**
 
 ```bash
+# Clone the repository
 git clone https://github.com/yourusername/federated-ai.git
 cd federated-ai
+
+# Start with Docker (one command!)
+./scripts/docker-start.sh
+# Choose option 1 for core services
+
+# Create Django superuser
+docker-compose exec django python server/manage.py createsuperuser
+
+# Access the application
+# - API: http://localhost:8000
+# - MinIO Console: http://localhost:9001
 ```
 
-### 2. Create virtual environment
+**Docker Commands:**
 
 ```bash
+# Start core services
+docker-compose up -d
+
+# Start with Flower clients (for testing)
+docker-compose --profile with-clients up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
+
+# Reset all data
+docker-compose down -v
+```
+
+---
+
+### Option 2: Manual Installation
+
+**Prerequisites:**
+- Python 3.10+
+- MySQL 8.0+
+- Redis 7.0+
+
+**Steps:**
+
+```bash
+# 1. Clone repository
+git clone https://github.com/yourusername/federated-ai.git
+cd federated-ai
+
+# 2. Create virtual environment
 python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-### 3. Install dependencies
+# 3. Install dependencies
+pip install -r requirements/server.txt
 
-```bash
-pip install -r requirements/server.txt  # For server
-pip install -r requirements/client.txt  # For client
-```
-
-### 4. Set up environment variables
-
-```bash
+# 4. Set up environment variables
 cp .env.example .env
-# Edit .env with your configuration
-```
+# Edit .env with your MySQL and Redis credentials
 
-### 5. Set up database
-
-```bash
-# Create MySQL database
+# 5. Set up database
 mysql -u root -p
-CREATE DATABASE federated_ai CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE fed CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 exit;
 
-# Run migrations
+# 6. Run migrations
 cd server
 python manage.py migrate
 python manage.py createsuperuser
-```
 
-### 6. Start Redis (if not running)
-
-```bash
-redis-server
-```
-
-### 7. Start the server
-
-```bash
-# Terminal 1: Django server
+# 7. Start services (in separate terminals)
+# Terminal 1: Django
 python manage.py runserver
 
-# Terminal 2: Celery worker
+# Terminal 2: Celery
 celery -A config worker -l info
 
 # Terminal 3: Flower FL server

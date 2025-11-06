@@ -1,0 +1,40 @@
+# Python
+__pycache__
+*.pyc
+venv/
+.venv/
+*.egg-info
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+docs/
+*.md
+LICENSE
+
+# Tests
+tests/
+.pytest_cache
+.coverage
+
+# CI/CD
+.github
+.gitlab-ci.yml
+
+# Environment
+.env.example
+
+# Build artifacts
+dist/
+build/
