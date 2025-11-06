@@ -64,6 +64,7 @@ services:
       dockerfile: docker/Dockerfile.server
     container_name: federated_ai_django
     environment:
+      - DJANGO_SETTINGS_MODULE=config.settings
       - DEBUG=True
       - SECRET_KEY=dev-secret-key-change-in-production
       - DB_NAME=fed
