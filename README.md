@@ -1,4 +1,4 @@
-# 🤖 Federated AI - Distributed Object Detection System
+# Federated AI - Distributed Object Detection System
 
 <div align="center">
 
@@ -9,123 +9,158 @@
 
 A production-grade federated learning system for collaborative object detection that enables privacy-preserving distributed training across multiple devices without sharing raw data.
 
-[Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Architecture](#-architecture) • [Contributing](#-contributing)
+[Features](#features) • [Quick Start](#quick-start) • [Documentation](#documentation) • [Architecture](#architecture) • [Contributing](#contributing)
 
 </div>
 
 ---
 
-## 🚀 Features
+## Features
 
 ### Core Capabilities
-- **🔐 Federated Learning**: Train on distributed devices without sharing raw data (Flower framework)
-- **📱 Native Android App**: Full-featured mobile client with on-device inference
-- **🎯 Real-time Detection**: MobileNetV3-based fast inference (<500ms)
-- **🔄 Dynamic Model Updates**: Hot-swap models without app restart
-- **📊 Django Admin Dashboard**: Real-time monitoring of training, clients, and system health
-- **🌐 RESTful API**: Complete API with authentication and documentation
 
-### Privacy & Security
-- **Differential Privacy**: Configurable privacy budgets (ε, δ)
-- **Secure Aggregation**: Model updates aggregated on server
-- **Token Authentication**: Secure API access with JWT
-- **Data Encryption**: TLS/SSL for all communications
+**Federated Learning Infrastructure**
+- Distributed training across multiple devices without centralized data collection
+- Flower framework integration for coordinated model aggregation
+- Privacy-preserving model updates with differential privacy support
 
-### ML Pipeline
-- **PyTorch Mobile**: Optimized .ptl models for on-device inference  
-- **Celery Async Training**: Background training with Redis message broker
-- **Model Versioning**: SHA256 verification and automatic rollback
-- **Image Upload Queue**: Batch processing with exponential backoff retry
+**Native Mobile Application**
+- Full-featured Android client built with Jetpack Compose
+- On-device inference using PyTorch Mobile
+- Real-time object detection with MobileNetV3 architecture
+- Inference latency under 500ms on modern mobile devices
 
-## ⚡ Quick Start
+**Model Management**
+- Hot-swap model updates without application restart
+- Automatic model versioning with SHA256 verification
+- Rollback capability for failed deployments
+- Centralized model distribution through RESTful API
 
-### Using Docker (Recommended)
+**Administrative Dashboard**
+- Real-time monitoring of training progress and system health
+- Client activity tracking and statistics
+- Training data distribution visualization
+- Performance metrics and model evaluation results
+
+### Security & Privacy
+
+**Data Protection**
+- Differential privacy with configurable epsilon and delta parameters
+- Secure aggregation of model updates on server
+- TLS/SSL encryption for all client-server communications
+- Token-based authentication using JWT standards
+
+**Access Control**
+- Role-based permissions for administrative functions
+- API rate limiting and request throttling
+- Secure client registration and authentication
+
+### Machine Learning Pipeline
+
+**Training Infrastructure**
+- Asynchronous training jobs using Celery task queue
+- Redis message broker for distributed task management
+- Automatic checkpoint saving and recovery
+- Support for distributed training across multiple GPUs
+
+**Model Optimization**
+- PyTorch Mobile optimized models (.ptl format)
+- Model quantization for reduced file size
+- Efficient inference on resource-constrained devices
+- Batch processing for image uploads with retry logic
+
+## Quick Start
+
+### Docker Deployment (Recommended)
 
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/federated-ai.git
 cd federated-ai
 
-# Copy environment file
+# Configure environment variables
 cp .env.example .env
+# Edit .env with your configuration
 
-# Start all services with Docker Compose
+# Start all services
 cd docker
 docker compose up -d
 
-# Create Django superuser
+# Create administrative user
 docker compose exec django python /app/server/manage.py createsuperuser
 
-# Access the system
-# 🌐 Django Admin: http://localhost:8000/admin
-# 📊 Dashboard: http://localhost:8000/admin/dashboard
-# 🔧 API Docs: http://localhost:8000/api/schema/swagger-ui/
-# 📦 MinIO: http://localhost:9001 (minioadmin/minioadmin)
+# Access the application
+# Django Admin: http://localhost:8000/admin
+# API Dashboard: http://localhost:8000/admin/dashboard
+# API Documentation: http://localhost:8000/api/schema/swagger-ui/
+# MinIO Console: http://localhost:9001 (minioadmin/minioadmin)
 ```
 
-### Android App Setup
+### Android Application Setup
 
 ```bash
-# Build and install the Android app
+# Build the Android application
 cd android-mobo
 ./gradlew assembleDebug
+
+# Install on connected device
 adb install app/build/outputs/apk/debug/app-debug.apk
 
-# Or open in Android Studio and run
+# Alternative: Open project in Android Studio and run
 ```
 
-**App Features:**
-- **Train Tab**: Capture and label images for training
-- **Predict Tab**: Real-time object detection with ML model
-- **Models Tab**: Download and manage model versions
-- Upload queue with progress tracking and retry logic
+**Mobile Application Capabilities:**
+- **Training Interface**: Capture and annotate images for model training
+- **Inference Interface**: Real-time object detection with confidence scores
+- **Model Management**: Download and switch between model versions
+- **Upload Queue**: Automatic synchronization with retry and progress tracking
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
-**Required:**
-- Docker & Docker Compose (recommended) OR:
-  - Python 3.11+
-  - MySQL 8.0+
-  - Redis 7.0+
-  - Node.js 16+ (for web interface)
-- Git
+### System Requirements
 
-**For Android Development:**
-- Android Studio Hedgehog or newer
-- Android SDK 24+ (Android 7.0)
-- Kotlin 1.9+
+**Production Deployment:**
+- Docker 20.10+ and Docker Compose 2.0+
+- 4GB RAM minimum, 8GB recommended
+- 10GB available disk space
+
+**Development Environment:**
+- Python 3.11 or higher
+- MySQL 8.0 or higher
+- Redis 7.0 or higher
+- Node.js 16+ (optional, for web interface development)
+- Git version control
+
+**Android Development:**
+- Android Studio Hedgehog (2023.1.1) or newer
+- Android SDK API Level 24 or higher (Android 7.0+)
+- Kotlin 1.9+ compiler
+- Gradle 8.0+
 
 ---
 
-## 🛠️ Installation
+## Installation
 
-### Option 1: Docker (Recommended) 🐳
+### Docker Deployment
 
-See [Quick Start](#-quick-start) above.
+Refer to the Quick Start section above for Docker-based deployment instructions.
 
-**Additional Docker Commands:**
+**Service Management:**
 
 ```bash
-# View logs
+# View service logs
 docker compose logs -f django
 
-# Restart services
-docker compose restart
+# Restart specific service
+docker compose restart django
 
-# Stop services
+# Stop all services
 docker compose down
 
-# Complete reset (removes volumes)
+# Complete reset with volume deletion
 docker compose down -v
-```
-
-**Docker Commands:**
-
-```bash
-# Start core services
-docker-compose up -d
 
 # Start with Flower clients (for testing)
 docker-compose --profile with-clients up -d
@@ -188,31 +223,33 @@ celery -A config worker -l info
 python fl_server/server.py
 ```
 
-## 📚 Documentation
+## Documentation
+
+### Available Documentation
 
 | Document | Description |
 |----------|-------------|
-| [API Documentation](API_DOCUMENTATION.md) | Complete REST API reference with examples |
-| [API Guide](API_DOCUMENTATION_GUIDE.md) | How to use the API with authentication |
-| [E2E Testing Guide](E2E_TESTING_GUIDE.md) | End-to-end testing procedures |
-| [Model Performance Testing](MODEL_PERFORMANCE_TESTING.md) | How to test ML model accuracy |
-| [Federated Training Pipeline](FEDERATED_TRAINING_PIPELINE.md) | Training architecture and workflow |
-| [Authentication Guide](AUTHENTICATION_GUIDE.md) | Security and auth implementation |
-| [Quick Start Testing](QUICK_START_TESTING.md) | Quick validation of system setup |
-| [Project Guidelines](PROJECT_GUIDELINES.md) | Technical specifications and standards |
+| [API Documentation](API_DOCUMENTATION.md) | Complete REST API reference with request/response examples |
+| [API Usage Guide](API_DOCUMENTATION_GUIDE.md) | Authentication and API integration guidelines |
+| [E2E Testing Guide](E2E_TESTING_GUIDE.md) | End-to-end testing procedures and test suites |
+| [Model Performance Testing](MODEL_PERFORMANCE_TESTING.md) | ML model accuracy evaluation methodology |
+| [Federated Training Pipeline](FEDERATED_TRAINING_PIPELINE.md) | Training architecture and workflow documentation |
+| [Authentication Guide](AUTHENTICATION_GUIDE.md) | Security implementation and authentication flows |
+| [Quick Start Testing](QUICK_START_TESTING.md) | System validation and smoke testing procedures |
+| [Project Guidelines](PROJECT_GUIDELINES.md) | Technical specifications and development standards |
 
-### API Endpoints
+### API Reference
 
-Access interactive API documentation at `http://localhost:8000/api/schema/swagger-ui/`
+Interactive API documentation is available at `http://localhost:8000/api/schema/swagger-ui/`
 
-**Key endpoints:**
-- `POST /api/clients/register/` - Register new device
-- `POST /api/images/upload/` - Upload training images
-- `POST /api/models/train/` - Trigger training job
-- `GET /api/models/latest/` - Download latest model
-- `POST /api/detections/` - Submit detection results
+**Core Endpoints:**
+- `POST /api/clients/register/` - Client device registration
+- `POST /api/images/upload/` - Training image upload
+- `POST /api/models/train/` - Initiate training job
+- `GET /api/models/latest/` - Download current model version
+- `POST /api/detections/` - Submit inference results
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run all tests
@@ -225,7 +262,7 @@ pytest --cov=server --cov=client
 pytest tests/server/test_models.py
 ```
 
-## 🏗️ Architecture
+## System Architecture
 
 ```
 ┌─────────────────┐         ┌──────────────────┐
@@ -275,7 +312,7 @@ pytest tests/server/test_models.py
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 federated-ai/
@@ -323,7 +360,7 @@ federated-ai/
     └── integration/
 ```
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
@@ -331,21 +368,21 @@ federated-ai/
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👥 Authors
+## Authors
 
-- Your Name - Initial work
+Initial development and architecture.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Flower Framework](https://flower.ai/) - Federated learning framework
 - [PyTorch](https://pytorch.org/) - Deep learning framework
 - [Django](https://www.djangoproject.com/) - Web framework
 
-## 🎯 Roadmap
+## Roadmap
 
 - [x] **Phase 1**: Core Infrastructure (Django + MySQL + Redis + Docker)
 - [x] **Phase 2**: RESTful API with authentication and documentation
@@ -377,7 +414,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Docker Issues
 
@@ -424,7 +461,7 @@ cd android-mobo
 
 ---
 
-## 📧 Support
+## Support
 
 - **Issues**: [GitHub Issues](https://github.com/yourusername/federated-ai/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/yourusername/federated-ai/discussions)
@@ -432,18 +469,12 @@ cd android-mobo
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-<div align="center">
-
-**Status**: � Active Development  
-**Version**: 1.0.0-alpha  
+**Project Status**: Active Development  
+**Current Version**: 1.0.0-alpha  
 **Last Updated**: November 8, 2025
-
-Made with ❤️ for privacy-preserving AI
-
-</div>
