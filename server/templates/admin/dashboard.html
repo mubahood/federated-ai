@@ -1,0 +1,422 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block title %}Federated AI Dashboard{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Federated AI Admin</a></h1>
+{% endblock %}
+
+{% block nav-global %}
+<div style="padding: 10px 20px; background: #417690;">
+    <a href="{% url 'admin:index' %}" style="color: white; margin-right: 20px; text-decoration: none;">← Back to Admin</a>
+    <a href="{% url 'admin_dashboard' %}" style="color: white; margin-right: 20px; text-decoration: none; font-weight: bold;">📊 Dashboard</a>
+</div>
+{% endblock %}
+
+{% block extrastyle %}
+<style>
+    /* Reset admin styles for dashboard */
+    #content {
+        padding: 20px;
+        background: #f8f9fa;
+    }
+    
+    .dashboard-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .dashboard-header h1 {
+        margin: 0 0 10px 0;
+        font-size: 32px;
+        font-weight: 600;
+        color: white;
+    }
+    
+    .dashboard-header p {
+        margin: 0;
+        opacity: 0.9;
+        color: white;
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .stat-card {
+        background: white;
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        border-left: 4px solid #667eea;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    
+    .stat-card.warning {
+        border-left-color: #f59e0b;
+    }
+    
+    .stat-card.success {
+        border-left-color: #10b981;
+    }
+    
+    .stat-card.error {
+        border-left-color: #ef4444;
+    }
+    
+    .stat-card.error {
+        border-left-color: #ef4444;
+    }
+    
+    .stat-card h3 {
+        margin: 0 0 8px 0;
+        font-size: 13px;
+        color: #6b7280;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+    
+    .stat-card .value {
+        font-size: 36px;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 8px;
+        line-height: 1;
+    }
+    
+    .stat-card .subtitle {
+        font-size: 13px;
+        color: #9ca3af;
+    }
+    
+    .section {
+        background: white;
+        padding: 28px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        margin-bottom: 24px;
+    }
+    
+    .section h2 {
+        margin: 0 0 24px 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: #1f2937;
+        border-bottom: 2px solid #e5e7eb;
+        padding-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .health-status {
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+    
+    .health-status.healthy {
+        background: #d1fae5;
+        color: #065f46;
+    }
+    
+    .health-status.warning {
+        background: #fef3c7;
+        color: #92400e;
+    }
+    
+    .health-status.error {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+    
+    .activity-item {
+        padding: 12px;
+        border-left: 3px solid #e5e7eb;
+        margin-bottom: 10px;
+        background: #f9fafb;
+        color: #1f2937;
+        border-radius: 4px;
+    }
+    
+    .activity-item:hover {
+        background: #f3f4f6;
+    }
+    
+    .activity-item strong {
+        color: #111827;
+    }
+    
+    .activity-item small {
+        color: #6b7280;
+    }
+    
+    .activity-icon {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+    
+    .chart-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .chart-list li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #e5e7eb;
+        color: #1f2937;
+    }
+    
+    .chart-list li:last-child {
+        border-bottom: none;
+    }
+    
+    .chart-list li span {
+        color: #1f2937;
+    }
+    
+    .progress-bar {
+        height: 8px;
+        background: #e5e7eb;
+        border-radius: 4px;
+        overflow: hidden;
+        margin-top: 5px;
+    }
+    
+    .progress-fill {
+        height: 100%;
+        background: #667eea;
+        transition: width 0.3s ease;
+    }
+    
+    .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    
+    .badge-success { background: #d1fae5; color: #065f46; }
+    .badge-warning { background: #fef3c7; color: #92400e; }
+    .badge-info { background: #dbeafe; color: #1e40af; }
+    .badge-error { background: #fee2e2; color: #991b1b; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1>🤖 Federated AI Control Center</h1>
+    <p>Real-time monitoring and management of your federated learning system</p>
+    <p style="margin-top: 10px; font-size: 14px;">Last updated: {{ dashboard_updated|date:"F d, Y H:i" }}</p>
+</div>
+
+<!-- Key Metrics -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <h3>📱 Total Clients</h3>
+        <div class="value">{{ total_clients }}</div>
+        <div class="subtitle">{{ active_clients }} active this week</div>
+    </div>
+    
+    <div class="stat-card success">
+        <h3>📸 Training Images</h3>
+        <div class="value">{{ total_training_images }}</div>
+        <div class="subtitle">{{ images_this_week }} uploaded this week</div>
+    </div>
+    
+    <div class="stat-card">
+        <h3>🤖 Model Versions</h3>
+        <div class="value">{{ total_model_versions }}</div>
+        {% if latest_model_stats %}
+        <div class="subtitle">Latest: v{{ latest_model_stats.version }} ({{ latest_model_stats.accuracy|floatformat:2 }}% accuracy)</div>
+        {% else %}
+        <div class="subtitle">No models deployed yet</div>
+        {% endif %}
+    </div>
+    
+    <div class="stat-card">
+        <h3>🎓 Training Rounds</h3>
+        <div class="value">{{ total_training_rounds }}</div>
+        <div class="subtitle">{{ completed_rounds }} completed, {{ active_training }} active</div>
+    </div>
+    
+    <div class="stat-card">
+        <h3>🔍 Predictions</h3>
+        <div class="value">{{ total_detections }}</div>
+        <div class="subtitle">Avg: {{ avg_inference_time }}ms</div>
+    </div>
+    
+    <div class="stat-card {% if system_health.status == 'healthy' %}success{% elif system_health.status == 'warning' %}warning{% else %}error{% endif %}">
+        <h3>❤️ System Health</h3>
+        <div class="value">
+            <span class="health-status {{ system_health.status }}">
+                {{ system_health.status|upper }}
+            </span>
+        </div>
+        <div class="subtitle">{{ system_health.issues|length }} issue{{ system_health.issues|length|pluralize }}</div>
+    </div>
+</div>
+
+<!-- System Health Details -->
+{% if system_health.issues %}
+<div class="section">
+    <h2>⚠️ System Health Issues</h2>
+    <ul style="list-style: none; padding: 0; margin: 0;">
+        {% for issue in system_health.issues %}
+        <li style="padding: 12px; background: #fef3c7; border-left: 4px solid #f59e0b; margin-bottom: 10px; border-radius: 4px; color: #92400e; font-weight: 500;">
+            {{ issue }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<!-- Two Column Layout -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+    <!-- Training Data Distribution -->
+    <div class="section">
+        <h2>📊 Training Data by Category</h2>
+        {% if images_by_category %}
+        <ul class="chart-list">
+            {% for item in images_by_category %}
+            <li>
+                <span><strong>{{ item.object_category__name|default:"Uncategorized" }}</strong></span>
+                <span class="badge badge-info">{{ item.count }} images</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p style="color: #9ca3af;">No training images uploaded yet.</p>
+        {% endif %}
+    </div>
+    
+    <!-- Client Activity -->
+    <div class="section">
+        <h2>📱 Client Status</h2>
+        <div style="margin-bottom: 15px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <span>Online Now</span>
+                <strong>{{ online_clients }}</strong>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: {% if total_clients %}{% widthratio online_clients total_clients 100 %}%{% else %}0%{% endif %};"></div>
+            </div>
+        </div>
+        
+        {% if clients_by_device %}
+        <h3 style="margin: 20px 0 10px 0; font-size: 14px; color: #6b7280;">By Device Type</h3>
+        <ul class="chart-list">
+            {% for device in clients_by_device %}
+            <li>
+                <span>{{ device.device_type|upper }}</span>
+                <span class="badge badge-info">{{ device.count }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Two Column Layout -->
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+    <!-- Recent Activity -->
+    <div class="section">
+        <h2>📅 Recent Activity</h2>
+        {% if recent_activities %}
+        {% for activity in recent_activities %}
+        <div class="activity-item">
+            <span class="activity-icon">{{ activity.icon }}</span>
+            <strong>{{ activity.title }}</strong>
+            <div style="font-size: 12px; color: #9ca3af; margin-top: 5px;">
+                {{ activity.timestamp|timesince }} ago
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p style="color: #9ca3af;">No recent activity.</p>
+        {% endif %}
+    </div>
+    
+    <!-- Model Performance -->
+    <div class="section">
+        <h2>🎯 Model Performance</h2>
+        {% if latest_model_stats %}
+        <div style="margin-bottom: 20px;">
+            <h3 style="font-size: 16px; margin-bottom: 10px;">Latest Model: v{{ latest_model_stats.version }}</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div>
+                    <div style="color: #6b7280; font-size: 12px;">Accuracy</div>
+                    <div style="font-size: 24px; font-weight: 700; color: #10b981;">
+                        {{ latest_model_stats.accuracy|floatformat:2 }}%
+                    </div>
+                </div>
+                <div>
+                    <div style="color: #6b7280; font-size: 12px;">File Size</div>
+                    <div style="font-size: 24px; font-weight: 700;">
+                        {{ latest_model_stats.file_size_mb }} MB
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if accuracy_from_feedback > 0 %}
+        <div>
+            <h3 style="font-size: 14px; margin-bottom: 10px; color: #6b7280;">User Feedback</h3>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span>Prediction Accuracy</span>
+                <strong style="color: #10b981;">{{ accuracy_from_feedback|floatformat:2 }}%</strong>
+            </div>
+            <div style="display: flex; gap: 10px; font-size: 12px;">
+                <span class="badge badge-success">{{ correct_predictions }} correct</span>
+                <span class="badge badge-error">{{ incorrect_predictions }} incorrect</span>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="section">
+    <h2>⚡ Quick Actions</h2>
+    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+        <a href="{% url 'admin:training_trainingimage_changelist' %}" class="button" style="background: #667eea; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600;">
+            📸 View Training Images
+        </a>
+        <a href="{% url 'admin:clients_client_changelist' %}" class="button" style="background: #667eea; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600;">
+            📱 Manage Clients
+        </a>
+        <a href="{% url 'admin:training_modelversion_changelist' %}" class="button" style="background: #667eea; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600;">
+            🤖 View Models
+        </a>
+        <a href="{% url 'admin:training_trainingsession_changelist' %}" class="button" style="background: #667eea; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600;">
+            🎓 Training Sessions
+        </a>
+        <a href="{% url 'admin:detection_detectionresult_changelist' %}" class="button" style="background: #667eea; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600;">
+            🔍 View Predictions
+        </a>
+    </div>
+</div>
+
+{% endblock %}

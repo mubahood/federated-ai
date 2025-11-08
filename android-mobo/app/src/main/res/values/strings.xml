@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FederatedAI</string>
+    
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="loading">Loading…</string>
+    <string name="error">Error</string>
+    <string name="retry">Retry</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="settings">Settings</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_camera">Camera</string>
+    <string name="nav_training">Training</string>
+    <string name="nav_stats">Stats</string>
+    <string name="nav_settings">Settings</string>
+    
+    <!-- Onboarding -->
+    <string name="welcome_title">Welcome to FederatedAI</string>
+    <string name="welcome_subtitle">Privacy-first AI training on your device</string>
+    <string name="get_started">Get Started</string>
+    <string name="skip">Skip</string>
+    
+    <!-- Home -->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="global_stats">Global Statistics</string>
+    <string name="your_contribution">Your Contribution</string>
+    <string name="quick_actions">Quick Actions</string>
+    
+    <!-- Camera -->
+    <string name="capture_image">Capture Image</string>
+    <string name="label_image">Label Image</string>
+    <string name="select_category">Select Category</string>
+    <string name="import_from_gallery">Import from Gallery</string>
+    
+    <!-- Training -->
+    <string name="start_training">Start Training</string>
+    <string name="stop_training">Stop Training</string>
+    <string name="training_in_progress">Training in Progress</string>
+    <string name="connection_status">Connection Status</string>
+    
+    <!-- Permissions -->
+    <string name="camera_permission_rationale">Camera permission is needed to capture training images</string>
+    <string name="storage_permission_rationale">Storage permission is needed to save and load images</string>
+    <string name="notification_permission_rationale">Notification permission is needed to keep you updated on training progress</string>
+    
+    <!-- Errors -->
+    <string name="error_network">Network error. Please check your connection.</string>
+    <string name="error_unknown">An unexpected error occurred</string>
+    <string name="error_camera">Failed to initialize camera</string>
+</resources>

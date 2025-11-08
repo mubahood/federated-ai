@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'drf_spectacular',
     'django_celery_beat',
     'django_celery_results',
     
@@ -74,7 +75,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -165,7 +166,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',  # Allow any for development; change to IsAuthenticated in production
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
@@ -178,6 +179,33 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser',
     ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+# DRF Spectacular settings
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Federated Learning Object Detection API',
+    'DESCRIPTION': 'REST API for federated learning-based object detection system. Supports client registration, image uploads, training coordination, and detection result management.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True,
+    'SCHEMA_PATH_PREFIX': r'/api/v[0-9]',
+    'SERVERS': [
+        {'url': 'http://localhost:8000', 'description': 'Development server'},
+    ],
+    # Prevent infinite recursion in serializers
+    'SCHEMA_COERCE_METHOD_NAMES': {
+        'list': 'list',
+        'create': 'create',
+        'retrieve': 'read',
+        'update': 'update',
+        'partial_update': 'partial_update',
+        'destroy': 'destroy',
+    },
+    'POSTPROCESSING_HOOKS': [],
+    'PREPROCESSING_HOOKS': [],
+    'ENUM_NAME_OVERRIDES': {},
+    'COMPONENT_NO_READ_ONLY_REQUIRED': False,
 }
 
 # CORS settings
@@ -226,6 +254,19 @@ DEFAULT_MODEL = 'mobilenet_v3_small'
 INPUT_SIZE = (224, 224)
 BATCH_SIZE = int(os.getenv('BATCH_SIZE', '32'))
 LEARNING_RATE = float(os.getenv('LEARNING_RATE', '0.001'))
+
+# Celery Configuration
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0')
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 3600  # 1 hour max per task
+CELERY_TASK_SOFT_TIME_LIMIT = 3300  # Soft limit: 55 minutes
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1  # Take 1 task at a time for long-running jobs
+CELERY_WORKER_MAX_TASKS_PER_CHILD = 10  # Restart worker after 10 tasks (prevent memory leaks)
 
 # Logging Configuration
 LOGGING = {

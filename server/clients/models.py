@@ -101,6 +101,7 @@ class Client(SoftDeleteModel):
         max_length=64,
         unique=True,
         blank=True,
+        null=True,
         help_text="API key for authentication"
     )
 

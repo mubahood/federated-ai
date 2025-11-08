@@ -1,6 +1,71 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import TrainingImage, TrainingRound, ModelVersion
+from django.urls import reverse
+from django.utils.safestring import mark_safe
+from .models import TrainingImage, TrainingRound, ModelVersion, TrainingSession
+
+
+@admin.register(TrainingSession)
+class TrainingSessionAdmin(admin.ModelAdmin):
+    list_display = [
+        'id',
+        'name',
+        'status_badge',
+        'model_name',
+        'progress',
+        'created_by',
+        'created_at'
+    ]
+    list_filter = ['status', 'model_name', 'created_at']
+    search_fields = ['name', 'created_by__username']
+    readonly_fields = ['current_round', 'created_at', 'updated_at']
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('name', 'model_name', 'status', 'created_by')
+        }),
+        ('Configuration', {
+            'fields': ('num_rounds', 'current_round', 'config'),
+            'classes': ('collapse',)
+        }),
+        ('Timing', {
+            'fields': ('start_time', 'end_time')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def status_badge(self, obj):
+        """Display colored badge for status."""
+        colors = {
+            'pending': 'gray',
+            'running': 'blue',
+            'completed': 'green',
+            'failed': 'red',
+            'cancelled': 'orange'
+        }
+        color = colors.get(obj.status, 'gray')
+        return format_html(
+            '<span style="background-color: {}; color: white; padding: 3px 10px; border-radius: 3px;">{}</span>',
+            color,
+            obj.get_status_display()
+        )
+    status_badge.short_description = "Status"
+    
+    def progress(self, obj):
+        """Display training progress."""
+        if obj.num_rounds > 0:
+            percentage = (obj.current_round / obj.num_rounds) * 100
+            return format_html(
+                '<div style="width: 100px; background-color: #f0f0f0; border-radius: 3px;">'
+                '<div style="width: {}%; background-color: #4CAF50; color: white; padding: 2px; text-align: center; border-radius: 3px;">'
+                '{}%</div></div>',
+                percentage,
+                int(percentage)
+            )
+        return "-"
+    progress.short_description = "Progress"
 
 
 @admin.register(TrainingImage)
@@ -79,7 +144,7 @@ class TrainingRoundAdmin(admin.ModelAdmin):
     filter_horizontal = ['participants']
     fieldsets = (
         ('Basic Information', {
-            'fields': ('round_number', 'status', 'min_clients')
+            'fields': ('training_session', 'round_number', 'status', 'num_clients')
         }),
         ('Participants', {
             'fields': ('participants',)

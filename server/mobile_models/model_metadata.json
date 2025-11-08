@@ -1,0 +1,51 @@
+{
+  "model_info": {
+    "architecture": "MobileNetV3-Small",
+    "num_classes": 5,
+    "input_size": [
+      224,
+      224
+    ],
+    "format": "PyTorch Mobile (.ptl)",
+    "quantized": false,
+    "base_model": "ImageNet Pre-trained",
+    "note": "Pre-trained on ImageNet, adapted for 5 classes. Will need fine-tuning on your data for best results."
+  },
+  "categories": {
+    "0": "Bicycle",
+    "1": "Car",
+    "2": "Cat",
+    "3": "Dog",
+    "4": "Person"
+  },
+  "preprocessing": {
+    "input_size": [
+      224,
+      224
+    ],
+    "normalization": {
+      "mean": [
+        0.485,
+        0.456,
+        0.406
+      ],
+      "std": [
+        0.229,
+        0.224,
+        0.225
+      ]
+    },
+    "pixel_range": [
+      0.0,
+      1.0
+    ],
+    "description": "1. Resize image to 224x224, 2. Convert to RGB, 3. Scale pixels to [0,1], 4. Normalize with ImageNet mean/std"
+  },
+  "performance": {
+    "model_size_mb": 8.1,
+    "parameters": 1522981,
+    "note": "Transfer learning from ImageNet - should give reasonable predictions immediately"
+  },
+  "version": "1.0.0-pretrained",
+  "created_at": "2025-11-07T16:57:35.707496"
+}

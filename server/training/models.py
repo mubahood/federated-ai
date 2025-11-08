@@ -6,6 +6,76 @@ from core.models import SoftDeleteModel, TimeStampedModel
 User = get_user_model()
 
 
+class TrainingSession(TimeStampedModel):
+    """
+    Represents a federated learning training session.
+    A session consists of multiple training rounds.
+    """
+    
+    class Status(models.TextChoices):
+        PENDING = 'pending', 'Pending'
+        RUNNING = 'running', 'Running'
+        COMPLETED = 'completed', 'Completed'
+        FAILED = 'failed', 'Failed'
+        CANCELLED = 'cancelled', 'Cancelled'
+    
+    name = models.CharField(
+        max_length=255,
+        help_text="Name of the training session"
+    )
+    model_name = models.CharField(
+        max_length=100,
+        default='mobilenet_v3_small',
+        help_text="Name of the model architecture"
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.PENDING,
+        db_index=True,
+        help_text="Current status of the training session"
+    )
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='training_sessions',
+        help_text="User who created this session"
+    )
+    num_rounds = models.IntegerField(
+        default=10,
+        validators=[MinValueValidator(1)],
+        help_text="Total number of planned rounds"
+    )
+    current_round = models.IntegerField(
+        default=0,
+        help_text="Current round number"
+    )
+    config = models.JSONField(
+        default=dict,
+        help_text="Session configuration"
+    )
+    start_time = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="When session started"
+    )
+    end_time = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="When session completed"
+    )
+    
+    class Meta:
+        verbose_name = "Training Session"
+        verbose_name_plural = "Training Sessions"
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.name} - Round {self.current_round}/{self.num_rounds}"
+
+
 class TrainingImage(SoftDeleteModel):
     """
     Individual training image uploaded by users.
@@ -84,8 +154,15 @@ class TrainingRound(TimeStampedModel):
         FAILED = 'failed', 'Failed'
         CANCELLED = 'cancelled', 'Cancelled'
     
+    training_session = models.ForeignKey(
+        'TrainingSession',
+        on_delete=models.CASCADE,
+        related_name='rounds',
+        null=True,
+        blank=True,
+        help_text="Parent training session"
+    )
     round_number = models.IntegerField(
-        unique=True,
         db_index=True,
         help_text="Sequential round number"
     )
@@ -103,10 +180,10 @@ class TrainingRound(TimeStampedModel):
         related_name='training_rounds',
         help_text="Clients participating in this round"
     )
-    min_clients = models.IntegerField(
+    num_clients = models.IntegerField(
         default=2,
         validators=[MinValueValidator(1)],
-        help_text="Minimum number of clients required"
+        help_text="Number of clients in this round"
     )
     
     # Timing

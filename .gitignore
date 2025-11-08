@@ -1,4 +1,10 @@
-# Python
+# ============================================
+# FEDERATED AI - Comprehensive .gitignore
+# ============================================
+
+# ============================================
+# Python & Virtual Environments
+# ============================================
 __pycache__/
 *.py[cod]
 *$py.class
@@ -10,78 +16,326 @@ build/
 venv/
 env/
 ENV/
+.venv/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
 
+# ============================================
 # Django
+# ============================================
 *.log
+*.pot
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-/media
-/staticfiles
-/static
+/staticfiles/
+/static/
+!server/static/.gitkeep
 
-# Environment variables
-.env
-.env.local
-.env.*.local
+# Django migrations (keep structure, ignore data)
+**/migrations/__pycache__/
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
+# ============================================
+# Training Data & Media (LARGE FILES!)
+# ============================================
+# Exclude ALL training images - they're too large for git
+server/media/training_images/
+server/media/uploaded_images/
+server/media/temp/
+client/data/training/
+client/data/images/
+client/data/cache/
 
-# Jupyter Notebook
-.ipynb_checkpoints
+# Allow media directory structure but not content
+server/media/*
+!server/media/.gitkeep
+!server/media/README.md
 
-# PyTorch
+# Import logs (large files)
+import_full.log
+import_test.log
+import_*.log
+
+# ============================================
+# ML Models & Checkpoints (LARGE FILES!)
+# ============================================
+# PyTorch models
 *.pth
 *.pt
 *.onnx
 
-# Model files
+# TensorFlow models
 *.h5
+*.pb
+saved_model/
+
+# Scikit-learn models
 *.pkl
 *.joblib
 
-# ML outputs
-runs/
-logs/
-checkpoints/
-models/
+# Mobile models (except sample/pretrained)
+*.ptl
 *.tflite
 *.mlmodel
+server/mobile_models/*.ptl
+!server/mobile_models/mobilenet_v3_pretrained.ptl
+!server/mobile_models/.gitkeep
 
-# Testing
+# Model checkpoints
+server/checkpoints/
+checkpoints/
+runs/
+models/
+model_cache/
+
+# ============================================
+# Docker & Containers
+# ============================================
+# Docker volumes contain database and media
+docker/volumes/
+docker/data/
+
+# Keep docker-compose but ignore local overrides
+docker-compose.override.yml
+
+# ============================================
+# Environment Variables & Secrets
+# ============================================
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+*.pem
+*.key
+*.cert
+secrets/
+credentials/
+
+# Keep example env files
+!.env.example
+!.env.template
+
+# ============================================
+# IDE & Editors
+# ============================================
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm / IntelliJ
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.vim/
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# ============================================
+# Operating System
+# ============================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.directory
+.Trash-*
+
+# ============================================
+# Testing & Coverage
+# ============================================
 .coverage
+.coverage.*
 .pytest_cache/
 htmlcov/
 .tox/
 .hypothesis/
+.nox/
+coverage.xml
+*.cover
+.cache
+nosetests.xml
 
-# Documentation
+# ============================================
+# Documentation Build
+# ============================================
 docs/_build/
+docs/_static/
+docs/_templates/
 site/
+.readthedocs/
+
+# ============================================
+# Jupyter Notebooks
+# ============================================
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+.jupyter/
+
+# ============================================
+# Redis & Message Brokers
+# ============================================
+dump.rdb
+*.rdb
+redis-data/
+
+# ============================================
+# Celery
+# ============================================
+celerybeat-schedule
+celerybeat.pid
+celerybeat-schedule.db
+
+# ============================================
+# Database Backups & Dumps
+# ============================================
+*.sql
+*.dump
+*.bak
+backups/
+*.sqlite
+
+# ============================================
+# Logs & Temporary Files
+# ============================================
+logs/
+*.log
+*.log.*
+log/
+server/logs/*.log
+!server/logs/.gitkeep
 
 # Temporary files
 *.tmp
-*.bak
+*.temp
 *.cache
+tmp/
+temp/
 
-# OS
-Thumbs.db
-.Spotlight-V100
-.Trashes
+# ============================================
+# Android (for android-mobo)
+# ============================================
+# Covered by android-mobo/.gitignore
+# But add common ones here too
+*.apk
+*.aab
+android-mobo/app/build/
+android-mobo/app/release/
+android-mobo/.gradle/
+android-mobo/local.properties
 
-# Redis dump
-dump.rdb
+# ============================================
+# Node.js (for web interface)
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.npm
+.yarn/
 
-# Celery
-celerybeat-schedule
-celerybeat.pid
+# ============================================
+# Compiled & Binary Files
+# ============================================
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.dylib
 
-# Database backups
-*.sql
-*.dump
+# ============================================
+# Archives (usually large)
+# ============================================
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.tar
+*.gz
+
+# ============================================
+# Misc Large Files
+# ============================================
+# Keep dataset info but not actual data
+data/raw/
+data/processed/
+data/external/
+!data/README.md
+!data/.gitkeep
+
+# ============================================
+# Project-Specific Generated Files
+# ============================================
+# Sample data generation outputs
+*_sample_data.json
+*_test_data.json
+
+# Status/summary markdown files (keep important ones)
+PHASE_*.md
+*_COMPLETE.md
+*_SUMMARY.md
+SUCCESS_REPORT.md
+PROGRESS_REPORT.md
+SYSTEM_STATUS_REPORT.md
+DELIVERABLES_*.md
+IMPLEMENTATION_SUMMARY_*.md
+FINAL_SUMMARY_*.md
+TASKS_*_SUMMARY.md
+VIEWMODEL_INTEGRATION_COMPLETE.md
+DASHBOARD_READY.md
+ADMIN_DASHBOARD_COMPLETE.md
+
+# Testing scripts outputs
+test_*.sh
+test_output.txt
+
+# ============================================
+# Keep These Important Files
+# ============================================
+# Make sure these are NOT ignored
+!README.md
+!LICENSE
+!.gitignore
+!requirements.txt
+!requirements/*.txt
+!docker-compose.yml
+!Dockerfile
+!manage.py
+!setup.py
+!pyproject.toml
