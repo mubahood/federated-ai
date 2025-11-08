@@ -43,6 +43,17 @@ db.sqlite3-journal
 server/media/training_images/
 server/media/uploaded_images/
 server/media/temp/
+server/media/**/*.jpg
+server/media/**/*.jpeg
+server/media/**/*.png
+server/media/**/*.gif
+
+# Exclude sample data directory
+server/data/
+server/data/**/*
+!server/data/.gitkeep
+
+# Client data
 client/data/training/
 client/data/images/
 client/data/cache/
