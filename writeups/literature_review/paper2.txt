@@ -1,0 +1,1091 @@
+
+
+============================================================
+PAGE 1
+============================================================
+
+Citation: Zhang, Y.; Tang, Y.; Zhang,
+Z.; Li, M.; Li, Z.; Khan, S.; Chen, H.;
+Cheng, G. Blockchain-Based Practical
+and Privacy-Preserving Federated
+Learning with Veriﬁable Fairness.
+Mathematics 2023, 11, 1091.
+https://doi.org/10.3390/
+math11051091
+Academic Editor: Antanas Cenys
+Received: 8 January 2023
+Revised: 9 February 2023
+Accepted: 13 February 2023
+Published: 22 February 2023
+Copyright:
+© 2023 by the authors.
+Licensee MDPI, Basel, Switzerland.
+This article is an open access article
+distributed
+under
+the
+terms
+and
+conditions of the Creative Commons
+Attribution (CC BY) license (https://
+creativecommons.org/licenses/by/
+4.0/).
+mathematics
+Article
+Blockchain-Based Practical and Privacy-Preserving Federated
+Learning with Veriﬁable Fairness
+Yitian Zhang 1,†, Yuming Tang 2,†, Zijian Zhang 2,3, Meng Li 4
+, Zhen Li 1,3,*, Salabat Khan 5
+, Huaping Chen 6
+and Guoqiang Cheng 6
+1
+School of Computer Science & Technology, Beijing Institute of Technology, Beijing 100081, China
+2
+School of Cyberspace Science & Technology, Beijing Institute of Technology, Beijing 100081, China
+3
+Southeast Institute of Information Technology, Beijing Institute of Technology, Putian 351100, China
+4
+School of Computer Science and Information Engineering, Hefei University of Technology,
+Hefei 230009, China
+5
+College of Computer Science and Software Engineering, Shenzhen University, Shenzhen 518060, China
+6
+Qianxin Technology Group Company, Beijing 100044, China
+*
+Correspondence: zhen.li@bit.edu.cn
+†
+These authors contributed equally to this work.
+Abstract: Federated learning (FL) has been widely used in both academia and industry all around
+the world. FL has advantages from the perspective of data security, data diversity, real-time continual
+learning, hardware efﬁciency, etc. However, it brings new privacy challenges, such as membership
+inference attacks and data poisoning attacks, when parts of participants are not assumed to be fully
+honest. Moreover, selﬁsh participants can obtain others’ collaborative data but do not contribute
+their real local data or even provide fake data. This violates the fairness of FL schemes. Therefore,
+advanced privacy and fairness techniques have been integrated into FL schemes including blockchain,
+differential privacy, zero-knowledge proof, etc. However, most of the existing works still have room
+to enhance the practicality due to our exploration. In this paper, we propose a Blockchain-based
+Pseudorandom Number Generation (BPNG) protocol based on Veriﬁable Random Functions (VRFs)
+to guarantee the fairness for FL schemes. Next, we further propose a Gradient Random Noise
+Addition (GRNA) protocol based on differential privacy and zero-knowledge proofs to protect data
+privacy for FL schemes. Finally, we implement both two protocols on Hyperledger Fabric and analyze
+their performance. Simulation experiments show that the average time that proof generation takes is
+18.993 s and the average time of on-chain veriﬁcation is 2.27 s under our experimental environment
+settings, which means the scheme is practical in reality.
+Keywords: blockchain; veriﬁable random functions; differential privacy; zero-knowledge proof;
+federated learning
+MSC: 94A60
+1. Introduction
+The application of machine learning has achieved much success in various ﬁelds such
+as ﬁnance, education, healthcare, etc. However, traditional machine learning algorithms
+need to collect training data in a centralized manner, which brings data privacy prob-
+lems. Efforts towards decentralized data collection and protecting data privacy have led
+to federated learning. This has enabled blockchain to become a hotspot in the area of FL
+recently, because blockchain systems naturally support decentralization. That is, the decen-
+tralized feature of blockchain systems has meant that it can be widely used in healthcare,
+education, ﬁnance, and many other ﬁelds, including many convergent applications with
+federated learning.
+In the previous scenarios, since the participants cannot fully trust each other, and there
+is no trusted third party, the participants have to only build and maintain the chain of trust
+Mathematics 2023, 11, 1091. https://doi.org/10.3390/math11051091
+https://www.mdpi.com/journal/mathematics
+
+
+============================================================
+PAGE 2
+============================================================
+
+Mathematics 2023, 11, 1091
+2 of 16
+based on the blockchain consensus protocols and accomplish their own missions using
+machine learning. When it comes to practical applications, as the focus of blockchain is to
+ensure the integrity and immutability of information, conﬁdentiality and privacy needs to
+be guaranteed by designing custom methods, such as cryptographic methods and privacy-
+preserving methods, according to the needs of a speciﬁc scenario. For example, [1] imple-
+mented a digit management system based on blockchain and zero-knowledge proof. Ben-
+hanmouda et al. [2] introduced secure multi-party computation (SMC) into the blockchain
+platform to support private data storage. Jia et al. [3] presents a data protection aggregation
+scheme based on blockchain, differential privacy (DP), and homomorphic encryption.
+However, there still exist technical challenges in terms of efﬁciency and security in
+the aforementioned works. The ZKP-based FL schemes are hard to apply in complex AI
+algorithms due to the large size of the proof. The SMC-based FL schemes require the
+assumption that all the participants are honest, whereas in practice there may be malicious
+participants, leading to incorrect computation results. The DP-based FL schemes, which
+add perturbation to the information, lack formal proof of information privacy. Moreover,
+in practical applications, participants are not always honest. For instance, when not being
+detected, selﬁsh participants will not provide real data and would like to obtain others’
+data, because the participants are curious and want to analyze others’ privacy according
+to their data. For example, the models may leak information about the individual data
+on which they were trained [4]. This challenge prompts the emergence of quality-aware
+federated learning schemes such as [5].
+In order to explore a practical and privacy-preserving solution to the aforementioned
+technical challenge, we propose two protocols and implement an FL scheme. Our contribu-
+tions are summarized below:
+1.
+We propose a Blockchain-based Pseudorandom Number Generation (BPNG) protocol,
+which is a zk-SNARK based blockchain veriﬁable random function, to enable the
+participants to generate a veriﬁable random number. Using BPNG, the participants
+can generate computationally unpredictable veriﬁable random numbers.
+2.
+We propose a Gradient Random Noise Addition (GRNA) protocol based on differen-
+tial privacy and zk-SNARK. Using GRNA, we can prove that the generated random
+number is indeed computed according to BPNG and that the computation result is a
+random number satisfying a speciﬁc distribution obtained with the seed constructed
+as we prescribe.
+3.
+We quantitatively evaluate the performance of the proposed protocols and give the
+performance and privacy analysis of them.
+The rest of this paper is organized as follows. Section 2 reviews related works. Section 3
+presents our system model, adversarial model, and design goal. Section 4 brieﬂy recalls
+the deﬁnition of veriﬁable random functions, the zero-knowledge succinct non-interactive
+argument of knowledge, and differential privacy. We present the two proposed protocols
+in Section 5. In Section 6 we provide the privacy analysis of our scheme. In Section 7 we
+show the privacy analysis and performance analysis. Section 8 draws the conclusion.
+2. Related Works
+In this section, we will review recent works about privacy-preserving federated learn-
+ing (FL), as well as the application of veriﬁable fairness in FL.
+Various techniques have been studied and integrated into privacy-preserving feder-
+ated learning, including blockchain, differential privacy (DP), secure multiparty computa-
+tion (SMC), etc.
+Blockchain-based privacy-preserving FL schemes take advantage of blockchain’s im-
+mutability and integrity. For example, [6] proposed a blockchain-based privacy-preserving
+FL framework. In this framework, the blockchain was used to interconnect multiple FL
+components. It used a distributed ledger of transactions to record information ﬂows, where
+the immutability of the blockchain helped to provide data provenance. Furthermore, under
+this work, a malicious client assumption can be adapted instead of a semi-honest client
+
+
+============================================================
+PAGE 3
+============================================================
+
+Mathematics 2023, 11, 1091
+3 of 16
+assumption, and it also made the contribution-based incentive mechanisms possible. In [7],
+LearningChain, a machine learning model which is decentralized and free of a central
+server, is proposed as a privacy-preserving and secure system. It designs the Stochastic Gra-
+dient Descent (SGD) algorithm to be decentralized and uses it to learn a general predictive
+model on a blockchain platform. An I-nearest aggregation algorithm is presented to defend
+against potential Byzantine attacks. Pokhrel et al. [8] proposed an autonomous federated
+learning (FL) scheme based on blockchain, which is applied to efﬁcient and privacy-aware
+vehicular communication networking. In this scheme, the local model updates of the on-
+vehicle machine learning model are exchanged and veriﬁed distributedly. It then presents
+a solution to the data provider to perform machine learning processes while not exposing
+the privacy of data.
+Though FL is capable of preventing participants from leaking local data, it is still
+possible for attackers to learn their personal information by analyzing the uploaded pa-
+rameters. Differential privacy (DP) provided an approach to prevent information leakage.
+Wei et al. [9] proposed a novel framework based on DP, in which clients add artiﬁcial noise
+to the local model updates before aggregation. Truex et al. [10] adopts local differential
+privacy (LDP) into a federated learning system and achieves a formal privacy guarantee. It
+made the existing LDP protocols applicable in federated learning. However, the aforemen-
+tioned works mainly focused on how to make existing DP mechanisms applicable in FL
+frameworks, and at which stage the artiﬁcial noise can be added to the private information.
+SMC was also used for privacy-preserving FL. Xu et al. [11] proposed an approach
+named HybridAlpha. It uses an SMC protocol based on functional encryption to imple-
+ment a privacy-preserving federated learning system. This is the ﬁrst privacy-preserving
+federated system that prevents certain inference attacks using functional encryption. Based
+on a chained SMC technique, a privacy-preserving FL framework termed chain-PPFL
+was proposed in [12]. A chain-based frame is constructed to enable masked information
+transferred among the participants under the protection of a single-masking mechanism.
+Benhamouda et al. [2] explored supporting private data on Hyperledger Fabric by using
+SMC. In this scheme, peers encrypted their local data before storing it on the ledger and
+used SMC when the local data were required in a transaction.
+There are still several other approaches except for the above techniques. In [13], a
+privacy-preserving federated learning framework for mobile systems was proposed and
+implemented. It utilized Trusted Execution Environments (TEES) on both the client’s
+side and the server’s side to hide the model updates in the learning algorithms from
+adversaries. Chen et al. [14] also proposed a scheme based on TEES, in which causative
+agents can be detected. Jiang et al. [15] proposed a privacy-preserving federated learning
+scheme with membership proof. The membership proofs are generated by leveraging
+cryptographic accumulators to accumulate user IDs, then the users can verify the proofs on
+a public blockchain where they are issued. Sun et al. [16] proposed a privacy-preserving
+personalized incentive scheme for federated learning. The scheme termed Pain-FL can
+provide workers with customized payments for the leakage cost of privacy while ensuring
+the model is well performing. In this contract-based scheme, participants agree on a
+predeﬁned contract with the server in each training round of FL which includes the level
+of privacy-preservation and the payment method, and then the worker can receive the
+rewards after contributing to the model.
+3. Problem Statement
+3.1. System Model
+The system comprises (1) a blockchain platform, (2) a chaincode that implements two
+protocols that we designed for the participants to invoke during the training process, and
+(3) the participants of federated learning and their personal data.
+All the notations of the parameters mentioned in the system are summarized in Table 1.
+For the blockchain platform, B represents the blockchain platform where the chaincode is
+deployed. It can generate TxBinding, pk, sk, which denote the random number generated
+
+
+============================================================
+PAGE 4
+============================================================
+
+Mathematics 2023, 11, 1091
+4 of 16
+by the blockchain to identify transactions and a pair of public and private keys, to serve as
+the inputs for VRF. For the chaincode part, it implements the BPNG and GRNA protocols.
+The VRF represents the veriﬁable random functions that we use in the protocols, and it
+can generate Rp and Pv, which denote the public random number and its proof generated
+by VRF. For the participants, Ci represents the ith participant in the system, xi denotes
+the gradient computed by Ci. Ci uses the hash function H to generate its private random
+number ri and the proof Pi, which is the seed to generate DP noise di added to the gradient.
+ri is in the range f. x′
+i denotes the gradient after adding the DP noise. Finally, we obtain
+ZKpk and ZKvk representing the proving key and the verifying key for the zk-SNARK
+proof, respectively.
+Table 1. Summary of notations.
+Notations
+Descriptions
+Ci
+The ith participant in the system
+B
+The chaincode deployed on the blockchain
+VRF
+Veriﬁable random functions
+pk
+Public key generated by chaincode
+sk
+Private key generated by chaincode
+TxBinding
+A unique representation of a speciﬁc transaction,
+generated as a HEX-encoded string of SHA256 hash
+using the concatenation of the transaction’s nonce, creator,
+and epoch. Provided by Hyperledger Fabric.
+Pv
+Proof generated by VRF
+Rp
+Random number generated by VRF
+xi
+Gradient computed by ith participant
+during the process of machine learning
+ri
+Random number generated by ith participant
+H
+Hash function used by participants to generate ri
+Pi
+Proof generated by ith participant for verifying ri
+di
+Laplace-distributed random number mapped from ri
+f
+The range of ri
+x′
+i
+The gradient after adding Laplace noise
+ZKpk
+The proving key for zk-SNARK proof generation
+ZKvk
+The verifying key for zk-SNARK proof veriﬁcation
+3.2. Adversarial Model
+Our privacy-preserving federated learning scheme aims at preserving system partic-
+ipants’ private input from being exposed or inferred with by others during the training
+process. So, we set the adversaries to be curious-but-honest, which means the participants
+run the protocols as we designed but they will probably try to obtain sensitive information
+from others’ public data. The adversaries will not break the protocol execution sequence or
+have the ability to compromise the blockchain on which the system runs.
+3.3. Design Goals
+Our goal is to design a practical and privacy-preserving federated learning scheme
+with veriﬁable fairness, thus we have the design goals described below.
+Privacy: Participants in the federated learning system want to contribute their data and
+proﬁt from the model without exposing their data, thus they can protect the privacy of their
+
+
+============================================================
+PAGE 5
+============================================================
+
+Mathematics 2023, 11, 1091
+5 of 16
+data sources and meanwhile keep their data competitive. Our scheme should preserve the
+participants’ real private data from being exposed to others.
+Security: Participants’ identities should be authenticated, and the system should
+provide data security so that the data cannot be modiﬁed to ensure that the participants
+can verify proofs of others’ at any time and receive idempotent results.
+Veriﬁable Fairness: The process of adding noises to the private data should be conducted
+in a fair manner and be veriﬁable to all the participants to avoid fake data being uploaded
+to the model. This is important for system assurance.
+Efﬁciency: The system provides proof of generating efﬁciency and on-chain veriﬁcation
+efﬁciency. Meanwhile, it should make the communication cost as low as possible.
+4. Preliminaries
+4.1. Veriﬁable Random Functions
+Veriﬁable random functions were ﬁrst presented in [17]. They combine unpredictabil-
+ity and veriﬁability by extending the construction of pseudorandom functions found in [18].
+In brief, it is the public key version of a keyed cryptographic hash. For a speciﬁc VRF, the
+veriﬁable random number Rp can only be generated by the holder of the private key sk,
+but it can be veriﬁed by anyone who knows the corresponding public key pk. Generally,
+VRF can be used to provide privacy against ofﬂine enumeration attacks on data stored in
+hash-based data structures. Here, we follow the deﬁnition of VRF in [17] as follows:
+Deﬁnition 1. Let G, F, and V be polynomial-time algorithms, where
+•
+G (the function generator) is probabilistic and its input is the security parameter k. It outputs
+two binary strings (the public key PK and private key SK);
+•
+F = (F1, F2) (the function evaluator) is deterministic and its input is two binary strings (SK
+and the input x to the VRF). It outputs two binary strings (the value F1(SK, x) of the VRF on
+x and the corresponding proo f = F2(SK, x));
+•
+V (the function veriﬁer) is probabilistic. It receives four binary strings (PK, x, v, and proo f)
+as the input, and outputs a bool value, YES or NO.
+VRFs are designed to satisfy the following security properties [19]:
+1.
+Uniqueness. For any given public key PK and input α, there is a unique VRF output
+β that is valid.
+2.
+Collision Resistance. Finding two inputs α1 and α2 that have the same output β
+should be computationally impossible.
+3.
+Pseudorandomness. Pseudorandomness ensures that if an adversarial veriﬁer re-
+ceives a VRF output β without its corresponding VRF proof π, then β is indistinguish-
+able from a random value.
+Currently, VRF is widely and mainly used in cryptocurrencies, such as Ethereum. It is
+used to produce a decentralized random beacon, of which the output is unpredictable to
+anyone until they become available to everyone. One example VRF speciﬁcation is [19].
+It is in a draft hosted by the Internet Research Task Force (IRTF) Crypto Forum Research
+Group (CFRG). This work-in-progress draft may become a ﬁnalized IETF RFC, and the
+VRF we used in our protocol is an implementation of this draft.
+4.2. Zero-Knowledge Succinct Non-Interactive Argument of Knowledge (zk-SNARK)
+Zero-Knowledge Succinct Non-Interactive Argument of Knowledge (zk-SNARK)
+refers to a proving system consisting of three algorithms (Setup, Prove, Veri f y), which
+allows a prover to convince a veriﬁer that a statement is true without interactions between
+them [20,21]. The algorithms (Setup, Prove, Veri f y) are deﬁned as follows [22]:
+•
+(pk, vk) ←−Setup(C, 1λ). With a security parameter λ and a circuit C, the algorithm
+generates a pair of keys (pk, vk). pk is the proving key and vk is the veriﬁcation key.
+
+
+============================================================
+PAGE 6
+============================================================
+
+Mathematics 2023, 11, 1091
+6 of 16
+•
+π ←−Prove(pk, −→s , −→
+w ) generates a proof π, which reﬂects that the pair (−→s , −→
+w ) con-
+sisting of statement −→s and witness −→
+w is a satisfying assignment for C.
+•
+True/False ←−Veri f y(vk, −→s , π). Return true if pi is a valid proof for the statement −→s
+with the veriﬁcation key vk and circuit C. Return false otherwise.
+Algorithms (Setup, Prove, Veri f y) should satisfy the following security properties [22]:
+1.
+Completeness. For each valid pair of statement −→s and witness −→
+w , Veri f y(vk, −→s , π)
+always returns true.
+2.
+Knowledge Soundness. If (−→s , −→
+w ) is not a valid pair of assignment for C, then the
+probability of Veri f y(vk, −→s , π) == True is negligible.
+3.
+Succinctness. The honestly generated proof size should be polynomial in λ, the
+running time of Veri f y(vk, −→s , π) should be polynomial in λ +
+−→s
+.
+Note that the arithmetic circuits used in zk-SNARK are computed in a ﬁnite ﬁeld,
+which means that only positive integers less than some large integer are supported in
+zk-SNARK’s circuits, not negative numbers or fractions.
+4.3. Differential Privacy
+Differential privacy (DP) is a technique that can share information about a dataset in a
+way that describes data patterns in the dataset. DP can protect the privacy of individuals in
+it at the same time. The idea behind DP is that the query function can be designed to make
+the impact of any single substitution in the query request small enough that any individual
+information cannot be inferred from the query result. There are several different mecha-
+nisms of the implementation of DP [23], namely the Laplace mechanism [24], the Gaussian
+mechanism [25], the geometric mechanism [26], and the exponential mechanism [27]. The
+key idea to implementing DP is to design a query function that can add random noise
+following a chosen distribution on the true sensitive dataset [28]. Here, we follow the
+deﬁnition of DP in [29] as follows:
+Deﬁnition 2. A randomized function κ gives (ϵ, δ) differential privacy, if for all datasets D1 and
+D2 differ on at most one element, and all S ⊆Range(κ),
+Pr[κ(D1) ∈S] ≤exp(ϵ) × Pr[κ(D2) ∈S] + δ
+(1)
+where Range(κ) denoted the range of function κ.
+Generally, the two parameters, ϵ and δ, can quantitatively represent the privacy loss.
+The closer ϵ and δ approach to zero, the less the privacy leaks.
+Using the implementation of the Laplace mechanism, DP can be achieved by adding
+stochastic noise to the result of the query function, which is drawn from a Laplace distri-
+bution [24]. The probabilistic density function of Laplace distribution is as Equation (2).
+pd f (x) = 1
+2σe−|x−µ|/σ, x ∈(−∞, +∞)
+(2)
+Here, the parameter µ is often set to 0, and the parameter σ has to be determined by
+the sensitivity, which stands for the greatest inﬂuence of any element in the dataset on the
+result of the query function [29]. Sensitivity is formally deﬁned as Deﬁnition 3.
+Deﬁnition 3. For f : D →Rd, the sensitivity of f is
+∆f = max
+D1,D2
+∥f (D1) −f (D2)∥
+(3)
+for all D1 and D2 differing in at most one element.
+To achieve differential privacy, σ should be no more than ∆f /ϵ [29].
+
+
+============================================================
+PAGE 7
+============================================================
+
+Mathematics 2023, 11, 1091
+7 of 16
+4.4. TxBinding
+TxBinding is a parameter we will use in the BPNG protocol, which is provided by the
+Hyperledger Fabric API. It is a unique representation of a speciﬁc transaction, generated
+as a HEX-encoded string of SHA256 hash using the concatenation of the transaction’s
+nonce, creator, and epoch. According to the source code of Hyperledger Fabric, this API is
+implemented as below:
+H(nonce||creator||epoch) = TxBinding
+(4)
+The H in the above equation denotes the hash function, which is SHA256. It ﬁrst
+concatenates the nonce, creator, and epoch (selecting the highest four bits and lowest
+four bits of the epoch because of the length limit of unsigned integer in JavaScript) of a
+speciﬁc transaction. Then, it uses SHA256 to hash the concatenated string and return it
+HEX-encoded.
+The chaincode receives the above information from the transaction proposal, which is
+a data structure that Hyperledger Fabric designed to store the key information about the
+transaction, such as the nonce, creator, submitter’s signature, and so on. According to the
+design of the transaction in the blockchain, the information it uses to generate this string is
+different between any two different transactions, which means TxBinding can identify a
+unique transaction and it is unpredictable until the associated transaction is created.
+In a chaincode proposal, the identity of the submitter needs to be authenticated by the
+peer so that it can be trusted. However, in some scenarios, the chaincode can only check
+the identity without the proposal submitter. This value can independently authenticate
+the identity of the transaction’s submitter, which means it can be used to defend against
+replay attacks.
+In our scheme, this value is used as a random number generation seed at the beginning
+of every computation round during the training process.
+5. Protocols
+5.1. Overview
+In this section, we introduce two protocols we designed to protect the privacy of the
+participants. In Section 5.2, we ﬁrst designed a Blockchain-based Pseudorandom Number
+Generation (BPNG) protocol to guarantee that the random numbers generated by each
+participant in the system are indeed randomly generated and not constructed values. Using
+the random numbers generated by BPNG, in Section 5.3, we designed a Gradient Random
+Noise Addition (GRNA) protocol to protect the gradient data of each participant by adding
+noise to it.
+5.2. Blockchain-Based Pseudorandom Number Generation Protocol (BPNG)
+The function of this protocol is to guarantee that the generation process of the random
+numbers generated by the participants is veriﬁable so that participants can verify that the
+so-called random numbers are indeed randomly generated but not constructed.
+To achieve this goal, we ﬁrst need to introduce veriﬁable random functions (VRF) that
+serve to provide a random number seed to the participants. Before using VRF to generate
+a veriﬁable random number, a pair of public and private keys are generated by chaincode,
+with which we obtain pk and sk. Then, we receive a unique blockchain transaction identiﬁer
+code TxBinding by invoking the Hyperledger Fabric chaincode API and use it as a seed
+for VRF. Before every computation process starts, we set up a new transaction on the
+blockchain and use the information of this transaction to generate the TxBinding, so we
+can ensure that TxBinding is unpredictable before the process starts, which means the seed
+of VRF is unpredictable. With the parameters above, the VRF is used in the following way:
+VRF(pk, sk, TxBinding) = (Pv, pk, Rp)
+(5)
+
+
+============================================================
+PAGE 8
+============================================================
+
+Mathematics 2023, 11, 1091
+8 of 16
+Pv, pk, and Rp will be uploaded to the blockchain so that participants can verify the public
+random number Rp with Pv and pk at any time.
+After verifying that Rp is credible, the participants can generate their own random
+number using the given hash function H with the parameters of Rp and their private
+gradient xi. The hash function we used in this scheme is the MIMC hash function provided
+by Zokrates standard library, which is efﬁcient in circuits. We deﬁne the usage of the hash
+function as follows:
+H(Rp||xi) = ri
+(6)
+However, we can ﬁnd that ri can still be constructed because other participants have no
+idea whether the generator of ri executes the protocol honestly, so we introduce zk-SNARK
+here. With zk-SNARK, the participants can generate their own proofs Pi to prove that they
+actually executed the protocol honestly and the randomness of ri becomes provable. The
+part of zero-knowledge will be described in the next protocol.
+Assume that there are M participants in the system. The ﬂow of the algorithm is
+summarized as shown in Algorithm 1.
+Algorithm 1 BPNG Protocol
+Require:
+xi, TxBinding
+Ensure:
+pk, Pv, Rp, ri
+1: We use VRF() and VRF_Veri f y() to generate and verify Rp
+2: Generate a pair of pk and sk, get TxBinding from B
+3: VRF(pk, sk, TxBinding) = (Pv, pk, Rp)
+4: Publish Rp, pk, Pv to all Ci
+5: for all Ci, i ∈[1, M] do
+6:
+if VRF_Veri f y(Rp, pk, Pv) == TRUE then
+7:
+ri = H(Rp||xi)
+8:
+return ri
+9:
+else
+10:
+return FALSE
+11:
+end if
+12: end for
+5.3. Gradient Random Noise Addition Protocol (GRNA)
+The function of this protocol is to input a uniformly distributed random number, and
+map that random number to a Laplace-distributed random number given by µ, b, and
+ﬁnally output the ﬁnal result by summing the resulting random number with the gradient
+of the input.
+The ﬁrst problem we want to solve is how to generate Laplace-distributed random
+numbers from uniformly distributed random numbers in zk-SNARK. The generation
+function is shown below:
+X = µ −b sgn(U) ln 1 −2|U|
+(7)
+where U is a uniformly distributed random number of (−1/2, 1/2], sgn(x) returns the sign
+of x, and µ, b are the parameters of Laplace distribution. We need to implement the above
+function in zk-SNARK.
+However, we have two problems to solve. The ﬁrst is that zk-SNARK does not support
+nonlinear functions such as log or ln, the second is that zk-SNARK does not support
+fractional calculation. To solve the ﬁrst problem, we must ﬁt the object function using a
+polynomial. Because (7) is an odd function, we just need to ﬁt half of the function. We
+use the Maclaurin series which is shown below to ﬁt the object function where (U > 0).
+In Equation (7), U is a uniformly distributed random number between −1/2 and 1/2, so
+
+
+============================================================
+PAGE 9
+============================================================
+
+Mathematics 2023, 11, 1091
+9 of 16
+2|U| will be between 0 and 1, but the random number generated in protocol 1 is a discrete
+random integer. So, we must replace 2|U| with x/ f, where x is the discrete random integer
+in the range of [0, f ) and f is a constant that marks the upper limit of x. In our experiments,
+we set the value of f to 1000. In order to make math expectation of the generated random
+number equal to 0, we let xµ = 0. For the sake of simplicity, we used the function below to
+obtain the Maclaurin series.
+y = −b ln (1 −x/ f ), (0 ≤x < f )
+(8)
+So, the Maclaurin series of (8) is
+n
+∑
+i=1
+b
+i f i xi
+(9)
+We can see the coefﬁcient of each item of (9) is b/i f i. However, zk-SNARK does
+not support fractional calculation, so the way to represent each item in zk-SNARK is
+[b/i f i] × xi(if b > i f i), or [xi/[(i f i)/b]](if b < i f i). Considering that the computation in
+zk-SNARK is performed in a ﬁnite ﬁeld and that the veriﬁcation of a/b ?= c is actually the
+process of verifying that a ?= bc, if b is divisible by a, then the result of b/a is the same as in
+the integers, otherwise it is not the same. Meanwhile, we cannot guarantee that xi can be
+divided exactly by [i f i/b], so we must make sure that b > i f i. Then, the ﬁnal problem is
+what we want, x′, which is the sum of a Laplace-distributed random number r of given
+parameter b and raw gradient x.
+In our solution, the bchosen is set to 5 ∗1015, which is a huge integer, meanwhile, our
+target is x′ = x + btargetr, where r is a Laplace-distributed random number with µ = 0, b = 1,
+so btargetr is a Laplace-distributed random number with µ = 0, b = btarget, but what we
+obtain is bchosenr, a Laplace-distributed random number with µ = 0, b = bchosen. Our
+solution is to enlarge x′ with a multiplier m = bchosen/btarget, so the output value will be
+x′m = xm + bchosenr. The algorithm is shown as Algorithm 2.
+Algorithm 2 GRNA Protocol
+Require:
+xi, ri, dtarget, dencoded, n, f, ZKpk
+Ensure:
+m, x′
+im, Pi
+1: m = dencoded/dtarget
+2: p1, . . . , pn = b/i f i(for i = 1, . . . , n)
+3: r′m = ∑n
+i=1 pixi
+4: x′
+im = xim + r′m
+5: Circuit = GenerateCircuit(p1, . . . , pn)
+6: Pi = GenerateProof(Circuit, ri, mxi, mx′
+i)
+7: return m, x′
+im, Pi
+6. Privacy, Security, and Fairness Analysis
+In this section, we prove that our scheme achieves all the privacy, security, and fairness
+goals we mentioned in Section 3.3.
+6.1. Privacy
+In BPNG protocol, the protocol is secure if we can ensure that
+(1)
+For each participant, the random number Rp generated by VRF is unpredictable.
+(2)
+Without revealing the random number ri and input xi of ith participant, that ri is
+generated using Rp and xi as the hash preimage should be veriﬁable.
+For (1), in the BPNG protocol, Rp is generated by VRF using a pair of pk and sk and
+the TxBinding provided by the blockchain. Among them, the pair of keys are generated
+
+
+============================================================
+PAGE 10
+============================================================
+
+Mathematics 2023, 11, 1091
+10 of 16
+by chaincode before the computation process starts, and the TxBinding is generated at
+the setup of a transaction which means it is unpredictable before its publication on the
+blockchain. So, if the probability of key collision in a ﬁnite key generation time is negligible,
+then Rp is unpredictable because the VRF is preimage-resistant. In BPNG, we use EdDSA
+to generate the key pair, which means that the protocol’s security depends on the security
+properties of EdDSA, which can meet our needs.
+For (2), we can use zk-SNARK to solve this problem, which means that the private
+parameters are secure as long as zk-SNARK achieves knowledge soundness.
+In the GRNA protocol, the protocol is secure if we can ensure that
+1.
+Without revealing the random noise di of ith participant, di is generated using ri
+is veriﬁable.
+2.
+Without revealing random noise di and private input xi of ith participant, the pub-
+lished x′
+i equals di + xi is veriﬁable.
+Obviously, in GRNA, we need some kind of SNARK protocol to meet our needs, so we
+use zk-SNARK to solve the problems, which means that if zk-SNARK achieves the security
+properties as it was designed previously, the protocol is secure as well.
+We note that there is a zk-SNARK part in both protocols, and we can combine these two
+parts into one, which will not affect the security of any protocol because of the continuity
+of the two protocols.
+Since the security of the protocols is guaranteed, we need to consider the settings
+of privacy parameters in our protocols. In general, we want to adjust the settings of our
+parameters to a condition that can protect participants’ privacy while ensuring the usability
+of the machine learning process.
+First, we must explain why we use α = 0.002 × 0.998epoch as learning rate. As shown
+in Figure 1, it is obvious that with a given privacy budget ϵ = 1, the lower the learning
+rate the more likely the model is to converge and the slower the model converges. In order
+to use the highest possible privacy budget, we set the learning rate to a relatively low
+α = 0.002 × 0.998epoch.
+Second, we need to verify the effect of adding noise on the convergence of the machine
+learning model. Figure 2 shows the graph of the variation of loss with epochs for different
+privacy budgets, which shows that the loss function cannot converge until the privacy
+budget ϵ is big enough.
+Third, we want to evaluate the effect of adding noise on privacy protection. We calcu-
+late the norm of the un-noised gradient submitted by the model and count its distribution,
+denoted as D, and denote the distribution of the norm of the noised gradient as D′. Further-
+more, we compute the distribution of the difference between the last submitted gradient
+and the current gradient and denote the one from un-noised gradient Dδ, and the one from
+noised D′
+δ. To show the difference between noised gradient and unnoised gradient, we
+calculate the KL divergence of D, D′ and Dδ, D′
+δ under different ϵ settings, the result are
+shown in Figure 3.
+6.2. Security
+We implement our scheme using Hyperledger Fabric, which is a permissioned blockchain
+platform. Unlike other public blockchain platforms, Fabric registers participants on the
+blockchain before the network starts, and the participants are divided into different chan-
+nels according to the setup settings, which means they can only access the data inside their
+channels. After the network starts running, the registered users can access the blockchain
+data and chaincode in their registered channel using their private keys. So, the participants
+are all pre-authenticated and their operations will be logged on the blockchain.
+Meanwhile, as a blockchain platform, Hyperledger Fabric also makes the data hard to
+tamper with and thus provides data security. In short, as long as the Hyperledger Fabric
+achieves the features as it was designed, the security of our scheme can be implemented
+as well.
+
+
+============================================================
+PAGE 11
+============================================================
+
+Mathematics 2023, 11, 1091
+11 of 16
+6.3. Fairness
+We achieve veriﬁable fairness through the BPNG protocol. According to the BPNG
+protocol, participants can verify the generation process of the random number ri, which
+means participants can ﬁnd out whether someone is cheating in the learning process,
+thus implementing veriﬁable fairness. We provide the analysis of the BPNG protocol in
+Section 6.1.
+6.4. Summary
+We presented privacy, security, and fairness analyses. As we stated above, the privacy,
+security, and fairness of our scheme rely mostly on the cryptographic techniques we use
+in the two protocols and, for now, these techniques are secure under the conditions we
+use them. Therefore, we can say that all of the design goals we mentioned in Section 3.3
+are implemented.
+0
+100
+200
+300
+400
+500
+0
+1
+2
+3
+4
+loss of α = 0.2
+0
+100
+200
+300
+400
+500
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+loss of α = 0.02
+0
+100
+200
+300
+400
+500
+0.3
+0.4
+0.5
+0.6
+0.7
+0.8
+loss of α = 0.008
+0
+100
+200
+300
+400
+500
+0.525
+0.550
+0.575
+0.600
+0.625
+0.650
+0.675
+0.700
+loss of α = 0.002
+Figure 1. Training convergence under different learning rates.
+
+
+============================================================
+PAGE 12
+============================================================
+
+Mathematics 2023, 11, 1091
+12 of 16
+0
+100
+200
+300
+400
+500
+0.50
+0.75
+1.00
+1.25
+1.50
+1.75
+2.00
+2.25
+2.50
+loss of ϵ = 0.1
+0
+100
+200
+300
+400
+500
+0.5
+0.6
+0.7
+0.8
+0.9
+1.0
+1.1
+loss of ϵ = 0.25
+0
+100
+200
+300
+400
+500
+0.50
+0.55
+0.60
+0.65
+0.70
+0.75
+0.80
+loss of ϵ = 0.5
+0
+100
+200
+300
+400
+500
+0.525
+0.550
+0.575
+0.600
+0.625
+0.650
+0.675
+0.700
+loss of ϵ = 1
+Figure 2. Training convergence under different privacy budgets.
+1
+0.5
+0.25
+0.1
+ϵ
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+DKL(D, D′)
+DKL(Dδ, D′
+δ)
+Figure 3. K-L divergence under different privacy budgets.
+
+
+============================================================
+PAGE 13
+============================================================
+
+Mathematics 2023, 11, 1091
+13 of 16
+7. Performance Analysis and Comparison
+7.1. Datasets, Parameters, Metrics, Setup
+For simplicity, we expanded the sample size of the IRIS dataset from 150 to 4050 and
+trained on the extended IRIS dataset using a logistic regression model to perform a machine
+learning process. Because logistic regression is a two-classes model and the IRIS dataset
+includes three classes, for each evaluation we selected two of the three categories, input
+them into the model for training, and evaluated their performance.
+Like many other federal learning schemes, we used stochastic gradient descent al-
+gorithm for learning. The total number of samples in the extended IRIS dataset is 4050
+(1350 for each class), so we chose two classes each time, and the total number of samples in
+the dataset for each time was 2700. We chose 80% of them as the training set and 20% of
+them as the validation set. We trained the model for 500 epochs every time, and we set the
+learning rate a = 0.002 × 0.998epoch.
+We implemented the application based on Hyperledger Fabric, which is a mature
+permissioned blockchain. We used the Zokrates framework for zk-SNARK proof generating
+and verifying. Because Zokrates is implemented in rust which can be compiled into WASM
+and provides an npm package where rust is a recently emerged programming language,
+WASM is an assembly language that can be executed in a javascript virtual machine and
+npm is the ofﬁcial package manager for node-js, we implemented Fabric chaincode in
+Typescript, and we implemented the local application also in Typescript. To parallelize
+proof generation that is CPU-intensive, we executed multiple subprocesses to generate
+zk-SNARK proof simultaneously.
+We implemented this application using Hyperledger Fabric version 2.3, nodejs version
+17.8.0, Zokrates-js version 1.0.39, running on docker versioning 20.10.14.
+We conducted our performance analysis on a PC that has an Intel Core i7-8550U
+CPU and 16G memory running Linux 5.17.1. However, as we ran the blockchain platform
+in a docker container, the computing resources are limited by docker which means the
+performance is restricted by docker and we cannot know exactly how many computing
+resources it holds according to the settings of docker. We can only provide results under
+the circumstance of docker due to the Hyperledger Fabric setup requirements, the result
+under real production circumstances needs to be further tested or estimated.
+7.2. Result
+We evaluated the time taken to generate proofs and on-chain veriﬁcation by submitting
+150 gradients and counting the time spent. The result is shown in Figure 4. The average
+time proof generating takes is 18.993 s, and the average time of on-chain veriﬁcation is
+2.27 s. It shows that most of the running time is spent on proof generation.
+0
+20
+40
+60
+80
+100
+120
+140
+5
+10
+15
+20
+time/s
+Generate Proof
+On-chain veriﬁcation
+Figure 4. Performance analysis.
+
+
+============================================================
+PAGE 14
+============================================================
+
+Mathematics 2023, 11, 1091
+14 of 16
+The result may seem not practical for a federated learning scheme, but we ﬁnd that
+several factors in the test environment settings have a relatively large impact on the
+performance result. First, we conducted the performance analysis on a laptop that has
+limited computing resources, which means that our running circumstance is much worse
+than in the real application. Second, due to the setup requirements of Hyperledger Fabric,
+we had to run multiple containers in docker to create a Hyperledger Fabric network
+structure, which greatly limits the speed of computing operation. Third, most of the
+running time was spent on the proof generation process using Zokrates. We ﬁnd that
+Zokrates is more efﬁcient when running outside docker or using its implementation in
+other programming languages, which means the efﬁciency of proof generation can be
+further improved.
+According to our estimation, the scheme is practical in real-world applications because
+the above problems can be solved. We can set up the Hyperledger Fabric network using
+different devices and aside from the federated learning machines, so there will be no
+resource limitation by the docker containers and it will be more efﬁcient when assigning
+different types of jobs to different devices, and meanwhile the proof generation can perform
+more efﬁciently.
+7.3. Comparison with Existing Approach
+We compared our schemes with that of [30], which is another blockchain-based fed-
+erated learning scheme that uses zero-knowledge proof techniques, but its main goal is
+to solve the problem of poisoning attacks. Both our scheme and scheme [30] are also
+blockchain-based federated learning schemes, both use Zokrates as a zero-knowledge
+proof solution, and both implement complex zero-knowledge proof circuits associated
+with machine learning algorithms. However, our schemes also have a lot of differences.
+In our scheme, all that needs to be proven is that the random numbers we use in DP are
+indeed random; in [30], all that needs to be proven is that the generated gradients are
+indeed computed by the correct algorithm. Our scheme uses Hyperledger Fabric, and the
+smart contract for verifying zero-knowledge proofs is implemented using WASM and runs
+in the native OS. The blockchain platform [30] uses is Ethereum, and the smart contract
+for verifying zero-knowledge proofs is implemented using EVM assembly [31] and runs
+in the EVM [31]. In a test with batch size of 10, our scheme takes about 20 s to generate
+the proof and 3 s to complete the veriﬁcation, while [30] takes 8 s to generate the proof
+and 37 s to complete the veriﬁcation. Considering the differences in the problems solved
+by the two solutions, the blockchain used and the hardware used, this comparison is for
+reference only.
+7.4. Summary
+We used a simple machine learning model to validate our proposed federal learning
+approach. In order to make the model converge successfully even at higher privacy budgets,
+we analyzed the effect of varying the learning rate on the convergence of the model at the
+same privacy budget, and we found that the lower the learning rate, the easier the model
+converges. We also tested the effect of different privacy budgets on the convergence of the
+model given a low learning rate.
+Moreover, we conducted our performance analysis and found that most of the running
+time was spent on the proof generation process of Zokrates.
+8. Conclusions
+In this paper, we have proposed a permissioned blockchain-based federated learn-
+ing method that protects privacy by adding Laplace-distributed noise to the gradients
+submitted by federated learning participants. We use zero-knowledge proof to guarantee
+that the gradients that participants submit are generated from a real value not randomly
+generated, and the noise added to the gradient is Laplace-distributed not deliberately
+selected. Experimental analysis shows the machine learning model’s convergence under
+
+
+============================================================
+PAGE 15
+============================================================
+
+Mathematics 2023, 11, 1091
+15 of 16
+different learning rates and privacy budgets and the performance of our scheme. Future
+efforts will focus on applying this scheme to vertical federal learning.
+Author Contributions: Conceptualization, Z.Z.; Formal analysis, Y.Z.; Funding acquisition, H.C.
+and G.C.; Methodology, Z.Z., M.L. and S.K.; Software, Y.Z. and Y.T.; Supervision, Z.Z.; Validation,
+Y.T. and Z.L.; Visualization, Z.L.; Writing—original draft, Y.Z., Y.T. and Z.L.; Writing—review &
+editing, Z.Z., M.L., S.K., H.C. and G.C. All authors have read and agreed to the published version of
+the manuscript.
+Funding: This paper is supported by High-performance Reliable Multi-party Secure Computing
+Technology and Product Project for Industrial Internet No.TC220H056.
+Data Availability Statement: Not applicable.
+Conﬂicts of Interest: The authors declare no conﬂict of interest.
+References
+1.
+Yang, X.; Li, W. A zero-knowledge-proof-based digital identity management scheme in blockchain.
+Comput. Secur. 2020,
+99, 102050. [CrossRef]
+2.
+Benhamouda, F.; Halevi, S.; Halevi, T. Supporting private data on Hyperledger Fabric with secure multiparty computation. IBM
+J. Res. Dev. 2019, 63, 3. [CrossRef]
+3.
+Jia, B.; Zhang, X.; Liu, J.; Zhang, Y.; Huang, K.; Liang, Y. Blockchain-Enabled Federated Learning Data Protection Aggregation
+Scheme With Differential Privacy and Homomorphic Encryption in IIoT. IEEE Trans. Ind. Inform. 2022, 18, 4049–4058. [CrossRef]
+4.
+Shokri, R.; Stronati, M.; Song, C.; Shmatikov, V. Membership Inference Attacks Against Machine Learning Models. In Proceedings
+of the 2017 IEEE Symposium on Security and Privacy (SP), San Jose, CA, USA, 22–26 May 2017; pp. 3–18. [CrossRef]
+5.
+Deng, Y.; Lyu, F.; Ren, J.; Chen, Y.C.; Yang, P.; Zhou, Y.; Zhang, Y. FAIR: Quality-Aware Federated Learning with Precise User
+Incentive and Model Aggregation. In Proceedings of the IEEE INFOCOM 2021—IEEE Conference on Computer Communications,
+Vancouver, BC, Canada, 10–13 May 2021; pp. 1–10. [CrossRef]
+6.
+Awan, S.; Li, F.; Luo, B.; Liu, M. Poster: A Reliable and Accountable Privacy-Preserving Federated Learning Framework Using
+the Blockchain. In Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security, London, UK,
+11–15 November 2019; Association for Computing Machinery: New York, NY, USA, 2019; pp. 2561–2563. [CrossRef]
+7.
+Chen, X.; Ji, J.; Luo, C.; Liao, W.; Li, P. When Machine Learning Meets Blockchain: A Decentralized, Privacy-preserving and
+Secure Design. In Proceedings of the 2018 IEEE International Conference on Big Data (Big Data), Seattle, WA, USA, 10–13
+December 2018; pp. 1178–1187. [CrossRef]
+8.
+Pokhrel, S.R.; Choi, J. Federated learning with blockchain for autonomous vehicles: Analysis and design challenges. IEEE Trans.
+Commun. 2020, 68, 4734–4746. [CrossRef]
+9.
+Wei, K.; Li, J.; Ding, M.; Ma, C.; Yang, H.H.; Farokhi, F.; Jin, S.; Quek, T.Q.S.; Poor, H.V. Federated Learning With Differential
+Privacy: Algorithms and Performance Analysis. IEEE Trans. Inf. Forensics Secur. 2020, 15, 3454–3469. [CrossRef]
+10.
+Truex, S.; Liu, L.; Chow, K.H.; Gursoy, M.E.; Wei, W. LDP-Fed: Federated Learning with Local Differential Privacy. In Proceedings
+of the Third ACM International Workshop on Edge Systems, Analytics and Networking, Heraklion, Greece, 27 April 2020;
+Association for Computing Machinery: New York, NY, USA, 2020; pp. 61–66. [CrossRef]
+11.
+Xu, R.; Baracaldo, N.; Zhou, Y.; Anwar, A.; Ludwig, H. HybridAlpha: An Efﬁcient Approach for Privacy-Preserving Federated
+Learning. In Proceedings of the 12th ACM Workshop on Artiﬁcial Intelligence and Security, London, UK, 15 November 2019;
+Association for Computing Machinery: New York, NY, USA, 2019; pp. 13–23. [CrossRef]
+12.
+Li, Y.; Zhou, Y.; Jolfaei, A.; Yu, D.; Xu, G.; Zheng, X. Privacy-Preserving Federated Learning Framework Based on Chained Secure
+Multiparty Computing. IEEE Internet Things J. 2021, 8, 6178–6186. [CrossRef]
+13.
+Mo, F.; Haddadi, H.; Katevas, K.; Marin, E.; Perino, D.; Kourtellis, N. PPFL: Privacy-Preserving Federated Learning with Trusted
+Execution Environments. In Proceedings of the 19th Annual International Conference on Mobile Systems, Applications, and
+Services, Virtual, 24 June–2 July 2021; Association for Computing Machinery: New York, NY, USA, 2021; pp. 94–108. [CrossRef]
+14.
+Chen, Y.; Luo, F.; Li, T.; Xiang, T.; Liu, Z.; Li, J. A training-integrity privacy-preserving federated learning scheme with trusted
+execution environment. Inf. Sci. 2020, 522, 69–79. [CrossRef]
+15.
+Jiang, C.; Xu, C.; Zhang, Y. PFLM: Privacy-preserving federated learning with membership proof. Inf. Sci. 2021, 576, 288–311.
+[CrossRef]
+16.
+Sun, P.; Che, H.; Wang, Z.; Wang, Y.; Wang, T.; Wu, L.; Shao, H. Pain-FL: Personalized Privacy-Preserving Incentive for Federated
+Learning. IEEE J. Sel. Areas Commun. 2021, 39, 3805–3820. [CrossRef]
+17.
+Micali, S.; Rabin, M.; Vadhan, S. Veriﬁable random functions. In Proceedings of the 40th Annual Symposium on Foundations of
+Computer Science (Cat. No.99CB37039), New York, NY, USA, 17–18 October 1999; pp. 120–130. [CrossRef]
+18.
+Goldreich, O.; Goldwasser, S.; Micali, S. How to construct random functions. J. ACM (JACM) 1986, 33, 792–807. [CrossRef]
+
+
+============================================================
+PAGE 16
+============================================================
+
+Mathematics 2023, 11, 1091
+16 of 16
+19.
+Goldberg, S.; Reyzin, L.; Papadopoulos, D.; Vˇcelák, J. Veriﬁable Random Functions (VRFs). Internet-Draft draft-irtf-cfrg-vrf-11,
+Internet Engineering Task Force, 2022. Work in Progress. Available online: https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-
+vrf-11 (accessed on 6 January 2023).
+20.
+Ben-Sasson, E.; Chiesa, A.; Tromer, E.; Virza, M. Succinct Non-Interactive Zero Knowledge for a von Neumann Architecture.
+In Proceedings of the 23rd USENIX Security Symposium (USENIX Security 14), San Diego, CA, USA, 20–22 August 2014;
+pp. 781–796.
+21.
+Groth, J. Short Pairing-Based Non-interactive Zero-Knowledge Arguments. In Proceedings of the Advances in Cryptology-
+ASIACRYPT 2010—16th International Conference on the Theory and Application of Cryptology and Information Security,
+Singapore, 5–9 December 2010; Abe, M., Ed.; Lecture Notes in Computer Science; Springer: Berlin/Heidelberg, Germany, 2010;
+Volume 6477; pp. 321–340.
+22.
+Parno, B.; Howell, J.; Gentry, C.; Raykova, M. Pinocchio: Nearly Practical Veriﬁable Computation. In Proceedings of the 2013
+IEEE Symposium on Security and Privacy, SP 2013, Berkeley, CA, USA, 19–22 May 2013; pp. 238–252. [CrossRef]
+23.
+Ouadrhiri, A.E.; Abdelhadi, A. Differential Privacy for Deep and Federated Learning: A Survey. IEEE Access 2022, 10, 22359–22380.
+[CrossRef]
+24.
+Dwork, C.; McSherry, F.; Nissim, K.; Smith, A.D. Calibrating Noise to Sensitivity in Private Data Analysis. In Proceedings of the
+Theory of Cryptography, Third Theory of Cryptography Conference, TCC 2006, New York, NY, USA, 4–7 March 2006; Halevi, S.,
+Rabin, T., Eds.; Lecture Notes in Computer Science; Springer: Berlin/Heidelberg, Germany, 2006; Volume 3876, pp. 265–284.
+25.
+Dong, J.; Roth, A.; Su, W.J. Gaussian Differential Privacy. arXiv 2019, arXiv:1905.02383.
+26.
+Ghosh, A.; Roughgarden, T.; Sundararajan, M. Universally Utility-maximizing Privacy Mechanisms. SIAM J. Comput. 2012,
+41, 1673–1693. [CrossRef]
+27.
+McSherry, F.; Talwar, K. Mechanism Design via Differential Privacy. In Proceedings of the 48th Annual IEEE Symposium on
+Foundations of Computer Science (FOCS 2007), Providence, RI, USA, 20–23 October 2007; IEEE Computer Society: Washington,
+DC, USA, 2007; pp. 94–103.
+28.
+Dwork, C.; Roth, A. The algorithmic foundations of differential privacy. Found. Trends Theor. Comput. Sci. 2014, 9, 211–407.
+[CrossRef]
+29.
+Dwork, C.; Lei, J. Differential privacy and robust statistics. In Proceedings of the 41st Annual ACM Symposium on Theory of
+Computing, STOC 2009, Bethesda, MD, USA, 31 May–2 June 2009; Mitzenmacher, M., Ed.; ACM: New York, NY, USA, 2009;
+pp. 371–380.
+30.
+Heiss, J.; Grünewald, E.; Tai, S.; Haimerl, N.; Schulte, S. Advancing Blockchain-based Federated Learning through Veriﬁable
+Off-chain Computations. In Proceedings of the 2022 IEEE International Conference on Blockchain (Blockchain), Espoo, Finland,
+22–25 August 2022; pp. 194–201. [CrossRef]
+31.
+Buterin, V. Ethereum White Paper: A Next Generation Smart Contract & Decentralized Application Platform. 2013. Available
+online: https://github.com/ethereum/wiki/wiki/White-Paper (accessed on 6 January 2023).
+Disclaimer/Publisher’s Note: The statements, opinions and data contained in all publications are solely those of the individual
+author(s) and contributor(s) and not of MDPI and/or the editor(s). MDPI and/or the editor(s) disclaim responsibility for any injury to
+people or property resulting from any ideas, methods, instructions or products referred to in the content.

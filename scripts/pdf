@@ -1,0 +1,16 @@
+#!/bin/bash
+# PDF Extraction Wrapper Script
+# This ensures the correct Python environment is used
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+VENV_PYTHON="$PROJECT_ROOT/.venv/bin/python"
+
+# Check if virtual environment exists
+if [ -f "$VENV_PYTHON" ]; then
+    # Use virtual environment Python
+    exec "$VENV_PYTHON" "$SCRIPT_DIR/extract_pdf.py" "$@"
+else
+    # Fall back to system Python
+    exec python3 "$SCRIPT_DIR/extract_pdf.py" "$@"
+fi
