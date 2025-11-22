@@ -1,0 +1,755 @@
+% Research Proposal - Blockchain-Based Federated Learning for Early Warning Systems
+% Author: Muhindo Mubaraka
+% Date: November 2025
+
+\documentclass[12pt,a4paper]{article}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{listings}
+
+% Hyperlink setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue,
+    pdftitle={Research Proposal - Blockchain-Based Federated Learning},
+    pdfauthor={Muhindo Mubaraka},
+}
+
+% Page style
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Research Proposal}
+\fancyhead[R]{\small Muhindo Mubaraka}
+\fancyfoot[C]{\thepage}
+
+% Title formatting
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+% Line spacing
+\onehalfspacing
+
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    {\LARGE\bfseries A Blockchain-Secured Federated-Learning System for Detection and Early Warning of Foot-and-Mouth Disease in Ugandan Cattle Farms\par}
+    
+    \vspace{2cm}
+    
+    {\Large Research Proposal\par}
+    
+    \vspace{1.5cm}
+    
+    {\large
+    \textbf{MUHINDO MUBARAKA}\\[0.5cm]
+    Student Number: 2400725633 MCSC(2024 Class - MUK)\\[0.3cm]
+    Reg. Number: 2024/HD05/25633U\\[0.5cm]
+    \textbf{Supervisor:}\\[0.2cm]
+    Dr. Chongomweru Halimu\\[0.3cm]
+    }
+    
+    \vspace{1.5cm}
+    
+    {\large
+    \textbf{School of Computing and Informatics Technology}\\[0.2cm]
+    \textbf{College of Computing and Information Sciences}\\[0.2cm]
+    \textbf{Makerere University}\\[0.5cm]
+    }
+    
+    \vfill
+    
+    {\large 19 November 2025\par}
+\end{titlepage}
+
+% Table of Contents
+\tableofcontents
+\newpage
+
+% No separate abstract - content begins directly after TOC
+
+\newpage
+
+\section{Introduction}
+
+Currently, building a good machine learning model involves gathering all data in one central location and using that data to train the model. It is like making it mandatory for any student to be able to learn; they must first physically go to the library. This causes major issues for privacy, it is costly, and in areas with slow internet, it's often simply not feasible.
+
+My research explores a different path. Instead of gathering the data, what if we could send the AI model out to learn from where the data already lives? This is what Federated Learning promises. But this new approach brings its own big question: if no one is sending their data to a central authority, how can we trust that the system is working correctly and hasn't been tampered with?
+
+This is where I propose bringing in blockchain, not for cryptocurrencies, but as a trust mechanism. My research is to design, build, and test a system that combines these two technologies to create a smarter, more private, and trustworthy way of training machine learning models.
+
+To prove this works, I will apply it to a real-world problem: predicting Foot-and-Mouth Disease in Uganda's cattle farms. The heart of my work is a contribution to computer science, creating a practical blueprint for decentralized AI that respects privacy and builds trust directly into the system.
+
+\section{Background}
+
+The classical way of applying machine learning relies on taking data from different sources, unifying them in one place, and then using that combined data for the training of the model. This method encounters serious problems like the risk of exposing personal information, the need for very powerful and expensive computers, and the inconveniences in places with poor internet connectivity.
+
+Federated learning, on the other hand, suggests an amazing new way of working where the models can be trained without transferring data and just using the local data kept in different places. This procedure allows a simultaneous learning process. But, this method of decentralization has also caused concerns about the integrity of the system and the possibility of verifying the contributions of the different participants.
+
+In the absence of a central authority that is responsible for the inspection of the data, what can we do to ensure that the whole learning process is protected and that no one is sending ill-intentioned updates to harm the model?
+
+This is the point where blockchain technology comes in with a very strong solution. Besides its application in the field of cryptocurrencies, it has been proven that the core of blockchain technology is the creation of trust in an environment where there is no trust. It can be represented as a decentralized ledger that can document the entire learning process step by step.
+
+Improper claims and fraud will be practically impossible in the case of blockchain. By employing blockchain technology, a new system can be introduced in which every model update goes through a process of verification, the whole thing is open, and the outcomes—like an early disease warning—are credible and cannot be altered after they have been announced.
+
+My research is situated at the intersection of these two technologies. I will investigate the way these technologies can be combined into a single, integrated system that is not only private and efficient but also capable of gaining users' trust.
+
+\section{Literature Review}
+
+\subsection{Paper 1: A Unified FMD Dataset for Uganda}
+
+Kapalaga and his team at Makerere University \cite{kapalaga2024unified} took on a messy problem: Uganda's animal disease data was all over the place with no standardization. You had NADDEC (the National Animal Disease Diagnostic Centre) keeping outbreak records. WOAH (World Organization for Animal Health) tracking regional patterns. UNMA (Uganda's weather service) collecting climate data. All separate, all in different formats. Nobody had bothered—or maybe nobody had the resources—to merge these into one coherent dataset that machine learning could actually use.
+
+They spent months cleaning and merging data from 2011 to 2022 across all 50 Ugandan districts. Outbreak records got combined with daily weather data (rainfall and maximum temperature), cattle population numbers from the 2008 census, and geographic factors like how close districts are to international borders or wildlife areas. What came out was Uganda's first real, comprehensive FMD prediction dataset.
+
+\subsubsection{Key Findings}
+
+They ran seven different machine learning algorithms against it—everything from basic logistic regression up to fancy random forests. When they trained and tested on data from relatively stable years (2011-2020), the results looked fantastic. Random Forest hit 92\% accuracy, 94\% recall, AUC of 0.97. Those are deployment-ready numbers.
+
+Then they did the actually interesting test. They took those same trained models and ran them on 2021-2022 data—years when climate change messed with normal rainfall and temperature patterns. Everything fell apart. That 92\% accuracy? Crashed to 46\%. Recall went from 94\% down to a pathetic 3\%, which means the model was missing 97 out of every 100 real outbreaks. F1-score collapsed from 0.92 to 0.06. Basically useless.
+
+\subsubsection{Dataset Structure}
+
+Here's what ended up in their unified dataset:
+
+\begin{itemize}
+    \item \textbf{Temporal features:} Month and year
+    \item \textbf{Location:} Which of the 50 districts
+    \item \textbf{Disease indicators:} Confirmed FMD cases, number of animals at risk, cumulative counts
+    \item \textbf{Climate variables:} Monthly average rainfall and maximum temperature
+    \item \textbf{Environmental risk factors:} How far the district is from protected wildlife areas and international borders
+    \item \textbf{Animal density:} Total cattle population per district
+\end{itemize}
+
+The prediction target is straightforward: outbreak or no outbreak for each district-month pair. Binary classification. You feed the model environmental and historical data, it tells you the probability of an outbreak happening.
+
+\subsubsection{Gap Identified}
+
+Kapalaga's dataset is solid, and their insights are valuable. But here's what's missing: everything's centralized. You need to collect all the data in one spot to train anything. There's zero privacy protection, no way for districts to work together without handing over their raw data, and absolutely no defense against those distribution shifts that wrecked their accuracy. Their models are also frozen—train once, use forever until someone manually retrains with new data. That doesn't work in a dynamic environment.
+
+\subsection{Paper 2: Blockchain-Based FL with Verifiable Fairness}
+
+Zhang's group from Beijing Institute of Technology \cite{zhang2023blockchain} went after two related problems: making federated learning actually private and actually fair. See, in typical federated learning, some central server gathers everyone's model updates. Sounds fine until you realize two issues: first, that server could potentially extract sensitive info from those gradient updates (privacy leak), and second, bad actors could send junk updates while still reaping the rewards of everyone else's legitimate work (unfairness).
+
+Their answer? Mix blockchain (specifically Hyperledger Fabric) with some serious cryptography. They built two custom protocols:
+
+\begin{itemize}
+    \item \textbf{BPNG (Blockchain-based Pseudorandom Number Generation):} This picks which participants join each training round using verifiable random functions. Blockchain generates truly random numbers that nobody can predict or game ahead of time. Everyone can verify the selection was genuinely random using zero-knowledge proofs—mathematical proof without revealing the underlying secrets.
+    
+    \item \textbf{GRNA (Gradient Random Noise Addition):} This implements differential privacy by carefully adding noise to model updates. Here's the clever bit: you can cryptographically prove you added the right amount of noise without actually showing your gradients to anyone.
+\end{itemize}
+
+Does it work? Yeah, actually. Generating the proofs takes around 19 seconds, blockchain verification another 2.3 seconds. That's tolerable for most use cases. Models trained with their privacy-protecting approach still converge fine and hit decent accuracy even with all that noise mixed in.
+
+\subsubsection{Gap Identified}
+
+Here's the limitation: they only tested on toy problems—logistic regression on the tiny IRIS dataset (4,050 samples). Real applications use massive neural networks with millions of parameters. They don't tell us how their system scales up, what happens with non-IID data distributions, or how well it handles Byzantine attacks.
+
+\subsection{Paper 3: FL in Healthcare - A Systematic Review}
+
+Teo's team from Singapore \cite{teo2024federated} did something ambitious: they systematically reviewed basically everything published about federated learning in healthcare. We're talking 22,000+ papers screened, 612 studies analyzed deeply. They wanted to know how FL gets used across different medical fields, what architectures actually work, and—most importantly—why so few of these systems make it past the research phase into actual hospitals.
+
+Their findings? Pretty depressing, honestly. After all these years of research and hundreds of papers, only 5.2\% of FL systems were actually deployed in real clinical settings. The other 94.8\%? Just proof-of-concept demos with simulated data. Radiology dominates (makes sense—imaging data is huge and privacy-sensitive), then internal medicine and oncology.
+
+Most implementations use horizontal federated learning—that's where different hospitals have different patients but measure the same things. Centralized aggregation is standard. Neural networks show up in about 75\% of studies. On the privacy side, differential privacy is most common (40\% of papers), with homomorphic encryption second (25\%).
+
+\subsubsection{Identified Barriers}
+
+\begin{enumerate}
+    \item \textbf{Privacy concerns:} Even with federated learning, those model updates aren't perfectly safe—clever attackers can sometimes reconstruct training data from gradients
+    \item \textbf{Data quality:} Non-IID data is a nightmare. When different hospitals have wildly different patient populations, model performance tanks
+    \item \textbf{Lack of explainability:} Doctors reasonably refuse to trust black-box models. "The AI says so" doesn't cut it when lives are at stake
+    \item \textbf{Infrastructure costs:} Setting up federated learning isn't trivial. You need serious technical chops and computing resources
+    \item \textbf{No incentive mechanisms:} This is huge. Why would hospitals spend resources contributing to training if there's no clear benefit to them specifically?
+    \item \textbf{Regulatory uncertainty:} Nobody's quite sure how existing medical regulations map onto FL systems. Legal gray areas make hospitals nervous
+\end{enumerate}
+
+\subsubsection{Gap Identified}
+
+The review does great at cataloging problems but doesn't propose solutions. Also striking: almost nothing from Africa or other resource-constrained settings. The incentive mechanism question—which seems absolutely critical for long-term success—barely gets explored anywhere.
+
+\subsection{Paper 4: FLock - Robust Privacy-Preserving FL}
+
+Chen's team \cite{chen2024flock} went after two goals at once: robustness and efficiency. Their system FLock can handle up to 40\% of participants being actively malicious while keeping everything private and working with real blockchain platforms like Ethereum and Bitcoin—not just theoretical systems.
+
+What makes FLock clever:
+
+\begin{itemize}
+    \item \textbf{MPC-Friendly Aggregation:} Instead of expensive, complex metrics to spot poisoned gradients, they use something lightweight. Convert gradients to binary (+1 or -1), take the median, then measure how far each participant's update is from that median using Hamming distance. Updates close to the median get weighted higher; outliers get weighted lower or tossed out.
+    
+    \item \textbf{Off-Chain State Channels:} Most blockchain federated learning systems naively dump every single model update onto the blockchain. That gets expensive fast. FLock is smarter—it runs the actual aggregation off-chain using secure multi-party computation. Only the final result and some verification proofs hit the blockchain. Cost savings are massive.
+    
+    \item \textbf{Pipelined Consensus:} While the aggregators are reaching consensus on round N, they're already computing round N+1. Basically doubles throughput.
+\end{itemize}
+
+Performance-wise, FLock delivers. With 100 clients and 25 aggregators, it can securely aggregate a ResNet-20 model (270,000 parameters) in roughly 2 minutes over realistic wide-area networks. Even when 40\% of clients are actively trying to sabotage the model, accuracy stays at 68\% on CIFAR-10. Compare that to standard federated averaging which crashes to 15\% under the same attack. That's genuinely impressive.
+
+\subsubsection{Gap Identified}
+
+But there's a big assumption: FLock needs an honest majority of aggregators. If over half of them collude, everything breaks. Also, they only tested on standard computer vision benchmarks like MNIST and CIFAR-10—images that don't behave like real-world disease surveillance data. No mention of incentive mechanisms either, or how to handle data distributions that change over time.
+
+\subsection{Synthesis: Literature Gaps}
+
+When you look at these four papers together, a pattern emerges:
+
+\begin{itemize}
+    \item \textbf{We can predict diseases with ML} (Kapalaga's work), but those models collapse when environmental conditions shift
+    \item \textbf{We can make FL private and fair} (Zhang's protocols), but only proved it on toy problems
+    \item \textbf{We know what stops FL adoption in practice} (Teo's review), but nobody's actually solving those barriers, especially not in developing countries
+    \item \textbf{We can build robust blockchain FL systems} (FLock), but they've never been tested on messy real-world data where distributions keep changing
+\end{itemize}
+
+Here's what's missing: nobody's put all these pieces together. There's no system that simultaneously learns from scattered disease surveillance data, adapts when weather patterns change, cryptographically guarantees privacy and fairness, actually works with Uganda's spotty infrastructure, includes incentives so people keep participating, and delivers warnings stakeholders can act on. That complete system? It doesn't exist yet.
+
+\section{Research Gap}
+
+The literature shows a weird disconnect. Over here, we've got excellent disease datasets proving we need systems that can adapt. Over there, we've got sophisticated federated learning and blockchain tech solving privacy and trust issues. But nobody's actually brought these two worlds together into something that works.
+
+Kapalaga gave us great data and showed the problem clearly (static models fail when conditions change), but didn't propose a solution. Zhang built verifiable fairness protocols, but only tested them on the IRIS dataset—hardly representative of real-world complexity. Teo's review listed all the barriers stopping FL from getting deployed, but those barriers haven't been addressed for agricultural disease surveillance. FLock demonstrated robust aggregation at scale, but didn't touch domain challenges like seasonal disease patterns, multi-modal data types, or how you'd incentivize farmers and vets to participate.
+
+Here are the specific gaps I found:
+
+\begin{enumerate}
+    \item \textbf{No End-to-End System:} Everyone's tackling pieces—data collection here, privacy there, robustness somewhere else—but nobody's assembled them into a complete, working early warning system.
+    
+    \item \textbf{No Real-World Validation:} Blockchain FL papers use synthetic data. Disease prediction papers use centralized training. Nobody's tested blockchain FL on actual disease surveillance data from the field.
+    
+    \item \textbf{No Adaptation Mechanisms:} Every system assumes data distributions stay frozen in time. None of them include drift detection or model adaptation strategies to handle environmental changes.
+    
+    \item \textbf{No African Context:} All the research focuses on rich countries with great infrastructure. The challenges specific to developing countries—spotty internet, limited computing power, different regulatory environments—haven't been seriously explored.
+    
+    \item \textbf{No Incentive Design:} For these systems to work long-term, people need reasons to participate. There's basically zero research on economic incentives tailored to agricultural stakeholders.
+    
+    \item \textbf{No Integration with National Systems:} Uganda already has ULITS tracking cattle movements. Nobody's figured out how to build federated learning on top of existing national infrastructure instead of starting from scratch.
+\end{enumerate}
+
+My research fills all these gaps. I'm designing, building, and testing the first blockchain-based federated learning early warning system for livestock disease that actually runs on real Ugandan data, adapts to distribution shifts, and works with existing national infrastructure.
+
+\section{Problem Statement}
+
+\textbf{How can we design a decentralized, privacy-preserving early warning system that learns from scattered livestock disease data, adapts when environmental conditions change, and cryptographically guarantees fairness and robustness—while actually working within Sub-Saharan Africa's infrastructure and regulatory reality?}
+
+This breaks down into three challenges:
+
+\begin{itemize}
+    \item \textbf{Technical:} Can we actually build something that integrates federated learning, blockchain verification, and adaptive algorithms into a prototype that works?
+    
+    \item \textbf{Empirical:} Can we prove it achieves decent accuracy, runs efficiently, and stays robust when tested on real disease surveillance data (not simulations)?
+    
+    \item \textbf{Practical:} Can it operate within Uganda's actual constraints—intermittent internet, limited computing hardware, data sovereignty laws, privacy regulations—instead of assuming perfect conditions?
+\end{itemize}
+
+Success means proving something important: you don't need centralized data collection or expensive cloud infrastructure to do sophisticated AI. You can build intelligent systems that respect privacy, work in resource-limited settings, and stay trustworthy even when some participants are actively malicious.
+
+\section{Research Objectives}
+
+\subsection{Overall Objective}
+
+I want to design, build, and test a blockchain-powered federated learning system that provides privacy-preserving, adaptive early warnings for livestock disease outbreaks—using Uganda's existing ULITS infrastructure as the foundation.
+
+\subsection{Specific Objectives}
+
+\begin{enumerate}
+    \item \textbf{Dataset Development:} Take Kapalaga's unified FMD dataset and enhance it with ULITS cattle ID data, movement records, vaccination histories, and detailed climate variables. The end result should be a comprehensive dataset that's ready for federated learning, with data naturally partitioned by district.
+    
+    \item \textbf{System Architecture Design:} Design a modular system that brings together (a) federated learning protocols for training across districts, (b) blockchain smart contracts that verify participants and distribute rewards, and (c) adaptive learning that handles environmental changes.
+    
+    \item \textbf{Privacy and Fairness Mechanisms:} Implement verifiable random participant selection (building on Zhang's BPNG protocol) and differential privacy with cryptographic proofs (inspired by GRNA)—adapted to work with neural networks for disease prediction.
+    
+    \item \textbf{Robust Aggregation:} Develop aggregation strategies (inspired by FLock) that can tolerate Byzantine attacks while dealing with non-IID data—the reality of cross-district disease surveillance where each district has different patterns.
+    
+    \item \textbf{Adaptive Learning:} Build in drift detection and model adaptation techniques (federated continual learning or meta-learning approaches) so accuracy doesn't collapse when environmental conditions shift.
+    
+    \item \textbf{System Implementation:} Build a working open-source prototype using Hyperledger Fabric for blockchain, PyTorch or TensorFlow for machine learning, and Flower framework for federated learning coordination. Deploy it on hardware that matches what district vet offices actually have—not fancy data center equipment.
+    
+    \item \textbf{Empirical Evaluation:} Test the system against centralized and standard federated learning baselines. Measure prediction accuracy, privacy guarantees (epsilon values), fairness (how evenly contributions are distributed), robustness (accuracy when under attack), latency, and bandwidth use.
+    
+    \item \textbf{Stakeholder Validation:} Actually talk to district veterinary officers and farmers. Run usability studies. Find out if they'd trust and use this system, what concerns they have, and whether they'd participate in a real deployment.
+\end{enumerate}
+
+\section{Research Methodology}
+
+This section explains \textbf{how} we'll achieve each objective, what methods we'll use, what data we'll work with, and how we'll measure success.
+
+\subsection{Dataset Development (Objective 1)}
+
+We'll build on Kapalaga's unified FMD dataset by adding layers of information from ULITS and other sources.
+
+\subsubsection{Data Sources}
+
+\begin{enumerate}
+    \item ULITS cattle registry: Electronic ID tags, breed, age, ownership, holding location
+    \item ULITS movement permits: Records of cattle moving between holdings, markets, or districts
+    \item District vaccination records: Dates and types of vaccines administered
+    \item NADDEC lab results: Test confirmations, clinical signs reported
+    \item UNMA climate data: Daily rainfall, min/max temperature, humidity
+    \item Sentinel surveillance: Regular health monitoring at selected farms
+    \item Market activity: Cattle market schedules, trading volumes (if available)
+\end{enumerate}
+
+\subsubsection{Dataset Structure}
+
+We'll organize data into a federated structure where each district holds its own records. Each district node contains data for cattle registered in that district with temporal granularity of daily records aggregated to weekly or monthly for prediction.
+
+Feature categories include:
+\begin{itemize}
+    \item Animal attributes: breed, age, vaccination status
+    \item Environmental: rainfall, temperature, seasonality
+    \item Spatial: distance to borders, protected areas, other outbreak sites
+    \item Behavioral: movement frequency, market participation
+    \item Historical: past outbreak occurrences, treatment outcomes
+\end{itemize}
+
+\textbf{Target Variable:} Binary classification: will an outbreak occur in this district in the next 2-4 weeks? (Prediction horizon chosen based on intervention timeframe.)
+
+\subsubsection{Expected Outcome}
+
+A cleaned, documented dataset with $\sim$50 client partitions (districts), each containing 50-500 samples (district-month observations) with 15-25 features, ready for federated training experiments.
+
+\subsection{System Architecture Design (Objective 2)}
+
+We'll follow a layered architecture approach with five main layers:
+
+\begin{enumerate}
+    \item \textbf{Data Layer:} Local data stores at each district node, preprocessing pipelines for feature extraction, privacy-preserving data handling (encryption at rest)
+    
+    \item \textbf{Learning Layer:} PyTorch-based neural network models, local training orchestration, gradient computation and differential privacy noise addition
+    
+    \item \textbf{Aggregation Layer:} Flower framework for FL coordination, custom aggregation functions implementing robust averaging, model versioning and checkpointing
+    
+    \item \textbf{Blockchain Layer:} Hyperledger Fabric network with district nodes as organizations, smart contracts for participant registration, training round coordination, contribution verification, and reward distribution
+    
+    \item \textbf{Application Layer:} Web dashboard for veterinary officers, alert generation and notification system, model performance monitoring, audit trail visualization
+\end{enumerate}
+
+\textbf{Expected Outcome:} Detailed architecture diagrams, component specifications, and API definitions documented in a technical design document.
+
+\subsection{Privacy and Fairness Mechanisms (Objective 3)}
+
+\subsubsection{Differential Privacy Implementation}
+
+\begin{itemize}
+    \item Add Laplacian noise to gradients before transmission
+    \item Noise scale calibrated to privacy budget ($\epsilon = 1-10$)
+    \item Track cumulative privacy loss across training rounds
+    \item Implement gradient clipping to bound sensitivity
+\end{itemize}
+
+\subsubsection{Verifiable Randomness}
+
+Adapt BPNG protocol: blockchain generates random seeds for client selection each round, participants verify randomness using VRF proofs, prevents coordinator from cherry-picking favorable clients.
+
+\subsubsection{Evaluation Metrics}
+
+\begin{itemize}
+    \item Privacy budget consumption per round
+    \item Success rate of membership inference attacks (to demonstrate privacy)
+    \item Distribution uniformity of client selection (to demonstrate fairness)
+\end{itemize}
+
+\subsection{Robust Aggregation (Objective 4)}
+
+Start with standard federated averaging (FedAvg) as baseline, then implement robust alternatives:
+
+\begin{enumerate}
+    \item \textbf{Median aggregation:} Use coordinate-wise median instead of mean
+    \item \textbf{Krum aggregation:} Select updates closest to the majority
+    \item \textbf{FLock-inspired:} Hamming distance weighting after signSGD binarization
+\end{enumerate}
+
+We'll simulate Byzantine attacks by randomly selecting 10-40\% of clients as malicious, submitting Gaussian noise, inverted gradients, or scaled gradients, and measure accuracy degradation with/without defenses.
+
+\textbf{Expected Outcome:} Comparison table showing accuracy under different attack scenarios and data distributions for each aggregation method.
+
+\subsection{Adaptive Learning (Objective 5)}
+
+\subsubsection{Drift Detection}
+
+\begin{itemize}
+    \item Monitor per-district loss distributions over time
+    \item Flag districts where validation loss increases significantly
+    \item Use statistical tests (Kolmogorov-Smirnov) to detect feature distribution shifts
+\end{itemize}
+
+\subsubsection{Adaptation Strategies}
+
+\begin{enumerate}
+    \item Periodic retraining on recent data windows
+    \item Elastic weight consolidation to preserve important parameters
+    \item Meta-learning: train model to quickly adapt to new districts/conditions
+    \item Personalization: allow districts to fine-tune global model on local data
+\end{enumerate}
+
+\textbf{Expected Outcome:} Demonstration that adaptive approaches maintain accuracy ($>80\%$) even when environmental conditions shift, compared to static models that degrade.
+
+\subsection{System Implementation (Objective 6)}
+
+\subsubsection{Technology Stack}
+
+\textbf{ML/FL:}
+\begin{itemize}
+    \item Python 3.9+
+    \item PyTorch 2.0 or TensorFlow 2.12
+    \item Flower 1.5+ (FL framework)
+    \item NumPy, Pandas, Scikit-learn
+\end{itemize}
+
+\textbf{Blockchain:}
+\begin{itemize}
+    \item Hyperledger Fabric 2.5
+    \item Node.js or Go for smart contracts
+    \item Docker for containerized deployment
+\end{itemize}
+
+\textbf{Supporting Infrastructure:}
+\begin{itemize}
+    \item PostgreSQL (metadata storage)
+    \item Redis (caching/job queues)
+    \item Flask/FastAPI (web services)
+    \item Grafana (monitoring dashboards)
+\end{itemize}
+
+\subsubsection{Hardware}
+
+\begin{itemize}
+    \item Simulate district nodes on separate VMs or containers
+    \item Use Raspberry Pi 4 (8GB) as representative edge device
+    \item Central server: standard Ubuntu VM (8 cores, 32GB RAM)
+\end{itemize}
+
+\textbf{Expected Outcome:} Fully functional prototype with public GitHub repository, installation guide, API documentation, and demo notebooks.
+
+\subsection{Empirical Evaluation (Objective 7)}
+
+We'll compare our system against baselines:
+
+\begin{enumerate}
+    \item Centralized learning: Train on pooled data
+    \item Local learning: Each district trains independently
+    \item Standard FedAvg: FL without blockchain/privacy
+    \item FedAvg + DP: FedAvg with differential privacy
+    \item Proposed system: Full blockchain-based FL with robustness
+\end{enumerate}
+
+\subsubsection{Metrics}
+
+\textbf{Accuracy Metrics:}
+\begin{itemize}
+    \item Classification accuracy
+    \item Precision, recall, F1-score
+    \item AUC-ROC
+    \item Calibration error
+\end{itemize}
+
+\textbf{Efficiency Metrics:}
+\begin{itemize}
+    \item Communication rounds to convergence
+    \item Total data transmitted per client
+    \item Training time per round
+    \item End-to-end latency for alert generation
+\end{itemize}
+
+\textbf{Privacy Metrics:}
+\begin{itemize}
+    \item Epsilon (differential privacy budget)
+    \item Success rate of membership inference attacks
+    \item Reconstruction error from gradient inversion attacks
+\end{itemize}
+
+\textbf{Fairness Metrics:}
+\begin{itemize}
+    \item Gini coefficient of client contributions
+    \item Standard deviation of client selection frequency
+    \item Performance equity (accuracy variance across districts)
+\end{itemize}
+
+\textbf{Robustness Metrics:}
+\begin{itemize}
+    \item Accuracy under Byzantine attacks (10\%, 20\%, 30\%, 40\% malicious)
+    \item Recovery time after attack
+    \item False positive rate for malicious detection
+\end{itemize}
+
+\subsubsection{Test Scenarios}
+
+\begin{enumerate}
+    \item Baseline performance: IID data, no attacks, stable conditions
+    \item Non-IID data: Realistic district partitioning with skewed distributions
+    \item Byzantine attacks: Various attack types and fractions
+    \item Distribution shift: Test on 2023-2024 data with climate changes
+    \item Connectivity stress: Simulate intermittent connections, dropouts
+    \item Scaling: Add clients progressively, measure degradation
+\end{enumerate}
+
+\textbf{Expected Outcome:} Comprehensive results showing our system achieves accuracy within 5\% of centralized baseline, privacy budget $\epsilon < 10$ with $< 2\%$ accuracy loss, tolerates up to 30\% malicious clients, and maintains $>75\%$ accuracy under distribution shifts.
+
+\subsection{Stakeholder Validation (Objective 8)}
+
+\subsubsection{Qualitative Methods}
+
+\begin{enumerate}
+    \item \textbf{Semi-structured interviews} with 10-15 district veterinary officers about current workflows, pain points, reactions to system demo, privacy concerns, and willingness to adopt
+    
+    \item \textbf{Focus groups} with 2-3 farmer cooperatives to understand system benefits/risks, trust in predictions, and incentive preferences
+    
+    \item \textbf{Usability testing} with task-based evaluation, System Usability Scale questionnaire, time to complete tasks, and error rates
+\end{enumerate}
+
+\subsubsection{Ethics}
+
+\begin{itemize}
+    \item Obtain IRB approval from Makerere University
+    \item Informed consent from all participants
+    \item Anonymize responses in publications
+    \item Compensate participants for their time
+\end{itemize}
+
+\textbf{Expected Outcome:} Qualitative themes and quantitative metrics (SUS scores, trust levels) demonstrating practical feasibility.
+
+\section{Process Workflow}
+
+The system operates through seven coordinated phases:
+
+\subsection{Phase 1: System Initialization}
+
+\begin{enumerate}
+    \item Deploy Hyperledger Fabric network with 50 district nodes as organizations
+    \item Install smart contracts for participant management and reward distribution
+    \item Initialize global model parameters on blockchain
+    \item District veterinary offices register as FL clients with blockchain identities
+\end{enumerate}
+
+\subsection{Phase 2: Local Data Collection}
+
+\begin{enumerate}
+    \item Farmers report cattle health observations via mobile app or SMS
+    \item District officers record lab test results, vaccination events
+    \item ULITS system captures movement permits, market activities
+    \item District node preprocesses incoming data and updates local training dataset (stored encrypted)
+\end{enumerate}
+
+\subsection{Phase 3: Federated Training Round}
+
+\begin{enumerate}
+    \item Blockchain smart contract generates verifiable random seed
+    \item Random selection algorithm picks 20-30 districts for this round
+    \item Selected clients download latest global model
+    \item Each client trains model on local data for E epochs
+    \item Clients add differential privacy noise to gradients
+    \item Clients generate zero-knowledge proof that noise was added correctly
+    \item Clients upload encrypted model updates and submit ZK proofs to blockchain
+\end{enumerate}
+
+\subsection{Phase 4: Secure Aggregation}
+
+\begin{enumerate}
+    \item Aggregation server collects updates and verifies ZK proofs via blockchain
+    \item Apply robust aggregation (weighted median or FLock-style)
+    \item Detect and filter outlier updates (potential attacks)
+    \item Aggregate new global model from verified client updates
+    \item Store model checkpoint on blockchain (hash pointer)
+    \item Broadcast updated model to all clients
+\end{enumerate}
+
+\subsection{Phase 5: Early Warning Generation}
+
+\begin{enumerate}
+    \item Each district runs latest global model on recent local data
+    \item Generate outbreak probability for next 2-4 weeks
+    \item Central dashboard aggregates predictions from all districts
+    \item Identify high-risk regions (probability $> 0.7$)
+    \item Generate alert messages for high-risk districts
+    \item Deliver via SMS, email, web dashboard, mobile app
+\end{enumerate}
+
+\subsection{Phase 6: Monitoring and Adaptation}
+
+\begin{enumerate}
+    \item Track prediction accuracy as ground truth emerges
+    \item Monitor model calibration and detect performance degradation
+    \item Analyze feature distributions over time for drift
+    \item Trigger adaptation mechanisms when drift exceeds threshold
+    \item Initiate retraining on recent data windows
+\end{enumerate}
+
+\subsection{Phase 7: Incentive Distribution}
+
+\begin{enumerate}
+    \item Smart contract evaluates each participant's contribution quality
+    \item Compute normalized contribution scores based on data quantity and model improvement
+    \item Distribute tokens or credits proportional to contribution scores
+    \item Record transactions on blockchain (transparent, auditable)
+\end{enumerate}
+
+\section{Expected Contributions}
+
+\subsection{Scientific Contributions}
+
+\textbf{Novel System Architecture:} This'll be the first complete reference architecture that actually combines federated learning, blockchain verification, and adaptive learning for disease early warning. The pattern should work for way more than just agriculture—anywhere you need privacy-preserving, distributed learning with accountability.
+
+\textbf{Empirical Evidence on Robustness:} Hard numbers showing how blockchain verification helps resist Byzantine attacks in realistic federated learning scenarios where data isn't identically distributed. Most papers handwave this—I'll have actual measurements.
+
+\textbf{Adaptation to Distribution Shifts:} A systematic comparison of different drift detection and model adaptation techniques in federated settings. Which approaches actually work when your data distribution keeps changing?
+
+\textbf{Privacy-Utility Trade-offs:} Detailed analysis of how different differential privacy levels affect accuracy, how fast models converge, and whether they're actually usable in resource-constrained environments. Theory's nice, but what matters is what works in practice.
+
+\subsection{Technical Contributions}
+
+\textbf{Open-Source Prototype:} A production-ready codebase that's actually documented and extensible. Modular components, Docker containers, example datasets, comprehensive API docs—everything someone would need to build on this or deploy it themselves.
+
+\textbf{ULITS-Enhanced FMD Dataset:} The first publicly available federated learning dataset for livestock disease that includes movement records, vaccination histories, and detailed environmental data. Researchers need good datasets—this'll be one.
+
+\textbf{Performance Benchmarks:} Baseline numbers for blockchain federated learning on real disease surveillance tasks. Right now there's nothing to compare against for this domain.
+
+\subsection{Practical Contributions}
+
+\textbf{Stakeholder Insights:} Real understanding of how Ugandan vets and farmers perceive trust, what privacy concerns they actually have, and what barriers would stop them from adopting this. Not speculation—actual qualitative data.
+
+\textbf{Deployment Blueprint:} A step-by-step guide for deploying blockchain federated learning in developing-country contexts. Infrastructure requirements, regulatory considerations, training needs, realistic cost estimates—the stuff you'd need to know to actually do this.
+
+\textbf{Policy Recommendations:} Evidence-based recommendations for policymakers about data governance, privacy regulations, and incentive structures. Not just "here's what should happen" but backed by real data.
+
+\subsection{Broader Impact}
+
+\textbf{Demonstrating Viable Alternatives to Centralization:} Proving sophisticated AI can work without centralized data collection means organizations and individuals can participate in machine learning without giving up privacy or control. That matters everywhere, not just Uganda.
+
+\textbf{Capacity Building:} Training Ugandan students and professionals in federated learning and blockchain—technologies that'll be increasingly important globally.
+
+\textbf{Foundation for Future Work:} Setting up infrastructure and methods that can extend to other diseases, other countries, other sectors entirely. This is a starting point, not an ending point.
+
+\section{Timeline and Milestones}
+
+\begin{table}[h]
+\centering
+\caption{Project Timeline}
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\textbf{Period} & \textbf{Activities} \\
+\hline
+Month 1-3 & Literature review, dataset development, ethics approval, data access agreements \\
+\hline
+Month 4-6 & System design and implementation, FL training loop, Hyperledger Fabric setup \\
+\hline
+Month 7-9 & Privacy and robustness implementation, differential privacy, ZK proofs, robust aggregation \\
+\hline
+Month 10-12 & Adaptive learning, early warning dashboard, end-to-end testing \\
+\hline
+Month 13-15 & Empirical evaluation, experiments, performance metrics analysis \\
+\hline
+Month 16-18 & Stakeholder validation, interviews, usability testing, system refinement \\
+\hline
+Month 19-21 & Thesis writing, conference papers, demonstration videos, code release \\
+\hline
+Month 22-24 & Conference presentations, thesis defense, dataset publication \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Ethical Considerations}
+
+\subsection{Data Privacy}
+
+All personally identifiable information (farmer names, specific locations) will be anonymized. Raw data never leaves district boundaries. Aggregated insights only shared with explicit consent.
+
+\subsection{Informed Consent}
+
+All research participants (interview subjects, pilot users) will receive clear explanations of the system and provide written consent. Participation is voluntary with right to withdraw.
+
+\subsection{Responsible AI}
+
+Model predictions are decision-support tools, not autonomous decisions. Veterinary officers retain authority and judgment. System designed to be transparent and explainable.
+
+\subsection{Benefit Sharing}
+
+Results published open-access. Software released under permissive license. Training provided to local stakeholders. System designed to benefit all districts, not extract value.
+
+\subsection{Environmental Impact}
+
+Federated learning reduces data center energy consumption. Blockchain energy usage minimized by using Hyperledger (not proof-of-work).
+
+\section{Conclusion}
+
+At its core, this research tackles something fundamental about how we do AI today: can we build intelligent systems that learn from scattered data without sacrificing privacy, security, or fairness? I think we can, by mixing federated learning with blockchain verification. That combination creates a trustworthy foundation for collaborative machine learning in domains where the stakes are high.
+
+Livestock disease prediction serves as my testing ground because it throws real challenges at us—privacy concerns, lousy infrastructure, potential bad actors, and data distributions that keep shifting. If the system works here, the underlying principles should transfer to lots of other domains beyond agriculture.
+
+I'm not just trying to build a better disease predictor. This is about proving a different way to do AI is possible—one where people keep ownership of their own data, where contributions are verifiably fair, where systems adapt instead of breaking when conditions change, and where trust comes from transparency rather than blind faith in some central authority.
+
+What comes out of this should be useful on multiple levels: open-source tools anyone can use, empirical evidence about what works and what doesn't, and practical insights for actually deploying these systems. It's research that aims to advance the science while also delivering something valuable to Uganda's livestock keepers. Theoretical rigor meeting real-world impact.
+
+% Bibliography
+\begin{thebibliography}{9}
+
+\bibitem{kapalaga2024unified}
+Kapalaga, G., Kivunike, F.N., Kerfua, S., Jjingo, D., Biryomumaisho, S., Rutaisire, J., Ssajjakambwe, P., Mugerwa, S., \& Kiwala, Y. (2024).
+\textit{A unified Foot and Mouth Disease dataset for Uganda: evaluating machine learning predictive performance degradation under varying distributions}.
+Frontiers in Artificial Intelligence, 7, 1446368.
+DOI: 10.3389/frai.2024.1446368
+
+\bibitem{zhang2023blockchain}
+Zhang, Y., Tang, Y., Zhang, Z., Li, M., Li, Z., Khan, S., Chen, H., \& Cheng, G. (2023).
+\textit{Blockchain-Based Practical and Privacy-Preserving Federated Learning with Verifiable Fairness}.
+Mathematics, 11(5), 1091.
+DOI: 10.3390/math11051091
+
+\bibitem{teo2024federated}
+Teo, Z.L., Jin, L., Li, S., Miao, D., Zhang, X., Ng, W.Y., Tan, T.F., Lee, D.M., Chua, K.J., Heng, J., Liu, Y., Goh, R.S.M., \& Ting, D.S.W. (2024).
+\textit{Federated machine learning in healthcare: A systematic review on clinical applications and technical architecture}.
+Cell Reports Medicine, 5(2), 101419.
+DOI: 10.1016/j.xcrm.2024.101419
+
+\bibitem{chen2024flock}
+Chen, R., Dong, Y., Liu, Y., Fan, T., Li, D., Guan, Z., Liu, J., \& Zhou, J. (2024).
+\textit{FLock: Robust and Privacy-Preserving Federated Learning based on Practical Blockchain State Channels}.
+Cryptology ePrint Archive, Paper 2024/1797.
+
+\bibitem{mcmahan2017communication}
+McMahan, B., Moore, E., Ramage, D., Hampson, S., \& Arcas, B.A. (2017).
+\textit{Communication-Efficient Learning of Deep Networks from Decentralized Data}.
+Proceedings of the 20th International Conference on Artificial Intelligence and Statistics (AISTATS).
+
+\bibitem{bonawitz2017practical}
+Bonawitz, K., Ivanov, V., Kreuter, B., Marcedone, A., McMahan, H.B., Patel, S., Ramage, D., Segal, A., \& Seth, K. (2017).
+\textit{Practical Secure Aggregation for Privacy-Preserving Machine Learning}.
+Proceedings of the 2017 ACM SIGSAC Conference on Computer and Communications Security.
+
+\bibitem{li2020federated}
+Li, T., Sahu, A.K., Zaheer, M., Sanjabi, M., Talwalkar, A., \& Smith, V. (2020).
+\textit{Federated Optimization in Heterogeneous Networks}.
+Proceedings of Machine Learning and Systems (MLSys).
+
+\bibitem{kairouz2021advances}
+Kairouz, P., McMahan, H.B., Avent, B., et al. (2021).
+\textit{Advances and Open Problems in Federated Learning}.
+Foundations and Trends in Machine Learning, 14(1-2), 1-210.
+
+\end{thebibliography}
+
+\end{document}

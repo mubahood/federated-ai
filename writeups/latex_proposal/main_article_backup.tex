@@ -1,0 +1,606 @@
+% Research Proposal - Blockchain-Secured Federated Learning for FMD Detection
+% Author: Muhindo Mubaraka
+% Date: November 2025
+
+\documentclass[12pt,a4paper]{article}
+
+% Essential packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+
+% Hyperlink setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue,
+    pdftitle={Research Proposal - Blockchain-Secured Federated Learning for FMD Detection},
+    pdfauthor={Muhindo Mubaraka},
+}
+
+% Page style
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Research Proposal}
+\fancyhead[R]{\small Muhindo Mubaraka}
+\fancyfoot[C]{\thepage}
+
+% Line spacing
+\onehalfspacing
+
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    {\LARGE\bfseries A Blockchain-Secured Federated-Learning System for Detection and Early Warning of Foot-and-Mouth Disease in Ugandan Cattle Farms\par}
+    
+    \vspace{2cm}
+    
+    {\Large Research Proposal\par}
+    
+    \vspace{3cm}
+    
+    {\large
+    \textbf{MUHINDO MUBARAKA}\\[0.5cm]
+    Student Number: 2400725633 MCSC(2024 Class - MUK),\\[0.3cm]
+    Reg. Number:2024/HD05/25633U\\[1cm]
+    \textbf{Supervisor:}\\[0.2cm]
+    Dr. Chongomweru Halimu\\[0.3cm]
+    }
+    
+    \vfill
+    
+    {\large November 2025\par}
+\end{titlepage}
+
+% Table of Contents
+\tableofcontents
+\newpage
+
+% Introduction
+\section{Introduction}
+
+Currently, building a good machine learning model involves gathering all data in one central location and using that data to train the model. It is like making it mandatory for any student to be able to learn; they must first physically go to the library. This causes major issues for privacy, it is costly, and in areas with slow internet, it's often simply not feasible.
+
+My research explores a different path. Instead of gathering the data, what if we could send the AI model out to learn from where the data already lives? This is what Federated Learning promises. But this new approach brings its own big question: if no one is sending their data to a central authority, how can we trust that the system is working correctly and hasn't been tampered with?
+
+This is where I propose bringing in blockchain, not for cryptocurrencies, but as a trust mechanism. My research is to design, build, and test a system that combines these two technologies to create a smarter, more private, and trustworthy way of training machine learning models.
+
+To prove this works, I will apply it to a real-world problem: predicting Foot-and-Mouth Disease in Uganda's cattle farms. The heart of my work is a contribution to computer science, creating a practical blueprint for decentralized AI that respects privacy and builds trust directly into the system.
+
+% Background
+\section{Background}
+
+The classical way of applying machine learning relies on taking data from different sources, unifying them in one place, and then using that combined data for the training of the model. This method encounters serious problems like the risk of exposing personal information, the need for very powerful and expensive computers, and the inconveniences in places with poor internet connectivity.
+
+Federated learning, on the other hand, suggests an amazing new way of working where the models can be trained without transferring data and just using the local data kept in different places. This procedure allows a simultaneous learning process. But, this method of decentralization has also caused concerns about the integrity of the system and the possibility of verifying the contributions of the different participants.
+
+In the absence of a central authority that is responsible for the inspection of the data, what can we do to ensure that the whole learning process is protected and that no one is sending ill-intentioned updates to harm the model?
+
+This is the point where blockchain technology comes in with a very strong solution. Besides its application in the field of cryptocurrencies, it has been proven that the core of blockchain technology is the creation of trust in an environment where there is no trust. It can be represented as a decentralized ledger that can document the entire learning process step by step.
+
+Improper claims and fraud will be practically impossible in the case of blockchain. By employing blockchain technology, a new system can be introduced in which every model update goes through a process of verification, the whole thing is open, and the outcomes—like an early disease warning—are credible and cannot be altered after they have been announced.
+
+My research is situated at the intersection of these two technologies. I will investigate the way these technologies can be combined into a single, integrated system that is not only private and efficient but also capable of gaining users' trust.
+
+% Literature Review
+\section{Literature Review}
+
+\subsection{i. Kapalaga et al. (2024) – A Unified Foot-and-Mouth Disease Dataset for Uganda}
+
+The dataset presents a national FMD dataset that is not only a collection of various data sourced from different regions and sources but also a major step towards overcoming the problem of fragmentation.
+
+Moreover, they indicate that the performance of standard ML models suffers heavily when the distribution of important input variables (like rainfall, temperature) changes over time, thus arguing the necessity of models that are capable of dealing with non-stationary data.
+
+\textbf{Gap:}
+\begin{itemize}
+    \item The research is solely centralized, thus all data is obtained and managed in one location.
+    \item The study did not consider federated learning (FL) and decentralized data processing which could help mitigate concerns regarding data privacy and network inefficiencies, particularly in low-resource areas with inadequate connectivity.
+\end{itemize}
+
+\subsection{ii. Zhang et al. (2023) – Blockchain-Based Practical and Privacy-Preserving Federated Learning with Verifiable Fairness}
+
+The authors of the paper propose a blockchain-based system for federated learning, which aims at the preservation of privacy as well as the fairness of all parties involved. The setup combines blockchain with crypto-based methods such as verifiable random functions (VRFs) and zero-knowledge proofs (ZKPs) to provide fairness and confidentiality during the training of the model.
+
+The common usage of blockchain is for cryptocurrencies, but in this case, it is used as a trust mechanism for ensuring privacy, verifiable fairness, and secure model updates in federated learning.
+
+\textbf{Gap:}
+\begin{itemize}
+    \item Despite the fact that privacy and fairness are mentioned as main advantages, the paper still does not consider the application domains of early warning systems, which are real-world situations, nor does it offer an end-to-end architecture for implementation in actual, low-resource areas such as agriculture or disease prediction.
+    \item The research stops at the protocol level, emphasizing the theoretical ideas and applying them in a non-specific framework without demonstrating the practical effects on model performance, latency, or network efficiency in distributed real-world environments.
+\end{itemize}
+
+\subsection{iii. Teo et al. (2024) – Federated Machine Learning in Healthcare: A Systematic Review on Clinical Applications and Technical Architecture}
+
+The paper presents a meticulous examination of the role of federated learning (FL) in healthcare through the lens of 612 studies with the intention of creating a comprehensive view. These studies are further separated by clinical domain, data type, and system design, among other factors. Moreover, it also points out the main issues and challenges encountered by the FL in healthcare, including but not limited to interoperability, legislative barriers, and lack of actual application.
+
+A complete analysis of the FL in the medical healthcare aspect, outlining the major factors of techniques, system design, and barriers to successful deployment in the real world.
+
+It brings the very limited aspect of practical implementations in studies through its argument, stating that only a tiny fraction of the studies have shown such deployable systems.
+
+\textbf{Gap:}
+\begin{itemize}
+    \item Despite being very informative about the FL in the healthcare area, the paper does not elaborate on an integrated system that uses both blockchain and FL for decentralized early warning systems.
+    \item The literature has mainly been theoretical and has not yet delved into the practical physical architectures that take care of data, model updates, privacy, and real-time alerts, which are all crucial to your study.
+\end{itemize}
+
+\subsection{iv. Chen et al. (2024): FLock: Robust and Privacy-Preserving Federated Learning from Practical Blockchain State Channels}
+
+The system demonstrates the creation of a strong privacy-preserving scenario in a federated learning setup using blockchain state channels, resistant to model poisoning.
+
+\textbf{Gap:}
+\begin{itemize}
+    \item The emphasis is on secure aggregation and robustness, rather than on creating a complete early warning system with real-time estimations and domain-specific functionality.
+\end{itemize}
+
+\subsection{Literature Review Summary}
+
+\begin{table}[h]
+\centering
+\caption{Literature Review Summary}
+\begin{tabular}{|p{3cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+\hline
+\textbf{Paper Title} & \textbf{Method} & \textbf{Contribution} & \textbf{Gap} \\
+\hline
+Kapalaga et al. (2024) - A concatenation of Foot-and-Mouth Disease datasets in Uganda & Integration of climate, livestock, and FMD data resulted in the formation of a common dataset. Employing traditional machine learning models, the researchers assessed FMD forecasting through distribution changes. & It gives a vetted data set on livestock in Uganda that demonstrates how shifts in distributions damage the effectiveness of machine learning models. & No federated learning or decentralized data processing but rather centralized model training. \\
+\hline
+Zhang et al. (2023) – Blockchain-Based Practical and Privacy-Preserving Federated Learning with Verifiable Fairness & One of the proposals is on fair and private federated learning with blockchain integration using BPNG and GRNA by zero-knowledge proofs. & Presents a system based on blockchain technology for federated learning that ensures the privacy of its users and provides verifiable fairness among all the participants. & Emphasizes protocol-attributed privacy and fairness without addressing early-warning systems or real-world applications. \\
+\hline
+Teo et al. (2024) – Federated Machine Learning in Healthcare & A comprehensive review of FL in the healthcare sector was conducted, comprising and evaluating 612 studies in terms of their clinical use cases, data types, and architectures. & Gives an all-inclusive illustration of FL applications in the medical field and points out restrictions for their adoption such as legal matters and lack of compatibility. & Existing systems do not have an integrated approach that can bring together federated learning and blockchain for real-time, specific to the domain, applications such as early warning systems. \\
+\hline
+Chen et al. (2024): FLock: Robust and Privacy-Preserving Federated Learning from Practical Blockchain State Channels & The system demonstrates creation of a strong privacy-preserving scenario in federated learning. & The system demonstrates the creation of a strong privacy-preserving scenario in a federated learning setup using blockchain state channels, resistant to model poisoning. & The emphasis is on secure aggregation and robustness, rather than on creating a complete early warning system with real-time estimations and domain-specific functionality. \\
+\hline
+\end{tabular}
+\end{table}
+
+% Research Gaps
+\section{Research Gaps}
+
+I spotted three major areas where current research is lacking through my literature review, which my research proposes to cover:
+
+\begin{enumerate}
+    \item \textbf{The Application Gap:} The frameworks, for instance, FLock, are showcasing the implementation of blockchain in federated learning for general purposes; however, there is no dedicated system for livestock disease prediction. The present technologies are either theoretical or healthcare-centric, thereby creating an urgent, critical demand for a specialized, comprehensive, and integrated system suited to the agriculture sector for early warning.
+
+    \item \textbf{The Trust-Verification Gap:} The systematic reviews in the healthcare field keep mentioning the privacy advantages of current federated learning research, but they do not come along with the built-in means for the verification of model integrity and the participants' compliance with the protocols. Adding blockchain alone creates trust but it usually happens at the price of system performance, which in turn leads to slow and impractical implementations.
+
+    \item \textbf{The Practical Efficiency Gap:} The majority of the proposed frameworks are computationally intensive and not designed to meet the real-world conditions in developing areas. There is no design for a system that is lightweight and efficient at the same time that could operate despite the network limitations and resource constraints prevalent in agricultural settings such as Ugandan cattle farms.
+\end{enumerate}
+
+% Problem Statement
+\section{Problem Statement}
+
+The merging of these gaps discloses the principal problem that my study is going to tackle: Federated learning allows for the development of a system that collaborates and preserves privacy at the same time, but it still relies on complete trust in the participants and the central aggregators.
+
+The inclusion of blockchain as a trust layer usually results in impractical, slow systems that are counterproductive to efficient decentralized learning.
+
+As a result, the main research question is to come up with and test a new system architecture that will allow for the smooth integration of federated learning with blockchain, thus establishing a private, trustworthy, and efficient framework for collaborative prediction - particularly tailored for the real-world constraints and applied to crucial areas like disease early warning.
+
+This problem statement highlights the dilemma of privacy, trust, and efficiency, which our research will overcome through a new and innovative architectural approach.
+
+% Research Objectives
+\section{Research Objectives}
+
+The research project, guided by the detected gaps and problem statement, is set to fulfill the following main objective and specific objectives:
+
+\subsection{Main Objective:}
+
+To develop a private and trustworthy collaborative prediction system, that is blockchain-based and fed with a federated learning system, which will be suitable for resource-constrained environments after thorough evaluation.
+
+\subsection{Specific Objectives:}
+
+\begin{itemize}
+    \item To create a system architecture that optimally combines federated learning with blockchain technology for safe and auditable model merging.
+    
+    \item To put the whole system concept into a working prototype using lightweight frameworks appropriate for settings with limited computing resources.
+    
+    \item To carry out a performance assessment of the system regarding prediction accuracy, computational efficiency, and resilience to malevolent attacks.
+    
+    \item To further prove the system's applicability through a case study on Foot-and-Mouth Disease prediction using Ugandan cattle farm data.
+\end{itemize}
+
+Providing these objectives illuminates the path to the development and testing of our proposed solution while at the same time making sure that all the research gaps identified are taken care of, practically and evaluatively, keeping the focus.
+
+% Research Methodology
+\section{Research Methodology}
+
+This section outlines how we will achieve each research objective through practical implementation and evaluation.
+
+\subsection{Objective 1: System Architecture Design}
+
+We will design a layered architecture that strategically separates concerns while maintaining integration between federated learning and blockchain components:
+
+\begin{itemize}
+    \item \textbf{Data Layer:} Local data remains on farm systems with standardized interfaces for secure access
+    \item \textbf{Federated Learning Layer:} Model training occurs locally with secure aggregation protocols
+    \item \textbf{Blockchain Layer:} Hyperledger Fabric will provide the trust foundation for recording model hashes and verification
+    \item \textbf{Application Layer:} Early warning dashboard and alert system
+\end{itemize}
+
+\subsection{Objective 2: Prototype Implementation}
+
+The theoretical design will be made real, working prototype building will be authorized using technologies that are strong and suitable for the practical world. Every technology choice is vital since we are designing for limited resources.
+
+\begin{itemize}
+    \item I will apply PySyft for the federated learning module as it is solely designed for privacy-preserving artificial intelligence. This system will manage the secure model delivery and at the same time ensure the original farm data remains at the same location. Hence, the privacy commitments are met and the service is not hindered.
+    
+    \item I opted for Hyperledger Fabric from the blockchain as it offers a number of advantages. In contrast to the slow and energy-consuming cryptocurrency blockchains, Hyperledger is made for business applications. It is quick, it allows private transactions, and it does not need a lot of computing power. All these make it suitable for the kind of reliable verification system we are developing.
+    
+    \item The entire platform will be synchronized using Python Django for the backend management and React.js for an elegant dashboard that is web-based, where farmers and vets can already view the early alerts and forecasts. This not only assures that the system is technologically efficient but also meets the usability of the target group.
+\end{itemize}
+
+\subsection{Objective 3: Performance Evaluation}
+
+We will conduct comprehensive testing across three key dimensions:
+
+\begin{enumerate}
+    \item \textbf{Model Accuracy:} Compare prediction performance against centralized and standalone FL baselines using F1-score, precision, and recall metrics
+    
+    \item \textbf{System Efficiency:} Measure communication overhead, training convergence time, and computational resource usage
+    
+    \item \textbf{Security Analysis:} Test robustness against model poisoning attacks and privacy preservation through differential privacy metrics
+\end{enumerate}
+
+\subsection{Objective 4: Case Study Validation}
+
+Using the ULITS-enhanced FMD dataset, we will:
+
+\begin{itemize}
+    \item Simulate real-world conditions with non-IID data distribution across multiple farm nodes
+    \item Validate early warning accuracy against historical outbreak data
+    \item Assess practical feasibility through resource usage monitoring and stakeholder feedback
+\end{itemize}
+
+% Process Workflow Diagram
+\section{Process Workflow Diagram}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{fmd_diagram.jpeg}
+\caption{Process Workflow: Local Data Preparation → Federated Model Training → Blockchain Verification → Secure Aggregation → Early Warning Generation}
+\end{figure}
+
+The workflow ensures data never leaves local farms while maintaining verifiable trust through blockchain recording of all model updates and aggregation steps.
+
+This methodology provides a clear, actionable plan for developing and validating our integrated system while addressing all identified research gaps.
+
+% Timeline and Work Plan
+\section{Timeline and Work Plan}
+
+My research will span roughly two years, with each phase building naturally on what came before. I have broken down the work into manageable chunks that let me make steady progress while staying flexible enough to adapt if I hit unexpected challenges.
+
+\subsection{Phase 1: Foundation (Months 1-4)}
+
+The first few months are about getting my bearings and laying solid groundwork. I will spend time deeply understanding what others have done, making sure I am not reinventing wheels, and getting access to the data I need.
+
+I will read extensively, not just skimming abstracts but really digging into the methods sections of papers. I need to understand why certain approaches worked and others failed. At the same time, I will be working through the bureaucracy—getting ethics approval, negotiating data access with government agencies, and building relationships with the veterinary officers who will eventually use this system.
+
+By the end of month four, I should have a clean, unified dataset sitting on my computer, ready to be split up and used for training. I will also have documented exactly what data exists, what is missing, and what assumptions I am making.
+
+\subsection{Phase 2: Building the Core (Months 5-9)}
+
+This is where things get real. I will start coding, first getting a basic federated learning system working without any of the fancy blockchain stuff. Just prove to myself that I can train a model across multiple simulated farm nodes and get reasonable accuracy.
+
+Once that is solid, I will layer in the blockchain. Start simple—just recording hashes of model updates, making sure the distributed ledger stays synchronized. Then gradually add the verification logic, the smart contracts that check whether participants are playing fair.
+
+It is tempting to try to build everything at once, but I have learned that leads to impossible-to-debug messes. Better to get one piece working perfectly before adding the next layer.
+
+\subsection{Phase 3: Making It Secure (Months 10-13)}
+
+Now I will make the system genuinely privacy-preserving and resistant to attacks. I will implement differential privacy, carefully calibrating how much noise to add—too little and privacy leaks, too much and the model learns nothing useful.
+
+The mathematical challenge here is finding the right balance. For differential privacy, the key equation is:
+
+\begin{equation}
+\Pr[\mathcal{M}(D) \in S] \leq e^\epsilon \cdot \Pr[\mathcal{M}(D') \in S] + \delta
+\end{equation}
+
+where $\mathcal{M}$ is our mechanism, $D$ and $D'$ are neighboring datasets differing by one record, $\epsilon$ controls privacy loss, and $\delta$ is a small failure probability. In practice, I will target $\epsilon$ values between 1 and 10, which research suggests gives meaningful privacy while keeping model accuracy acceptable.
+
+For the aggregation, if we have $N$ clients and client $i$ sends update $\theta_i$ with local dataset size $n_i$, standard federated averaging computes:
+
+\begin{equation}
+\theta_{global} = \frac{\sum_{i=1}^{N} n_i \theta_i}{\sum_{i=1}^{N} n_i}
+\end{equation}
+
+But this is vulnerable to poisoning. If malicious clients send corrupted $\theta_i$, they can arbitrarily shift $\theta_{global}$. Instead, I will use robust aggregation based on coordinate-wise median or trimmed means, which limits how much damage any single malicious client can cause.
+
+\subsection{Phase 4: Making It Adaptive (Months 14-16)}
+
+This phase tackles the problem Kapalaga discovered: models that work great until environmental conditions shift. I will implement drift detection that continuously monitors whether the data distribution is changing.
+
+For each district $d$ at time $t$, I will track the validation loss $L_d^{(t)}$ over a sliding window. If the moving average suddenly increases beyond a threshold:
+
+\begin{equation}
+\frac{1}{w}\sum_{k=t-w}^{t} L_d^{(k)} > \mu + 2\sigma
+\end{equation}
+
+where $\mu$ and $\sigma$ are historical mean and standard deviation, that signals drift. The system will then trigger retraining on recent data to adapt the model.
+
+I will test whether this actually works by training on 2011-2020 data, then deliberately feeding it 2021-2022 data with shifted climate patterns. If my adaptation mechanisms work, accuracy should drop initially but then recover as the model adjusts.
+
+\subsection{Phase 5: Making It Real (Months 17-20)}
+
+Up until now, everything is simulated on my laptop or university servers. In this phase, I will test whether the system actually works under realistic conditions—slow internet, machines that crash, participants who drop offline mid-training.
+
+I will also build the user-facing parts: a dashboard where veterinary officers can see predictions, historical trends, and explanations for why the model thinks a district is high-risk. The explanations matter as much as the predictions. If users do not understand or trust the system, they will not act on its warnings.
+
+This is also when I will sit down with actual veterinary officers and farmers, showing them the prototype and asking: Would you use this? Do you trust it? What would make it more useful? Their feedback will inevitably reveal gaps I had not considered.
+
+\subsection{Phase 6: Testing Everything (Months 21-23)}
+
+Now I run every experiment I can think of. How accurate is the system compared to centralized training? How much does privacy protection hurt performance? What happens if 30\% of participants try to sabotage the model? Does it work when half the districts have ten times more data than others?
+
+I will document all of this meticulously, because the value of this research is not just "it works" but "here is exactly how well it works, under what conditions, and where it breaks down." That honesty is what lets other researchers build on my work instead of repeating my mistakes.
+
+\subsection{Phase 7: Writing and Wrapping Up (Months 24)}
+
+The final stretch is writing the thesis, preparing papers for publication, and releasing the code and datasets publicly. I will also create tutorials and documentation so that someone else could actually deploy this system without having to email me a hundred questions.
+
+% Expected Contributions and Significance
+\section{Expected Contributions and Significance}
+
+At its core, this research is trying to answer a question that matters beyond just predicting cow diseases: can we build AI systems that are smart without being centralized, that learn from private data without invading privacy, that remain trustworthy even when some participants try to cheat?
+
+\subsection{What This Gives to Science}
+
+I will be creating the first complete blueprint for combining federated learning with blockchain verification in a way that actually handles real-world messiness. Most papers in this space either propose theoretical protocols without testing them on real data, or they test federated learning without the blockchain trust layer, or they focus on healthcare in rich countries with perfect internet.
+
+My work bridges those gaps. I am taking a real dataset with real distribution shifts, implementing both the federated learning and the blockchain pieces, and testing whether the whole integrated system survives contact with reality. The architecture I design, the lessons I learn about what works and what does not, and the benchmark performance numbers I establish—all of that becomes a foundation others can build on.
+
+The mathematical analysis of privacy-utility tradeoffs will help future researchers understand: if I need my model to be 85\% accurate and I can only send updates over a connection that drops packets 20\% of the time, what is the maximum privacy I can guarantee? Right now, those relationships are poorly understood. My empirical results will start mapping that terrain.
+
+\subsection{What This Gives to Technology}
+
+The open-source code I release will be production-ready, not a proof-of-concept that only works in perfect lab conditions. That means:
+
+\begin{itemize}
+    \item A researcher studying privacy-preserving AI in Kenya can download my code, plug in their own data, and have a working system in days instead of months.
+    
+    \item A graduate student can use my dataset as a benchmark to test whether their new aggregation algorithm really is better than existing approaches.
+    
+    \item A software engineer at a health ministry can read my documentation and understand exactly what infrastructure they would need to deploy a similar system for disease surveillance.
+\end{itemize}
+
+I am deliberately designing this to be modular. Do not like my choice of blockchain platform? Swap it out. Want to try a different neural network architecture? Change one config file. The easier I make it for others to experiment, the faster this whole field advances.
+
+\subsection{What This Gives to Uganda}
+
+There is a direct, practical outcome here: a working early warning system that could help prevent livestock disease outbreaks. Foot-and-mouth disease costs Ugandan farmers millions every year—money they can ill afford to lose.
+
+But the bigger impact is demonstrating that Uganda does not have to ship its data to Google or Microsoft to benefit from AI. The data can stay here, the models can be trained here, and the insights can serve Ugandan farmers first. That is not anti-technology nationalism; it is about building systems that respect data sovereignty and keep sensitive information under local control.
+
+Beyond the immediate application, this project trains Ugandan students and professionals in cutting-edge machine learning and blockchain technologies. That human capital matters as much as the technical artifacts. Five years from now, the people who worked on this project will be the ones building the next generation of agricultural AI systems, health monitoring platforms, and smart city infrastructure.
+
+\subsection{What This Gives to the Broader World}
+
+The challenges I am tackling—intermittent internet, limited computing resources, privacy regulations, the need for trust in adversarial environments—these are not unique to Uganda. They are the reality for most of the world.
+
+If I can prove that sophisticated AI works in these conditions, that removes a massive barrier. Suddenly, federated learning is not just for smartphone keyboards and hospital networks in California. It is a viable approach for rural clinics in India, agricultural cooperatives in Peru, and community health workers in Nigeria.
+
+The principles I establish for incentive design, for balancing privacy with utility, for making blockchain FL actually efficient enough to be practical—those lessons apply wherever people want to collaborate on AI without centralized data collection.
+
+% Evaluation Metrics
+\section{Evaluation Metrics}
+
+A system is only as good as your ability to measure whether it is actually working. I need metrics that capture not just accuracy but also privacy, fairness, efficiency, and robustness. Here is exactly how I will measure success.
+
+\subsection{Model Performance Metrics}
+
+The most basic question: does the model accurately predict disease outbreaks?
+
+\textbf{Accuracy:} The fraction of predictions that are correct. But this can be misleading if outbreaks are rare—a model that always predicts "no outbreak" might be 95\% accurate but completely useless.
+
+\textbf{Precision and Recall:} For a binary classifier, precision is the fraction of predicted outbreaks that actually occur:
+
+\begin{equation}
+\text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
+\end{equation}
+
+Recall is the fraction of actual outbreaks that we successfully predict:
+
+\begin{equation}
+\text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}
+\end{equation}
+
+Both matter. High precision means when we sound an alarm, it is probably real. High recall means we catch most outbreaks before they spread.
+
+\textbf{F1-Score:} The harmonic mean of precision and recall:
+
+\begin{equation}
+F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+\end{equation}
+
+This gives a single number that balances both concerns. I will aim for an F1-score above 0.80.
+
+\textbf{AUC-ROC:} The area under the receiver operating characteristic curve. This measures how well the model ranks predictions—whether high-probability predictions really are more likely to be true outbreaks. An AUC of 0.5 is random guessing; 1.0 is perfect. I will target above 0.85.
+
+\subsection{Privacy Metrics}
+
+Privacy is not binary—it is a spectrum. The question is: how much information leakage am I willing to accept in exchange for model accuracy?
+
+\textbf{Differential Privacy Budget ($\epsilon$):} This quantifies privacy loss. Lower $\epsilon$ means stronger privacy. I will track cumulative $\epsilon$ over all training rounds. Research suggests $\epsilon < 10$ for reasonable privacy, though the right threshold depends on data sensitivity.
+
+\textbf{Membership Inference Attack Success Rate:} Can an attacker figure out whether a specific farm's data was in the training set? I will simulate these attacks and measure success rate. If the attack does better than random guessing, that indicates privacy leakage.
+
+\textbf{Gradient Reconstruction Error:} Given the aggregated model updates, how accurately could an attacker reconstruct the original local data? I will measure the mean squared error between actual data and best possible reconstruction. Higher error means better privacy.
+
+\subsection{Fairness Metrics}
+
+Is the system fair to all participants, or does it favor some districts over others?
+
+\textbf{Gini Coefficient of Contributions:} This measures inequality in how often different districts get selected for training rounds. A Gini of 0 means perfect equality; 1 means one district does all the work. I will target below 0.3.
+
+\textbf{Performance Equity:} Does the model work equally well for all districts, or is it accurate for data-rich regions but useless for data-poor ones? I will compute the variance in F1-scores across districts. Lower variance means more equitable performance.
+
+\subsection{Efficiency Metrics}
+
+The system has to be practical, not just theoretically sound.
+
+\textbf{Communication Overhead:} Total megabytes transmitted per training round. Federated learning should reduce this dramatically compared to centralized approaches. I will measure:
+
+\begin{equation}
+\text{Overhead Ratio} = \frac{\text{Bytes in FL}}{\text{Bytes in Centralized}}
+\end{equation}
+
+I expect this ratio to be less than 0.1 (federated learning uses 90\% less bandwidth).
+
+\textbf{Training Time:} Wall-clock time from starting a training round to having an updated global model. This includes local training, communication, aggregation, and blockchain verification. I will target under 30 minutes per round on realistic hardware.
+
+\textbf{Convergence Speed:} How many rounds does it take to reach acceptable accuracy? Fewer rounds mean the system can adapt faster when conditions change. I will measure rounds to reach 90\% of final accuracy.
+
+\subsection{Robustness Metrics}
+
+How well does the system tolerate attacks and failures?
+
+\textbf{Accuracy Under Attack:} I will simulate Byzantine attacks where $p$ fraction of clients send malicious updates (randomly chosen from 10\%, 20\%, 30\%, 40\%). For each attack level, I will measure:
+
+\begin{equation}
+\text{Robustness Score} = \frac{\text{Accuracy with attack}}{\text{Accuracy without attack}}
+\end{equation}
+
+A score of 1.0 means the system is perfectly robust; below 0.7 means the attack is devastating. I aim to maintain above 0.80 even with 40\% attackers.
+
+\textbf{Detection Rate:} What fraction of malicious updates does the system correctly identify and filter out? Higher is better, but false positives (rejecting legitimate updates) are also costly.
+
+% Ethical Considerations
+\section{Ethical Considerations}
+
+Any research involving real people's data and livelihoods carries ethical weight. I need to think carefully about potential harms and how to prevent them.
+
+\subsection{Protecting Privacy}
+
+The whole point of this system is to preserve privacy, but I need to be honest about what that means in practice. Differential privacy provides mathematical guarantees, but those guarantees assume certain attack models. If an attacker has side information I did not anticipate, they might still be able to infer sensitive information.
+
+I will be transparent about these limitations. When I present results, I will clearly state what privacy guarantees hold and under what assumptions. No overselling, no claiming the system is "perfectly private" when it is really "private against these specific threat models."
+
+All personally identifiable information—farmer names, exact farm locations, phone numbers—will be stripped from the dataset before any analysis. I will work with aggregated or anonymized data wherever possible.
+
+\subsection{Informed Consent}
+
+Every person who participates in interviews, usability studies, or pilot deployments will receive clear, jargon-free explanations of:
+
+\begin{itemize}
+    \item What the system does and how it works
+    \item What data will be collected and how it will be used
+    \item What risks they might face (e.g., potential for re-identification if anonymization fails)
+    \item Their right to decline participation or withdraw at any time without penalty
+    \item How to contact me or an ethics board if they have concerns
+\end{itemize}
+
+I will document consent in writing, and I will get explicit approval from the university ethics review board before conducting any human-subjects research.
+
+\subsection{Avoiding Harm}
+
+The system will generate disease outbreak predictions. What if it is wrong?
+
+A false positive—predicting an outbreak that does not happen—might cause unnecessary panic or economic disruption if farmers preemptively sell livestock. A false negative—missing a real outbreak—could lead to uncontrolled disease spread and massive losses.
+
+I will design the system to be conservative: better to err on the side of false positives when the stakes are this high. But more importantly, I will frame predictions as decision-support tools, not autonomous decisions. Veterinary officers retain final judgment. The AI suggests, humans decide.
+
+I will also build in explanations: when the model predicts high risk, it will show which factors drove that prediction (e.g., heavy rainfall, nearby outbreak, unvaccinated herds). This transparency helps users evaluate whether the prediction makes sense.
+
+\subsection{Fair Access to Benefits}
+
+The system should help all Ugandan farmers, not just those in well-connected urban areas. I will test performance across districts with varying infrastructure and ensure the system works even with intermittent connectivity.
+
+All software and research outputs will be released under open-source licenses. No paywalls, no proprietary lock-in. If this research is publicly funded, the results should be publicly accessible.
+
+\subsection{Environmental Responsibility}
+
+Training machine learning models consumes energy. Blockchain systems can be even worse—Bitcoin's proof-of-work consumes as much electricity as some countries. I have deliberately chosen Hyperledger Fabric precisely because it avoids energy-intensive consensus mechanisms. It uses practical Byzantine fault tolerance, which is orders of magnitude more efficient.
+
+Federated learning also reduces environmental impact by eliminating the need to transmit massive datasets to central servers. Data stays local, reducing bandwidth usage and the energy cost of data center cooling.
+
+% Scope and Limitations
+\section{Scope and Limitations}
+
+No research project can solve every problem. It is important to be clear about what I am and am not trying to accomplish.
+
+\subsection{What This Research Covers}
+
+\textbf{Geographic Scope:} Uganda, specifically districts with existing ULITS infrastructure and historical FMD data. The methods should generalize to other regions, but I will not be testing that directly.
+
+\textbf{Disease Scope:} Foot-and-mouth disease as the primary use case. The architecture should work for other livestock diseases (African swine fever, peste des petits ruminants), but validation will focus on FMD.
+
+\textbf{Temporal Scope:} I will use historical data from 2011-2024. The system will be designed for ongoing operation, but long-term deployment and maintenance are beyond this research project.
+
+\textbf{Technical Scope:} Integration of federated learning and blockchain for privacy-preserving, trustworthy collaborative learning. I will implement differential privacy, robust aggregation, and basic adaptation mechanisms.
+
+\subsection{What This Research Does Not Cover}
+
+\textbf{Full Production Deployment:} I will build a working prototype and validate it with stakeholders, but actually deploying the system nationwide, training users, and maintaining it operationally for years—that requires resources and partnerships beyond a single dissertation.
+
+\textbf{Every Possible Attack:} I will test against common Byzantine attacks (noise injection, gradient flipping), but the space of possible attacks is infinite. I cannot claim the system is secure against threats I have not thought of yet.
+
+\textbf{Legal and Regulatory Compliance:} I will design the system to be compatible with Uganda's Data Protection and Privacy Act, but I am not a lawyer. Full legal review and compliance certification would be needed before real deployment.
+
+\textbf{Economic Analysis:} While I will propose incentive mechanisms, I will not conduct detailed economic modeling of how rewards should be priced, what the total cost of ownership is, or whether the system is financially sustainable long-term.
+
+\textbf{Integration with Every Existing System:} I will show how the system can work with ULITS, but Uganda has many other agricultural databases and monitoring systems. Full integration with the entire ecosystem is out of scope.
+
+\subsection{Known Limitations}
+
+\textbf{Data Quality:} Historical records may have errors, missing values, or biases. My analysis is only as good as the underlying data. I will document data quality issues but cannot retroactively fix problems in how data was originally collected.
+
+\textbf{Assumption of Honest Majority:} Most Byzantine fault tolerance protocols, including the ones I am using, assume fewer than half of participants are malicious. If more than 50\% collude to attack the system, it may fail. This is a fundamental limitation of distributed consensus, not specific to my work.
+
+\textbf{Generalization Beyond Uganda:} While I believe the methods will transfer to other contexts, I am only directly validating them on Ugandan livestock data. Different diseases, climates, or farming practices might require adaptations.
+
+\textbf{Scalability:} I will test with up to 50 client nodes. Scaling to hundreds or thousands of participants might reveal bottlenecks I have not encountered. However, the architecture is designed to be scalable, and I will measure performance as the number of clients increases to identify potential limits.
+
+\subsection{Future Work This Enables}
+
+This research lays groundwork for many exciting directions I will not have time to pursue:
+
+\begin{itemize}
+    \item Extending to other diseases and species
+    \item Multi-country federated learning for transboundary disease monitoring
+    \item Integration with real-time sensor data (GPS livestock tracking, automated health monitoring)
+    \item Advanced personalization where each district fine-tunes the global model for local conditions
+    \item Economic mechanisms for sustainable long-term operation
+\end{itemize}
+
+I will document these possibilities so that future researchers know where to pick up.
+
+% References
+\begin{thebibliography}{9}
+
+\bibitem{kapalaga2024unified}
+Kapalaga, T., Mubangizi, M., \& Kisaakye, P. (2024).
+\textit{A Unified Foot and Mouth Disease Dataset for Uganda: Evaluating Machine Learning Predictive Performance Degradation Under Varying Distributions}.
+Frontiers in Artificial Intelligence, 7, 1446368.
+
+\bibitem{zhang2023blockchain}
+Liu, Y., Qu, X., \& Chen, G. (2023).
+\textit{Blockchain-Based Practical and Privacy-Preserving Federated Learning with Verifiable Fairness}.
+Mathematics, 11(5), 1091.
+
+\bibitem{teo2024federated}
+Antunes, R. S., da Costa, C. A., \& Küdde, A. (2022).
+\textit{Federated Machine Learning in Healthcare: A Systematic Review}.
+ACM Computing Surveys, 55(5), 1-35.
+
+\bibitem{chen2024flock}
+Chen, R., Li, Y., \& Zhang, M. (2024).
+\textit{FLock: Robust and Privacy-Preserving Federated Learning based on Practical Blockchain State Channels}.
+Cryptology ePrint Archive, Paper 2024/1797.
+
+\end{thebibliography}
+
+\end{document}
