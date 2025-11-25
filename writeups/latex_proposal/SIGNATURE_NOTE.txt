@@ -1,0 +1,8 @@
+IMPORTANT: Save the supervisor's signature image as "signature.png" in this directory.
+
+The signature image should be:
+- Named exactly: signature.png
+- Format: PNG
+- Placed in: /Users/mac/Desktop/github/federated-ai/writeups/latex_proposal/
+
+You can save the signature image from the attachment manually.
