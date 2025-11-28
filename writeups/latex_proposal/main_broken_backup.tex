@@ -42,31 +42,33 @@
 
 \begin{document}
 
-% Title Page
-\begin{titlepage}
+% Approval Page (hidden while editing)
+\iffalse
+\newpage
 \begin{center}
+{\Large \textbf{Approval}}
+\end{center}
 
-\vspace*{1cm}
+\vspace{1cm}
 
-% University Logo (optional - remove if not needed)
-% \includegraphics[width=0.2\textwidth]{university_logo.png}\\[1cm]
+I hereby declare that this research proposal has been submitted for examination with my approval as the university supervisor.
 
-{\LARGE \textbf{Makerere University}}\\[0.5cm]
-{\large College of Computing and Information Sciences}\\[0.3cm]
-{\large Department of Computer Science}\\[2cm]
+\vspace{2cm}
 
-{\huge \textbf{A Blockchain-Secured Federated Learning System for Detection and Early Warning of Foot-and-Mouth Disease in Ugandan Cattle Farms}}\\[1.5cm]
+\noindent
+	extbf{Supervisor:}\\[0.5cm]
+	extbf{Dr. Chongomweru Halimu}\\
+School of Computing and Informatics Technology\\
+Department of Computer Science\\
+Makerere University\\
+Kampala, Uganda\\[1.5cm]
 
-{\Large \textit{Research Proposal}}\\[2cm]
-
-{\large \textbf{By}}\\[0.5cm]
-{\Large Muhindo Mubaraka}\\[0.3cm]
-{\large Student Number: 2400725633}\\[0.2cm]
-{\large Registration Number: 2024/HD05/25633U}\\[0.2cm]
-{\large \textit{muhindo.mubaraka@students.mak.ac.ug}}\\[2cm]
-
-{\large \textbf{Supervisor}}\\[0.3cm]
-{\large Dr. Chongomweru Halimu}\\[0.2cm]
+\noindent
+\begin{tabular}{@{}ll}
+	extbf{Signature:} & \includegraphics[height=1.5cm]{signature.png} \\\[0.3cm]
+	extbf{Date:} & \today \\
+\end{tabular}
+\fi
 {\large Department of Computer Science}\\[3cm]
 
 {\large A Research Proposal Submitted in Partial Fulfillment of the Requirements for the Degree of Master of Computer Science}\\[1.5cm]
@@ -76,8 +78,7 @@
 \end{center}
 \end{titlepage}
 
-% Approval Page (hidden - remove \iffalse and \fi to show)
-\iffalse
+% Approval Page
 \newpage
 \begin{center}
 {\Large \textbf{Approval}}
@@ -102,7 +103,6 @@ Kampala, Uganda\\[1.5cm]
 \textbf{Signature:} & \includegraphics[height=1.5cm]{signature.png} \\[0.3cm]
 \textbf{Date:} & \today \\
 \end{tabular}
-\fi
 
 % Abstract Page
 \newpage
@@ -147,18 +147,18 @@ At the same time, decentralization raises questions of trust and integrity: mali
 \subsection{Problem Statement}
 \label{sec:problem}
 
-Federated learning systems have a fundamental trust problem. When hospitals, farms, or other organizations train models on their local data, there is no reliable way to verify that participants are sending honest updates. A malicious actor could submit corrupted data that poisons the entire model. Similarly, participants cannot verify whether the central server is actually using their contributions correctly or just ignoring them. This trust issue is particularly dangerous in disease surveillance, where a poisoned model could miss an outbreak and cost lives.
+My research explores a different path. Instead of gathering the data, what if we could send the AI model out to learn from where the data already lives? This is what Federated Learning promises. But this new approach brings its own big question: if no one is sending their data to a central authority, how can we trust that the system is working correctly and hasn't been tampered with?
 
-Researchers have tried using blockchain to solve this trust problem, but these solutions create new issues. Most blockchain systems are too slow and power-hungry to work in rural areas with limited internet and electricity \cite{kairouz2021}. This is frustrating because federated learning was designed specifically to help these low-resource environments in the first place.
+The merging of these gaps discloses the principal problem that my study is going to tackle: Federated learning allows for the development of a system that collaborates and preserves privacy at the same time, but it still relies on complete trust in the participants and the central aggregators. The inclusion of blockchain as a trust layer usually results in impractical, slow systems that are counterproductive to efficient decentralized learning.
 
-So the core problem is: how do we build a system that verifies model integrity and holds participants accountable, while still being efficient enough to run on modest hardware in areas with poor infrastructure? This research addresses this gap by designing a practical verification mechanism for federated learning in resource-constrained settings like Uganda's livestock disease monitoring system.
+As a result, the main research question is to come up with and test a new system architecture that will allow for the smooth integration of federated learning with blockchain, thus establishing a private, trustworthy, and efficient framework for collaborative prediction—particularly tailored for the real-world constraints and applied to crucial areas like disease early warning.
 
 \subsection{Research Objectives}
 \label{sec:objectives}
 
 \subsubsection{Main Objective}
 
-To design a private and trustworthy collaborative prediction system, that is blockchain-based and fed with a federated learning system, which will be suitable for resource-constrained environments after thorough evaluation.
+To develop a private and trustworthy collaborative prediction system, that is blockchain-based and fed with a federated learning system, which will be suitable for resource-constrained environments after thorough evaluation.
 
 \subsubsection{Specific Objectives}
 
@@ -216,7 +216,7 @@ This research focuses on:
     
     \item \textbf{Temporal Scope:} Historical FMD data from 2011-2024 for model training and validation
     
-    \item \textbf{Technical Scope:} Integration of PySyft for federated learning, Hyperledger Fabric for blockchain verification, and design of a complete system architecture
+    \item \textbf{Technical Scope:} Integration of PySyft for federated learning, Hyperledger Fabric for blockchain verification, and development of a complete system architecture
 \end{itemize}
 
 \subsubsection{Limitations}
@@ -307,7 +307,7 @@ This study adopts a design science research methodology, which is appropriate fo
 \begin{enumerate}
     \item Problem identification and motivation
     \item Objectives definition
-    \item Design and implementation
+    \item Design and development
     \item Demonstration
     \item Evaluation
     \item Communication
@@ -326,7 +326,7 @@ We will design a layered architecture that strategically separates concerns whil
 
 \subsection{Prototype Implementation}
 
-The theoretical design will be made real through working prototype implementation using technologies that are robust and suitable for the practical world:
+The theoretical design will be made real through working prototype development using technologies that are robust and suitable for the practical world:
 
 \begin{itemize}
     \item \textbf{PySyft} for federated learning module as it is designed for privacy-preserving artificial intelligence
@@ -577,7 +577,7 @@ Hyperledger Foundation, ``Hyperledger Fabric,'' [Online]. Available: https://www
 \end{minipage}
 \hfill
 \begin{minipage}[t]{0.7\textwidth}
-\textbf{Muhindo Mubaraka} received his B.Sc. in Computer Science from the Islamic University of Technology, Bangladesh, in 2022. He is currently pursuing a Master of Science in Computer Science at Makerere University. He works as a software engineer and his research interests include federated learning and blockchain technology.
+\textbf{Muhindo Mubaraka} received his B.Sc. in Computer Science from the Islamic University of Technology, Bangladesh, in 2022. He is currently pursuing a Master of Science in Computer Science at Makerere University. He works as a software developer and his research interests include federated learning and blockchain technology.
 \end{minipage}
 
 \end{document}
