@@ -347,21 +347,21 @@ We will conduct comprehensive testing across three key dimensions:
 \section{Timeline and Work Plan}
 \label{sec:timeline}
 
-My research will span roughly two years, with each phase building naturally on what came before.
+My research will span 12 months, with each phase building naturally on what came before.
 
-\subsection{Phase 1: Foundation (Months 1-4)}
+\subsection{Phase 1: Foundation (Months 1-2)}
 
-The first few months are about getting my bearings and laying solid groundwork. I will spend time deeply understanding what others have done, making sure I am not reinventing wheels, and getting access to the data I need.
+The first two months are about getting my bearings and laying solid groundwork. I will spend time deeply understanding what others have done, making sure I am not reinventing wheels, and getting access to the data I need.
 
-By the end of month four, I should have a clean, unified dataset sitting on my computer, ready to be split up and used for training.
+By the end of month two, I should have a clean, unified dataset sitting on my computer, ready to be split up and used for training.
 
-\subsection{Phase 2: Building the Core (Months 5-9)}
+\subsection{Phase 2: Building the Core (Months 3-5)}
 
 This is where things get real. I will start coding, first getting a basic federated learning system working without any of the fancy blockchain stuff. Once that is solid, I will layer in the blockchain.
 
 It is tempting to try to build everything at once, but I have learned that leads to impossible-to-debug messes. Better to get one piece working perfectly before adding the next layer.
 
-\subsection{Phase 3: Making It Secure (Months 10-13)}
+\subsection{Phase 3: Making It Secure (Months 6-7)}
 
 Now I will make the system genuinely privacy-preserving and resistant to attacks. I will implement differential privacy, carefully calibrating how much noise to add.
 
@@ -377,7 +377,7 @@ For aggregation, if we have $N$ clients and client $i$ sends update $\theta_i$ w
 \theta_{global} = \frac{\sum_{i=1}^{N} n_i \theta_i}{\sum_{i=1}^{N} n_i}
 \end{equation}
 
-\subsection{Phase 4: Making It Adaptive (Months 14-16)}
+\subsection{Phase 4: Making It Adaptive (Month 8)}
 
 For each district $d$ at time $t$, I will track the validation loss $L_d^{(t)}$ over a sliding window. If the moving average suddenly increases beyond a threshold:
 \begin{equation}
@@ -386,17 +386,17 @@ For each district $d$ at time $t$, I will track the validation loss $L_d^{(t)}$ 
 
 where $\mu$ and $\sigma$ are historical mean and standard deviation, that signals drift.
 
-\subsection{Phase 5: Making It Real (Months 17-20)}
+\subsection{Phase 5: Making It Real (Month 9)}
 
 I will test whether the system actually works under realistic conditions—slow internet, machines that crash, participants who drop offline mid-training. I will also build the dashboard where veterinary officers can see predictions and explanations.
 
-\subsection{Phase 6: Testing Everything (Months 21-23)}
+\subsection{Phase 6: Testing Everything (Months 10-11)}
 
 Now I run every experiment I can think of. How accurate is the system compared to centralized training? What happens if 30\% of participants try to sabotage the model?
 
-\subsection{Phase 7: Writing and Wrapping Up (Month 24)}
+\subsection{Phase 7: Writing and Wrapping Up (Month 12)}
 
-The final stretch is writing the thesis, preparing papers for publication, and releasing the code and datasets publicly.
+The final month is for writing the thesis, preparing papers for publication, and releasing the code and datasets publicly.
 
 \subsection{Expected Contributions and Deliverables}
 \label{sec:contributions}
