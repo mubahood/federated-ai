@@ -115,7 +115,7 @@ Training machine learning models traditionally requires collecting all data in o
 
 Federated learning offers an alternative by training models on distributed data without moving it from its source. Each participant trains locally and shares only model updates, which are aggregated to create a global model. However, this introduces a trust problem: participants cannot verify whether aggregation was done correctly or whether some contributed manipulated updates.
 
-This research addresses the trust problem by integrating blockchain technology with federated learning. The blockchain provides a transparent, tamper-proof record of the training process, allowing participants to verify that all steps were executed correctly. I design and evaluate this system specifically for resource-limited environments, using Foot-and-Mouth Disease prediction in Ugandan cattle farms as a practical test case.
+This research addresses the trust problem by integrating blockchain technology with federated learning. The blockchain provides a transparent, tamper-proof record of the training process, allowing participants to verify that all steps were executed correctly. This study designs and evaluates such a system specifically for resource-limited environments, using Foot-and-Mouth Disease prediction in Ugandan cattle farms as a practical test case.
 
 The system demonstrates that collaborative machine learning can work in settings with limited resources and unreliable connectivity while maintaining privacy and trust. The architecture balances security with computational efficiency, making blockchain-verified federated learning practical for developing regions. This has broader implications for privacy-preserving AI in agriculture, healthcare, and other domains where data sharing faces technical and trust barriers.
 
@@ -146,7 +146,9 @@ Second, many organizations do not have the network and computing resources to se
 
 Federated learning (FL) solves these problems by keeping data on local devices and only sharing model updates instead of raw data. Each participant trains a model on their own data, then sends only the learned patterns (model updates) to a central server. The server combines these updates to create a global model without ever accessing the actual data \cite{mcmahan2017, bonawitz2017}.
 
-However, FL has a critical trust issue. When participants send their model updates, there is no easy way to verify if someone is sending corrupted or fake updates that could damage the model. This research looks at how to add a verification system using blockchain to create reliable records of who contributed what, while keeping the system light enough to work in places with limited resources.
+However, FL has a critical trust issue. When participants send their model updates, there is no easy way to verify if someone is sending corrupted or fake updates that could damage the model. This research investigates how blockchain technology can provide transparent verification of the collaborative learning process, ensuring that all contributions are recorded immutably and the aggregation process is auditable, while keeping the system light enough to work in places with limited resources.
+
+To demonstrate and evaluate the proposed system, this research uses Foot-and-Mouth Disease (FMD) prediction in Uganda as a practical test case. FMD is a highly contagious livestock disease that causes significant economic losses in Uganda through reduced milk production, trade restrictions, and animal morbidity. The disease data is naturally distributed across different districts, making it an ideal scenario to test a privacy-preserving federated learning system. This application context allows the research to validate the technical contributions under real-world conditions typical of resource-limited environments.
 
 \subsection{Problem Statement}
 \label{sec:problem}
@@ -155,7 +157,7 @@ Federated learning has a trust problem. When multiple participants train a model
 
 Federated learning was designed to work in low-resource environments where participants have limited computing power and unreliable network connections. However, there is no lightweight verification mechanism that can provide trust and accountability in these resource-limited settings.
 
-The core problem is: how can I design a verification mechanism that provides trust and accountability in federated learning, while remaining lightweight enough to work in resource-constrained environments? This research addresses this gap by designing a practical blockchain-based verification system for federated learning in resource-limited settings.
+The core problem is: how can a verification mechanism be designed that provides trust and accountability in federated learning, while remaining lightweight enough to work in resource-constrained environments? This research addresses this gap by designing a practical blockchain-based verification system for federated learning in resource-limited settings.
 
 \subsection{Research Objectives}
 \label{sec:objectives}
@@ -167,6 +169,8 @@ To design and evaluate a blockchain-based federated learning system with early w
 \subsubsection{Specific Objectives}
 
 \begin{enumerate}
+    \item To collect, clean, and preprocess Foot-and-Mouth Disease data from the Uganda Livestock Information Tracking System (ULITS) for use in federated learning experiments.
+    
     \item To design a system architecture that integrates federated learning with blockchain for secure and verifiable model aggregation.
     
     \item To implement a lightweight prototype that works efficiently in resource-limited environments typical of Ugandan cattle farms.
@@ -180,6 +184,8 @@ To design and evaluate a blockchain-based federated learning system with early w
 \label{sec:questions}
 
 \begin{enumerate}
+    \item How can data quality be ensured through appropriate collection, cleaning, and preprocessing of FMD records for use in federated learning?
+    
     \item How can blockchain technology be integrated with federated learning to provide secure and verifiable model aggregation for early warning of Foot-and-Mouth Disease?
     
     \item What system architecture will work efficiently in resource-limited environments typical of Ugandan cattle farms while maintaining prediction accuracy?
@@ -244,7 +250,7 @@ This research focuses on:
 
 \subsection{Introduction}
 
-This chapter examines existing research on federated learning, blockchain technology, and their use in disease prediction. The review is organized around key themes: privacy-preserving machine learning, trust verification in distributed systems, blockchain integration, and practical applications in resource-limited settings. Through this analysis, I identify gaps that motivate this research.
+This chapter examines existing research on federated learning, blockchain technology, and their integration for trustworthy distributed machine learning. The review is organized around key themes: privacy-preserving machine learning, trust verification in distributed systems, blockchain integration, and practical applications in resource-limited settings. Through this analysis, gaps that motivate this research are identified.
 
 \subsection{Federated Learning and Privacy Preservation}
 
@@ -270,7 +276,7 @@ Several recent studies have explored this integration. Zhang et al. \cite{zhang2
 
 Chen et al. \cite{chen2024} developed a system called FLock that uses blockchain state channels to prevent model poisoning attacks. Their approach shows that blockchain can help detect malicious participants who try to corrupt the model. The system is robust against attacks, but it is designed for environments with good network connectivity and sufficient computational resources.
 
-What I observe from these studies is that blockchain can indeed provide transparency and verification for federated learning. The challenge is making it work efficiently in settings where resources are limited. Most proposed systems assume stable internet connections and powerful devices, which does not match the reality in many developing regions.
+What emerges from these studies is that blockchain can indeed provide transparency and verification for federated learning. The challenge is making it work efficiently in settings where resources are limited. Most proposed systems assume stable internet connections and powerful devices, which does not match the reality in many developing regions.
 
 \subsection{Applications in Disease Prediction and Healthcare}
 
@@ -290,22 +296,51 @@ Some researchers have started exploring lightweight approaches. Edge computing t
 
 The gap here is clear: a system architecture is needed that balances security and verifiability with computational efficiency. The system must work with intermittent internet connectivity, limited processing power, and minimal storage capacity while still providing the transparency and trust benefits of blockchain.
 
+\subsection{Summary of Reviewed Literature}
+
+Table \ref{tab:literature_summary} summarizes the key studies reviewed in this chapter, highlighting their main contributions and limitations relevant to this research.
+
+\begin{table}[h]
+\centering
+\caption{Summary of Key Literature}
+\label{tab:literature_summary}
+\begin{tabular}{|p{2.5cm}|p{4.5cm}|p{4.5cm}|}
+\hline
+\textbf{Study} & \textbf{Main Contribution} & \textbf{Limitation} \\
+\hline
+McMahan et al. \cite{mcmahan2017} & Introduced federated averaging algorithm for decentralized training & No trust verification mechanism \\
+\hline
+Kairouz et al. \cite{kairouz2021} & Comprehensive review of FL challenges and open problems & Does not address blockchain integration \\
+\hline
+Bonawitz et al. \cite{bonawitz2017} & Secure aggregation protocol for privacy preservation & High computational overhead \\
+\hline
+Zhang et al. \cite{zhang2023} & Blockchain-FL integration with cryptographic verification & Not designed for resource-limited settings \\
+\hline
+Chen et al. \cite{chen2024} & State channels for attack prevention in FL & Requires stable network connectivity \\
+\hline
+Teo et al. \cite{teo2024} & Review of FL in healthcare applications & Focus on well-resourced institutions \\
+\hline
+Kapalaga et al. \cite{kapalaga2024} & Unified FMD dataset for Uganda & Centralized approach, privacy concerns \\
+\hline
+\end{tabular}
+\end{table}
+
 \subsection{Summary of Research Gaps}
 \label{sec:gaps}
 
-Through this literature review, I identified three critical gaps that this research addresses:
+Through this literature review, three critical gaps that this research addresses are identified:
 
 \begin{enumerate}
     \item \textbf{Trust Verification Gap:} While federated learning provides privacy, existing systems lack built-in mechanisms for participants to verify that model aggregation was done correctly and that all participants followed the protocol. Current solutions either rely on trust in a central authority or use cryptographic methods too heavy for resource-limited settings.
 
-    \item \textbf{Practical Deployment Gap:} Most proposed blockchain-federated learning systems are designed for well-resourced environments. There is no system specifically designed for resource-limited agricultural settings with poor connectivity, limited devices, and the need for disease early warning.
+    \item \textbf{Practical Deployment Gap:} Most proposed blockchain-federated learning systems are designed for well-resourced environments. There is no system specifically designed for resource-limited settings with poor connectivity, limited devices, and distributed data sources typical of developing regions.
 
-    \item \textbf{Application Gap:} Existing applications focus on healthcare in developed countries or use centralized approaches in agriculture. No system combines blockchain-verified federated learning specifically for livestock disease prediction in developing regions where data is distributed, trust is a concern, and resources are limited.
+    \item \textbf{Application Validation Gap:} Existing blockchain-FL integrations lack real-world validation in challenging environments. This research uses Foot-and-Mouth Disease prediction in Uganda as a test case to validate the proposed system under realistic conditions, demonstrating that the technical contributions work in practice.
 \end{enumerate}
 
 \subsection{Chapter Summary}
 
-This review shows that both federated learning and blockchain technologies have advanced significantly, but their integration for practical early warning systems in resource-constrained environments remains unexplored. The trust problem in federated learning is well recognized but not adequately solved for settings like Ugandan cattle farms. The next chapter describes how I design and evaluate a system that addresses these gaps.
+This review shows that both federated learning and blockchain technologies have advanced significantly, but their integration for practical systems in resource-constrained environments remains unexplored. The trust problem in federated learning is well recognized but not adequately solved for resource-limited settings. The next chapter describes the design and evaluation of a system that addresses these gaps, using FMD prediction in Uganda as a practical demonstration context.
 
 \newpage
 \section*{CHAPTER 3: RESEARCH METHODOLOGY}
@@ -314,109 +349,221 @@ This review shows that both federated learning and blockchain technologies have 
 
 \subsection{Introduction}
 
-This chapter describes the methodology for designing, implementing, and evaluating a blockchain-secured federated learning system for Foot-and-Mouth Disease early warning in Uganda. The approach follows a systematic process: architecture design, prototype implementation, and comprehensive evaluation across accuracy, efficiency, and security dimensions.
+This chapter describes the methodology for designing, implementing, and evaluating a blockchain-secured federated learning system for resource-limited environments. The primary contribution is to the science of privacy-preserving distributed machine learning, specifically addressing the trust verification problem in federated learning. Foot-and-Mouth Disease prediction in Uganda serves as a practical test case to validate the system under real-world conditions. The methodology is organized according to the research objectives, ensuring that each step directly addresses a specific objective.
 
 \subsection{Research Design}
 
-This study adopts a design science research methodology, which is appropriate for creating and evaluating new artifacts in information systems. The research follows an iterative process of:
+This study adopts a design science research methodology, which is appropriate for creating and evaluating new artifacts in information systems. The research follows an iterative process of problem identification, objectives definition, design and implementation, demonstration, evaluation, and communication.
 
-\begin{enumerate}
-    \item Problem identification and motivation
-    \item Objectives definition
-    \item Design and implementation
-    \item Demonstration
-    \item Evaluation
-    \item Communication
-\end{enumerate}
+\subsection{Objective 1: Data Collection, Cleaning, and Preprocessing}
 
-\subsection{System Architecture}
+The first objective involves obtaining, cleaning, and preparing FMD data for federated learning experiments.
 
-I will design a layered architecture that strategically separates concerns while maintaining integration between federated learning and blockchain components:
+\subsubsection{Data Source}
 
+FMD outbreak records will be obtained from the Uganda Livestock Information Tracking System (ULITS), which contains surveillance data collected by district veterinary officers across Uganda from 2011 to 2024. The dataset includes information on outbreak locations, dates, herd sizes, clinical signs observed, vaccination history, and environmental factors such as rainfall and temperature.
+
+\subsubsection{Data Cleaning Process}
+
+Data cleaning will involve several steps:
 \begin{itemize}
-    \item \textbf{Data Layer:} Local data remains on farm systems with standardized interfaces for secure access
-    \item \textbf{Federated Learning Layer:} Model training occurs locally with secure aggregation protocols
-    \item \textbf{Blockchain Layer:} Hyperledger Fabric will provide the trust foundation for recording model hashes and verification
-    \item \textbf{Application Layer:} Early warning dashboard and alert system
+    \item \textbf{Missing Value Treatment:} Records with missing critical fields (location, date, diagnosis) will be flagged. Numerical missing values will be imputed using median imputation for continuous variables and mode imputation for categorical variables where appropriate.
+    \item \textbf{Duplicate Removal:} Duplicate records arising from multiple reporting channels will be identified using fuzzy matching on location, date, and herd identifiers.
+    \item \textbf{Outlier Detection:} Statistical methods will be used to identify implausible values (e.g., negative animal counts, future dates) which will be corrected or removed.
+    \item \textbf{Standardization:} Date formats, location names, and categorical variables will be standardized across all district records.
 \end{itemize}
 
-\subsection{Prototype Implementation}
+\subsubsection{Data Preprocessing}
 
-The system will be implemented using technologies suitable for resource-limited environments:
-
+The cleaned data will be preprocessed for machine learning:
 \begin{itemize}
-    \item \textbf{PySyft} for federated learning, chosen for its support of privacy-preserving operations and secure aggregation
-    \item \textbf{Hyperledger Fabric} for blockchain verification, selected for its practical Byzantine fault tolerance and lower computational requirements compared to proof-of-work systems
-    \item \textbf{Django} for backend services and \textbf{React.js} for the web-based early warning dashboard
+    \item \textbf{Feature Engineering:} Temporal features (month, season, year), spatial features (district, region), and derived features (outbreak frequency, proximity to previous outbreaks) will be created.
+    \item \textbf{Normalization:} Numerical features will be normalized using min-max scaling to ensure comparable ranges.
+    \item \textbf{Encoding:} Categorical variables will be encoded using one-hot encoding or label encoding as appropriate for the prediction model.
+    \item \textbf{Train-Test Split:} The dataset will be split temporally, with earlier years used for training and recent years reserved for testing to simulate real-world prediction scenarios.
 \end{itemize}
 
-\subsection{Performance Evaluation}
+\subsection{Objective 2: System Architecture Design}
 
-I will conduct comprehensive testing across three key dimensions:
+The second objective involves designing a system architecture that integrates federated learning with blockchain for secure and verifiable model aggregation.
 
+\subsubsection{Layered Architecture}
+
+A layered architecture will be designed that strategically separates concerns:
+
+\begin{itemize}
+    \item \textbf{Data Layer:} Local FMD data remains on district systems with standardized interfaces for secure access. Each participating district maintains control over its raw data.
+    \item \textbf{Federated Learning Layer:} Model training occurs locally at each district node. Only model updates (gradients or weights) are shared, not raw data. PySyft framework will be used for implementing federated averaging with secure aggregation.
+    \item \textbf{Blockchain Layer:} Hyperledger Fabric will provide the trust foundation. Each model update submission and aggregation step will be recorded as transactions on the blockchain, creating an immutable audit trail.
+    \item \textbf{Application Layer:} An early warning dashboard built with Django backend and React.js frontend will present predictions to veterinary officers with explanations.
+\end{itemize}
+
+\subsubsection{Blockchain Integration Design}
+
+The blockchain integration will record:
+\begin{itemize}
+    \item Hash of each model update submitted by participating nodes
+    \item Aggregation operations performed by the central server
+    \item Verification proofs that allow participants to confirm their contributions were included
+\end{itemize}
+
+Hyperledger Fabric is selected because it uses practical Byzantine fault tolerance (PBFT) consensus, which is more energy-efficient than proof-of-work and suitable for permissioned networks where participants are known.
+
+\subsection{Objective 3: Prototype Implementation}
+
+The third objective involves implementing a lightweight prototype that works efficiently in resource-limited environments.
+
+\subsubsection{Technology Stack}
+
+\begin{itemize}
+    \item \textbf{Federated Learning Framework:} PySyft will be used for implementing federated learning. PySyft supports privacy-preserving operations including secure aggregation and differential privacy, and integrates well with PyTorch for deep learning models.
+    \item \textbf{Blockchain Platform:} Hyperledger Fabric will provide the blockchain layer. A minimal network configuration will be designed with peers representing participating districts and an ordering service for transaction sequencing.
+    \item \textbf{Machine Learning Model:} A lightweight neural network will be trained for FMD outbreak prediction. The model architecture will be chosen to balance accuracy with computational requirements suitable for resource-limited devices.
+    \item \textbf{Backend Services:} Django will handle API endpoints, user authentication, and coordination between federated learning and blockchain components.
+    \item \textbf{Frontend Dashboard:} React.js will be used for the early warning interface, displaying predictions, confidence levels, and explanations for veterinary officers.
+\end{itemize}
+
+\subsubsection{Federated Training Process}
+
+The federated training process follows these steps:
 \begin{enumerate}
-    \item \textbf{Model Accuracy:} Compare prediction performance using F1-score, precision, and recall metrics
-    \item \textbf{System Efficiency:} Measure communication overhead, training convergence time, and computational resource usage
-    \item \textbf{Security Analysis:} Test robustness against model poisoning attacks and privacy preservation
+    \item The central server initializes a global model and distributes it to all participating district nodes.
+    \item Each district node trains the model locally on its FMD data for several epochs.
+    \item Local model updates are computed and hashed before transmission.
+    \item Updates are sent to the server along with blockchain transactions recording the submission.
+    \item The server aggregates updates using federated averaging and records the aggregation on the blockchain.
+    \item The updated global model is distributed to participants, and the process repeats.
 \end{enumerate}
-
-\section{Timeline and Work Plan}
-\label{sec:timeline}
-
-The research will span 12 months, with each phase building on previous work to ensure systematic progress.
-
-\subsection{Phase 1: Literature Review and Data Preparation (Months 1-2)}
-
-The first two months focus on establishing a solid foundation. This includes comprehensive literature review, finalizing the system architecture design, and obtaining access to the FMD dataset from Uganda Livestock Information Tracking System (ULITS).
-
-Data preparation involves cleaning, standardizing formats, and creating the unified dataset that will be distributed across simulated nodes for federated training experiments.
-
-\subsection{Phase 2: Core System Implementation (Months 3-5)}
-
-This phase involves building the federated learning infrastructure. The approach is incremental: first implementing a basic federated learning system to ensure correct model training and aggregation, then integrating the blockchain layer for verification.
-
-Building components separately before integration reduces complexity and makes debugging more manageable. By month 5, both the federated learning and blockchain components should be functional and integrated.
-
-\subsection{Phase 3: Security and Privacy Implementation (Months 6-7)}
-
-This phase adds privacy preservation and attack resistance mechanisms. Differential privacy will be implemented and calibrated to balance privacy protection with model accuracy.
-
-For differential privacy, the key equation is:
-\begin{equation}
-\Pr[\mathcal{M}(D) \in S] \leq e^\epsilon \cdot \Pr[\mathcal{M}(D') \in S] + \delta
-\end{equation}
-
-where $\mathcal{M}$ is the mechanism, $D$ and $D'$ are neighboring datasets differing by one record, $\epsilon$ controls privacy loss, and $\delta$ is a small failure probability.
 
 For aggregation, if there are $N$ clients and client $i$ sends update $\theta_i$ with local dataset size $n_i$, standard federated averaging computes:
 \begin{equation}
 \theta_{global} = \frac{\sum_{i=1}^{N} n_i \theta_i}{\sum_{i=1}^{N} n_i}
 \end{equation}
 
-\subsection{Phase 4: Adaptive Mechanisms (Month 8)}
+\subsubsection{Privacy Mechanisms}
 
-This phase implements mechanisms for detecting and handling distribution shifts. For each district $d$ at time $t$, the system tracks validation loss $L_d^{(t)}$ over a sliding window. If the moving average increases beyond a threshold:
+Differential privacy will be implemented to protect individual farm records. The key equation is:
+\begin{equation}
+\Pr[\mathcal{M}(D) \in S] \leq e^\epsilon \cdot \Pr[\mathcal{M}(D') \in S] + \delta
+\end{equation}
+
+where $\mathcal{M}$ is the mechanism, $D$ and $D'$ are neighboring datasets differing by one record, $\epsilon$ controls privacy loss, and $\delta$ is a small failure probability. The privacy budget will be calibrated to balance protection with model utility.
+
+\subsection{Objective 4: System Evaluation}
+
+The fourth objective involves evaluating system performance across prediction accuracy, computational efficiency, and security.
+
+\subsubsection{Accuracy Evaluation}
+
+Model performance will be measured using standard classification metrics:
+
+\textbf{Precision and Recall:}
+\begin{equation}
+\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}, \quad \text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}
+\end{equation}
+
+\textbf{F1-Score:}
+\begin{equation}
+F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+\end{equation}
+
+The federated model's performance will be compared against a centralized baseline trained on the same data collected in one location. Target: F1-score above 0.80, AUC-ROC above 0.85.
+
+\subsubsection{Efficiency Evaluation}
+
+\textbf{Communication Overhead:} The ratio of data transmitted in federated learning compared to centralized training:
+\begin{equation}
+\text{Overhead Ratio} = \frac{\text{Bytes in FL}}{\text{Bytes in Centralized}}
+\end{equation}
+
+Target: Ratio less than 0.1 (90\% bandwidth reduction).
+
+\textbf{Training Time:} Time per training round will be measured. Target: Under 30 minutes per round on typical hardware available in Ugandan districts.
+
+\textbf{Resource Usage:} Memory consumption and CPU utilization will be monitored to ensure the system runs on resource-limited devices.
+
+\subsubsection{Security Evaluation}
+
+\textbf{Model Poisoning Resistance:} The system will be tested with varying fractions of malicious participants (10\%, 20\%, 30\%, 40\%) sending corrupted updates. Robustness score:
+\begin{equation}
+\text{Robustness Score} = \frac{\text{Accuracy with attack}}{\text{Accuracy without attack}}
+\end{equation}
+
+Target: Maintain score above 0.80 even with 40\% attackers.
+
+\textbf{Privacy Testing:} Membership inference attacks will be conducted to test whether attackers can determine if specific farm data was included in training.
+
+\textbf{Blockchain Integrity:} Verification that all model updates are correctly recorded and that tampering attempts are detected.
+
+\subsection{Objective 5: Practical Effectiveness Assessment}
+
+The fifth objective involves assessing the system's practical effectiveness through testing with real FMD data.
+
+\subsubsection{Simulation of District Nodes}
+
+Up to 50 simulated nodes will be created, each representing a Ugandan district. FMD data will be distributed across these nodes according to actual geographic distribution of outbreaks. This setup mimics real-world deployment where each district veterinary office would operate a node.
+
+\subsubsection{Realistic Conditions Testing}
+
+Testing will be conducted under conditions that reflect the actual operating environment:
+\begin{itemize}
+    \item \textbf{Network Constraints:} Simulated slow and intermittent internet connectivity typical of rural Uganda
+    \item \textbf{Node Failures:} Random node dropouts during training rounds to test system resilience
+    \item \textbf{Heterogeneous Data:} Uneven distribution of FMD cases across districts reflecting real patterns
+\end{itemize}
+
+\subsubsection{Distribution Shift Detection}
+
+The system will implement mechanisms for detecting when data distributions change over time. For each district $d$ at time $t$, validation loss $L_d^{(t)}$ is tracked over a sliding window. If the moving average exceeds a threshold:
 \begin{equation}
 \frac{1}{w}\sum_{k=t-w}^{t} L_d^{(k)} > \mu + 2\sigma
 \end{equation}
 
 where $\mu$ and $\sigma$ are historical mean and standard deviation, this signals distribution drift requiring model retraining.
 
-\subsection{Phase 5: Real-World Testing and Dashboard (Month 9)}
+\subsubsection{Early Warning Dashboard Testing}
 
-This phase tests the system under realistic conditions including slow internet connectivity, node failures, and participants dropping offline during training. The early warning dashboard will be developed to allow veterinary officers to view predictions with explanations.
+The dashboard interface will be evaluated for usability by presenting predictions to potential end users (veterinary officers or agricultural extension workers) and collecting feedback on clarity, usefulness, and actionability of the information presented.
 
-Testing focuses on robustness under the actual conditions expected in Ugandan districts, ensuring the system works despite infrastructure limitations.
+\subsection{System Workflow}
 
-\subsection{Phase 6: Comprehensive Evaluation (Months 10-11)}
+\begin{figure}[!t]
+\centering
+\includegraphics[width=3.4in]{fmd_diagram.jpeg}
+\caption{System workflow showing local data preparation, federated model training, blockchain verification, secure aggregation, and early warning generation. Data never leaves local farms while maintaining verifiable trust through blockchain recording.}
+\label{fig:workflow}
+\end{figure}
 
-This phase conducts systematic experiments across all evaluation dimensions: prediction accuracy compared to centralized training, system efficiency under varying network conditions, and security robustness against different attack scenarios (including 30-40\% malicious participants).
+The workflow in Fig. \ref{fig:workflow} illustrates the complete process from local data preparation through federated training to early warning generation. Each step maintains data privacy while the blockchain layer ensures accountability and verifiability throughout.
 
-Performance metrics will be collected and analyzed to document the trade-offs between privacy, security, and efficiency.
+\subsection{Research Timeline}
 
-\subsection{Phase 7: Documentation and Dissemination (Month 12)}
+The research will span 12 months. Table \ref{tab:timeline} summarizes the key activities for each phase.
 
-The final month focuses on thesis writing, preparing research papers for publication, and releasing the open-source code and documentation. All datasets and implementation details will be made publicly available to enable replication and extension of this work.
+\begin{table}[h]
+\centering
+\caption{Research Timeline Summary}
+\label{tab:timeline}
+\begin{tabular}{|c|p{4cm}|p{6cm}|}
+\hline
+\textbf{Month} & \textbf{Phase} & \textbf{Key Activities} \\
+\hline
+1-2 & Literature Review \& Data Preparation & Complete literature review; obtain FMD data from ULITS; clean and preprocess data \\
+\hline
+3-5 & Core System Implementation & Implement federated learning infrastructure; integrate blockchain verification layer \\
+\hline
+6-7 & Security \& Privacy & Implement differential privacy; add attack resistance mechanisms \\
+\hline
+8 & Adaptive Mechanisms & Implement distribution shift detection; add model retraining triggers \\
+\hline
+9 & Testing \& Dashboard & Test under realistic conditions; develop early warning dashboard \\
+\hline
+10-11 & Comprehensive Evaluation & Conduct experiments on accuracy, efficiency, and security; analyze results \\
+\hline
+12 & Documentation & Write thesis; prepare publications; release open-source code \\
+\hline
+\end{tabular}
+\end{table}
 
 \subsection{Expected Contributions and Deliverables}
 \label{sec:contributions}
@@ -542,18 +689,6 @@ This research focuses on designing and evaluating a blockchain-verified federate
 \subsection{Future Research Directions}
 
 This foundation enables future work on multi-disease monitoring, cross-country collaboration, real-time sensor integration, personalized district-level models, and economic incentive mechanisms for sustained participation.
-
-\section{Process Workflow}
-\label{sec:workflow}
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=3.4in]{fmd_diagram.jpeg}
-\caption{System workflow showing local data preparation, federated model training, blockchain verification, secure aggregation, and early warning generation. Data never leaves local farms while maintaining verifiable trust through blockchain recording.}
-\label{fig:workflow}
-\end{figure}
-
-The workflow in Fig. \ref{fig:workflow} ensures data privacy while maintaining accountability through blockchain-recorded model updates and aggregation steps.
 
 \section{Conclusion}
 \label{sec:conclusion}
