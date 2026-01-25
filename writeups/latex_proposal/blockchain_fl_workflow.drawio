@@ -1,0 +1,461 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="1">
+    <mxGraphModel dx="1434" dy="815" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Title -->
+        <mxCell id="title" value="Blockchain-Secured Federated Learning System for FMD Early Warning" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;fontStyle=1;fontColor=#1A5490;" vertex="1" parent="1">
+          <mxGeometry x="200" y="30" width="1400" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Subtitle -->
+        <mxCell id="subtitle" value="Privacy-Preserving Collaborative Machine Learning for Resource-Limited Environments" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontColor=#666666;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="85" width="1400" height="25" as="geometry" />
+        </mxCell>
+        
+        <!-- Background container -->
+        <mxCell id="bg_container" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F4F8;strokeColor=#4A90A4;strokeWidth=2;opacity=30;" vertex="1" parent="1">
+          <mxGeometry x="80" y="140" width="1640" height="900" as="geometry" />
+        </mxCell>
+        
+        <!-- PHASE 1: LOCAL DATA & TRAINING (LEFT SIDE) -->
+        <mxCell id="phase1_title" value="PHASE 1: Local Data & Model Training" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#2C5F2D;" vertex="1" parent="1">
+          <mxGeometry x="110" y="160" width="350" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- District Node A -->
+        <mxCell id="district_a_container" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="220" width="280" height="220" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="district_a_label" value="District A (Kampala)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fontColor=#2C5F2D;" vertex="1" parent="1">
+          <mxGeometry x="140" y="230" width="240" height="25" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="farm_icon_a" value="🐄" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=40;" vertex="1" parent="1">
+          <mxGeometry x="150" y="270" width="60" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="local_data_a" value="Local FMD Data&#xa;(Stays Private)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;strokeWidth=1;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="220" y="275" width="160" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="nn_icon_a" value="🧠" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+          <mxGeometry x="150" y="335" width="50" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="local_training_a" value="Train ML Model&#xa;Locally" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#97D077;strokeColor=#82B366;strokeWidth=1;fontSize=11;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="220" y="335" width="160" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="dp_noise_a" value="Add ε-DP Noise&#xa;(Privacy Protection)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E6;strokeColor=#D79B00;strokeWidth=1;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="140" y="390" width="240" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- District Node B -->
+        <mxCell id="district_b_container" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="470" width="280" height="220" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="district_b_label" value="District B (Mbarara)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fontColor=#2C5F2D;" vertex="1" parent="1">
+          <mxGeometry x="140" y="480" width="240" height="25" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="farm_icon_b" value="🐄" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=40;" vertex="1" parent="1">
+          <mxGeometry x="150" y="520" width="60" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="local_data_b" value="Local FMD Data&#xa;(Stays Private)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;strokeWidth=1;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="220" y="525" width="160" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="nn_icon_b" value="🧠" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+          <mxGeometry x="150" y="585" width="50" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="local_training_b" value="Train ML Model&#xa;Locally" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#97D077;strokeColor=#82B366;strokeWidth=1;fontSize=11;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="220" y="585" width="160" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="dp_noise_b" value="Add ε-DP Noise&#xa;(Privacy Protection)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E6;strokeColor=#D79B00;strokeWidth=1;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="140" y="640" width="240" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- District Node C -->
+        <mxCell id="district_c_container" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="120" y="720" width="280" height="220" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="district_c_label" value="District C (Gulu)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fontColor=#2C5F2D;" vertex="1" parent="1">
+          <mxGeometry x="140" y="730" width="240" height="25" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="farm_icon_c" value="🐄" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=40;" vertex="1" parent="1">
+          <mxGeometry x="150" y="770" width="60" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="local_data_c" value="Local FMD Data&#xa;(Stays Private)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#82B366;strokeWidth=1;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="220" y="775" width="160" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="nn_icon_c" value="🧠" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+          <mxGeometry x="150" y="835" width="50" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="local_training_c" value="Train ML Model&#xa;Locally" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#97D077;strokeColor=#82B366;strokeWidth=1;fontSize=11;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="220" y="835" width="160" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="dp_noise_c" value="Add ε-DP Noise&#xa;(Privacy Protection)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E6;strokeColor=#D79B00;strokeWidth=1;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="140" y="890" width="240" height="35" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="ellipsis" value="..." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;fontStyle=1;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="230" y="950" width="60" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- PHASE 2: UPDATE SUBMISSION & BLOCKCHAIN (CENTER) -->
+        <mxCell id="phase2_title" value="PHASE 2: Secure Update Submission" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#7C2C91;" vertex="1" parent="1">
+          <mxGeometry x="520" y="160" width="350" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow from A to center -->
+        <mxCell id="arrow_a_to_center" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#82B366;endArrow=block;endFill=1;" edge="1" parent="1" source="dp_noise_a" target="hash_compute">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="407" as="sourcePoint" />
+            <mxPoint x="550" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="arrow_a_label" value="①" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#82B366;strokeColor=#82B366;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="392" width="35" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow from B to center -->
+        <mxCell id="arrow_b_to_center" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#82B366;endArrow=block;endFill=1;" edge="1" parent="1" source="dp_noise_b" target="hash_compute">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="657" as="sourcePoint" />
+            <mxPoint x="600" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="arrow_b_label" value="①" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#82B366;strokeColor=#82B366;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="642" width="35" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow from C to center -->
+        <mxCell id="arrow_c_to_center" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#82B366;endArrow=block;endFill=1;" edge="1" parent="1" source="dp_noise_c" target="hash_compute">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="907" as="sourcePoint" />
+            <mxPoint x="600" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="arrow_c_label" value="①" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#82B366;strokeColor=#82B366;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="892" width="35" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- Hash Computation -->
+        <mxCell id="hash_compute" value="Hash Model Updates&#xa;H(θᵢ) = SHA-256(updates)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7C2C91;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="570" y="250" width="230" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="encrypt_icon" value="🔐" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+          <mxGeometry x="520" y="255" width="50" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Encryption -->
+        <mxCell id="encryption" value="Encrypt Updates&#xa;(Secure Aggregation)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#7C2C91;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="570" y="340" width="230" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="key_icon" value="🔑" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;" vertex="1" parent="1">
+          <mxGeometry x="525" y="350" width="40" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow to blockchain -->
+        <mxCell id="arrow_to_blockchain" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#7C2C91;endArrow=block;endFill=1;" edge="1" parent="1" source="encryption" target="blockchain_layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow_blockchain_label" value="②" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#7C2C91;strokeColor=#7C2C91;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="667" y="425" width="35" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- Blockchain Layer -->
+        <mxCell id="blockchain_layer" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7C2C91;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="530" y="500" width="310" height="320" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="blockchain_title" value="⛓️ BLOCKCHAIN VERIFICATION LAYER" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fontColor=#7C2C91;" vertex="1" parent="1">
+          <mxGeometry x="550" y="510" width="270" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="hyperledger_label" value="Hyperledger Fabric (PBFT Consensus)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="550" y="540" width="270" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Blockchain Blocks -->
+        <mxCell id="block_1" value="Block N-2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#7C2C91;strokeWidth=2;fontSize=10;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="560" y="580" width="80" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="block_2" value="Block N-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#7C2C91;strokeWidth=2;fontSize=10;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="660" y="580" width="80" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="block_3" value="Block N&#xa;(Current)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#AB47BC;strokeColor=#7C2C91;strokeWidth=3;fontSize=10;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="760" y="580" width="60" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Chain links -->
+        <mxCell id="chain_1" value="→" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#7C2C91;" vertex="1" parent="1">
+          <mxGeometry x="635" y="595" width="30" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="chain_2" value="→" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#7C2C91;" vertex="1" parent="1">
+          <mxGeometry x="735" y="595" width="30" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Transaction Records -->
+        <mxCell id="tx_record" value="Transaction Records:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="560" y="650" width="260" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="tx_1" value="• Update Hash: 0x4f3a2..." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="570" y="675" width="240" height="18" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="tx_2" value="• Node ID: District_A" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="570" y="695" width="240" height="18" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="tx_3" value="• Timestamp: 2026-01-25 14:30" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="570" y="715" width="240" height="18" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="tx_4" value="• Signature: Verified ✓" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#2C5F2D;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="735" width="240" height="18" as="geometry" />
+        </mxCell>
+        
+        <!-- Immutable & Auditable -->
+        <mxCell id="immutable" value="✓ Immutable Record" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7C2C91;strokeWidth=1;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="560" y="770" width="120" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="auditable" value="✓ Auditable Trail" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#7C2C91;strokeWidth=1;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="700" y="770" width="120" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- PHASE 3: AGGREGATION (CENTER-RIGHT) -->
+        <mxCell id="phase3_title" value="PHASE 3: Secure Aggregation" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#C45911;" vertex="1" parent="1">
+          <mxGeometry x="950" y="160" width="350" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow to aggregation -->
+        <mxCell id="arrow_to_aggregation" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#D79B00;endArrow=block;endFill=1;" edge="1" parent="1" source="blockchain_layer" target="aggregation_server">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow_agg_label" value="③" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#D79B00;strokeColor=#D79B00;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="867" y="642" width="35" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- Aggregation Server -->
+        <mxCell id="aggregation_server" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF4E6;strokeColor=#D79B00;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="950" y="250" width="320" height="420" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="server_icon" value="🖥️" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=40;" vertex="1" parent="1">
+          <mxGeometry x="1085" y="260" width="50" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agg_title" value="SECURE AGGREGATION SERVER" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fontColor=#C45911;" vertex="1" parent="1">
+          <mxGeometry x="970" y="320" width="280" height="25" as="geometry" />
+        </mxCell>
+        
+        <!-- Verify Updates -->
+        <mxCell id="verify_updates" value="Verify via Blockchain&#xa;(Check Hashes)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#D79B00;strokeWidth=2;fontSize=11;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="980" y="365" width="260" height="45" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="check_icon" value="✓" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;fontStyle=1;fontColor=#2C5F2D;" vertex="1" parent="1">
+          <mxGeometry x="950" y="370" width="35" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- Decrypt Updates -->
+        <mxCell id="decrypt_updates" value="Decrypt Aggregated Updates&#xa;(Collective Decryption)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#D79B00;strokeWidth=2;fontSize=11;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="980" y="430" width="260" height="45" as="geometry" />
+        </mxCell>
+        
+        <!-- Federated Averaging -->
+        <mxCell id="fed_averaging" value="Federated Averaging&#xa;θ_global = Σ(nᵢ·θᵢ) / Σ(nᵢ)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9800;strokeColor=#D79B00;strokeWidth=2;fontSize=11;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="980" y="495" width="260" height="55" as="geometry" />
+        </mxCell>
+        
+        <!-- Byzantine Detection -->
+        <mxCell id="byzantine_detect" value="Byzantine Fault Detection&#xa;(Outlier Filtering)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#D79B00;strokeWidth=2;fontSize=11;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="980" y="570" width="260" height="45" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="shield_icon" value="🛡️" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=28;" vertex="1" parent="1">
+          <mxGeometry x="950" y="575" width="35" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- Updated Global Model -->
+        <mxCell id="global_model" value="UPDATED GLOBAL MODEL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF6F00;strokeColor=#D79B00;strokeWidth=3;fontSize=12;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="980" y="630" width="260" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- PHASE 4: DISTRIBUTION & EARLY WARNING (RIGHT) -->
+        <mxCell id="phase4_title" value="PHASE 4: Model Distribution & Early Warning" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#1976D2;" vertex="1" parent="1">
+          <mxGeometry x="1370" y="160" width="350" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Arrow to distribution -->
+        <mxCell id="arrow_to_dist" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#1976D2;endArrow=block;endFill=1;" edge="1" parent="1" source="global_model" target="model_distribution">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="arrow_dist_label" value="④" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1976D2;strokeColor=#1976D2;fontColor=#FFFFFF;fontSize=16;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1302" y="627" width="35" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- Model Distribution -->
+        <mxCell id="model_distribution" value="Distribute Updated Model&#xa;to All Districts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1976D2;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="250" width="280" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="download_icon" value="⬇️" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=32;" vertex="1" parent="1">
+          <mxGeometry x="1335" y="255" width="40" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Return arrows to districts -->
+        <mxCell id="return_arrow_a" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#1976D2;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="model_distribution" target="district_a_container">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1520" y="330" />
+              <mxPoint x="260" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="return_arrow_b" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#1976D2;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="model_distribution" target="district_b_container">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1520" y="580" />
+              <mxPoint x="260" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="return_arrow_c" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#1976D2;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="model_distribution" target="district_c_container">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1520" y="830" />
+              <mxPoint x="260" y="830" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Early Warning Dashboard -->
+        <mxCell id="dashboard" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="380" width="280" height="300" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="dashboard_icon" value="📊" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=40;" vertex="1" parent="1">
+          <mxGeometry x="1495" y="390" width="50" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="dashboard_title" value="EARLY WARNING DASHBOARD" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontStyle=1;fontColor=#1976D2;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="450" width="240" height="25" as="geometry" />
+        </mxCell>
+        
+        <!-- Prediction Output -->
+        <mxCell id="prediction" value="FMD Outbreak Predictions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#42A5F5;strokeColor=#1976D2;strokeWidth=2;fontSize=11;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="490" width="240" height="35" as="geometry" />
+        </mxCell>
+        
+        <!-- Risk Areas -->
+        <mxCell id="risk_areas" value="High-Risk Areas Identified" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;strokeColor=#1976D2;strokeWidth=1;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="540" width="240" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Confidence -->
+        <mxCell id="confidence" value="Confidence: 87% ✓" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;strokeColor=#1976D2;strokeWidth=1;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="580" width="240" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Veterinary Officers -->
+        <mxCell id="vet_officers" value="👨‍⚕️ Veterinary Officers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1976D2;strokeWidth=2;fontSize=11;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="630" width="240" height=="35" as="geometry" />
+        </mxCell>
+        
+        <!-- Key Features Box -->
+        <mxCell id="features_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9E6;strokeColor=#D79B00;strokeWidth=2;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="730" width="280" height="200" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="features_title" value="KEY SYSTEM FEATURES" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;fontColor=#C45911;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="740" width="240" height="25" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="feature_1" value="✓ Data Never Leaves Source" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="775" width="220" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="feature_2" value="✓ Differential Privacy (ε-DP)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="800" width="220" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="feature_3" value="✓ Blockchain Verified & Auditable" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="825" width="220" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="feature_4" value="✓ Byzantine Fault Tolerant" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="850" width="220" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="feature_5" value="✓ Works with Limited Connectivity" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="875" width="220" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="feature_6" value="✓ Resource-Efficient Design" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="900" width="220" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- Legend at bottom -->
+        <mxCell id="legend_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#999999;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="990" width="1540" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend_title" value="WORKFLOW LEGEND:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="140" y="1000" width="150" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend_1" value="① Local Training & Privacy" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="300" y="1000" width="180" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend_2" value="② Blockchain Recording" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="490" y="1000" width="170" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend_3" value="③ Secure Aggregation" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="670" y="1000" width="150" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend_4" value="④ Model Distribution" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="830" y="1000" width="140" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="data_privacy_note" value="🔒 Raw data never leaves local nodes - Only encrypted model updates are shared" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontStyle=2;fontColor=#D84315;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="1000" width="620" height="20" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

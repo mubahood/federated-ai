@@ -1,0 +1,208 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Blockchain-Transaction-Flow" id="transaction">
+    <mxGraphModel dx="1434" dy="815" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Title -->
+        <mxCell id="2" value="Blockchain Transaction &amp; Verification Flow in Federated Learning" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="30" width="1400" height="40" as="geometry"/>
+        </mxCell>
+        
+        <!-- Subtitle -->
+        <mxCell id="2b" value="Hyperledger Fabric PBFT Consensus for Verifiable Model Updates" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="100" y="70" width="1400" height="25" as="geometry"/>
+        </mxCell>
+        
+        <!-- Phase 1: Transaction Creation -->
+        <mxCell id="3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="60" y="140" width="340" height="320" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="4" value="📝 PHASE 1: TRANSACTION CREATION" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="80" y="155" width="300" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="5" value="District Node (Client)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="200" width="280" height="35" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="6" value="1. Create Model Update&#xa;θ_local = {weights, gradients}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="90" y="250" width="280" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="7" value="2. Apply Differential Privacy&#xa;θ_private = θ_local + Noise(ε, δ)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="90" y="305" width="280" height="40" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="8" value="3. Create Transaction Proposal&#xa;• Hash: SHA-256(θ_private)&#xa;• Node ID: district_kampala&#xa;• Timestamp: 2026-01-25T14:32:01Z&#xa;• Metadata: {size, round, epoch}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#81C784;strokeColor=#2E7D32;strokeWidth=2;fontSize=11;align=left;spacingLeft=10;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="90" y="360" width="280" height="85" as="geometry"/>
+        </mxCell>
+        
+        <!-- Phase 2: Endorsement -->
+        <mxCell id="9" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="460" y="140" width="340" height="320" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="10" value="✓ PHASE 2: ENDORSEMENT" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#1565C0;" vertex="1" parent="1">
+          <mxGeometry x="480" y="155" width="300" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="11" value="Endorsing Peers (Smart Contract)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;strokeColor=#1565C0;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="200" width="280" height="35" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="12" value="Peer 1: Validate Transaction&#xa;• Check signature ✓&#xa;• Verify node identity ✓&#xa;• Validate metadata ✓" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;strokeWidth=2;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="490" y="250" width="280" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="13" value="Peer 2: Execute Smart Contract&#xa;function validateUpdate(update) {&#xa;  if (isValidFormat(update))&#xa;    return ENDORSE;&#xa;}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#1565C0;strokeWidth=2;fontSize=10;align=left;spacingLeft=10;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="490" y="325" width="280" height="70" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="14" value="Endorsement Response&#xa;{status: VALID, signature: 0x7a9b...}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#42A5F5;strokeColor=#1565C0;strokeWidth=2;fontSize=12;fontStyle=1;fontColor=#FFFFFF;align=center;" vertex="1" parent="1">
+          <mxGeometry x="490" y="410" width="280" height="40" as="geometry"/>
+        </mxCell>
+        
+        <!-- Phase 3: PBFT Consensus -->
+        <mxCell id="15" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#6A1B9A;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="860" y="140" width="340" height="320" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="16" value="⛓️ PHASE 3: PBFT CONSENSUS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#6A1B9A;" vertex="1" parent="1">
+          <mxGeometry x="880" y="155" width="300" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="17" value="Orderer Nodes (Consensus)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE93D8;strokeColor=#6A1B9A;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="890" y="200" width="280" height="35" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="18" value="1. PRE-PREPARE&#xa;Leader broadcasts transaction&#xa;to all orderer nodes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6A1B9A;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="890" y="250" width="280" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="19" value="2. PREPARE&#xa;Nodes vote on transaction&#xa;Collect 2f+1 votes (Byzantine tolerance)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6A1B9A;strokeWidth=2;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="890" y="315" width="280" height="55" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="20" value="3. COMMIT&#xa;✓ Consensus achieved (67% agreement)&#xa;Transaction ready for block" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9C27B0;strokeColor=#6A1B9A;strokeWidth=3;fontSize=12;align=left;spacingLeft=10;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="890" y="385" width="280" height="65" as="geometry"/>
+        </mxCell>
+        
+        <!-- Phase 4: Block Creation -->
+        <mxCell id="21" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="140" width="340" height="320" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="22" value="📦 PHASE 4: BLOCK CREATION" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#E65100;" vertex="1" parent="1">
+          <mxGeometry x="1280" y="155" width="300" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="23" value="Block Assembly" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCC80;strokeColor=#E65100;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="200" width="280" height="35" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="24" value="Block Header:&#xa;• Block Number: 1,284,567&#xa;• Previous Hash: 0x2f4a...&#xa;• Merkle Root: 0x8c3d...&#xa;• Timestamp: 2026-01-25T14:32:05Z" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E65100;strokeWidth=2;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="250" width="280" height="85" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="25" value="Block Body:&#xa;• Transaction 1: district_kampala&#xa;• Transaction 2: district_mbarara&#xa;• Transaction 3: district_gulu&#xa;• ... (batch of N transactions)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E65100;strokeWidth=2;fontSize=11;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="350" width="280" height="85" as="geometry"/>
+        </mxCell>
+        
+        <!-- Phase 5: Verification & Storage -->
+        <mxCell id="26" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#283593;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="60" y="520" width="740" height="240" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="27" value="🔐 PHASE 5: VERIFICATION &amp; IMMUTABLE STORAGE" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=17;fontStyle=1;fontColor=#283593;" vertex="1" parent="1">
+          <mxGeometry x="80" y="535" width="700" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="28" value="All Peer Nodes Verify Block" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9FA8DA;strokeColor=#283593;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="580" width="330" height="35" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="29" value="Verification Steps:&#xa;1. Validate block hash&#xa;2. Verify Merkle tree&#xa;3. Check PBFT signatures&#xa;4. Validate transaction sequence" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#283593;strokeWidth=2;fontSize=12;align=left;spacingLeft=15;" vertex="1" parent="1">
+          <mxGeometry x="90" y="630" width="330" height="110" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="30" value="Distributed Ledger (All Nodes)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#9FA8DA;strokeColor=#283593;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="580" width="330" height="35" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="31" value="Immutable Storage:&#xa;Block 1,284,567 → Blockchain&#xa;✓ Replicated across all nodes&#xa;✓ Tamper-proof (cryptographic hash)&#xa;✓ Auditable (complete history)&#xa;✓ Byzantine fault tolerant" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#5C6BC0;strokeColor=#283593;strokeWidth=3;fontSize=12;align=left;spacingLeft=15;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="450" y="630" width="330" height="110" as="geometry"/>
+        </mxCell>
+        
+        <!-- Smart Contract Details -->
+        <mxCell id="32" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57F17;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="860" y="520" width="740" height="240" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="33" value="📜 SMART CONTRACT: MODEL UPDATE VALIDATION" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=17;fontStyle=1;fontColor=#F57F17;" vertex="1" parent="1">
+          <mxGeometry x="880" y="535" width="700" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="34" value="chaincode.js (Hyperledger Fabric)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF59D;strokeColor=#F57F17;strokeWidth=2;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="890" y="580" width="680" height="30" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="35" value="async function submitModelUpdate(ctx, nodeId, updateHash, metadata) {&#xa;  // 1. Validate node identity&#xa;  const node = await ctx.stub.getState(nodeId);&#xa;  if (!node) throw new Error('Unauthorized node');&#xa;  &#xa;  // 2. Check update format and size&#xa;  if (!isValidHash(updateHash)) throw new Error('Invalid hash');&#xa;  &#xa;  // 3. Record on blockchain&#xa;  const txn = {&#xa;    nodeId, updateHash, timestamp: Date.now(),&#xa;    blockNumber: ctx.stub.getTxID()&#xa;  };&#xa;  await ctx.stub.putState(updateHash, Buffer.from(JSON.stringify(txn)));&#xa;  return txn;&#xa;}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFDE7;strokeColor=#F57F17;strokeWidth=2;fontSize=10;align=left;spacingLeft=10;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="890" y="625" width="680" height="120" as="geometry"/>
+        </mxCell>
+        
+        <!-- Arrows -->
+        <mxCell id="36" value="" style="endArrow=block;html=1;strokeWidth=4;strokeColor=#2E7D32;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="3" target="9">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="37" value="" style="endArrow=block;html=1;strokeWidth=4;strokeColor=#1565C0;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="9" target="15">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="38" value="" style="endArrow=block;html=1;strokeWidth=4;strokeColor=#6A1B9A;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="15" target="21">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="39" value="" style="endArrow=block;html=1;strokeWidth=4;strokeColor=#E65100;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="21" target="26">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1430" y="490"/>
+              <mxPoint x="430" y="490"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Labels -->
+        <mxCell id="40" value="Proposal" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="400" y="280" width="60" height="20" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="41" value="Endorsed" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="800" y="280" width="60" height="20" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="42" value="Ordered" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="280" width="60" height="20" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="43" value="Block" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="1400" y="480" width="60" height="20" as="geometry"/>
+        </mxCell>
+        
+        <!-- Key Properties -->
+        <mxCell id="44" value="KEY PROPERTIES:&#xa;✓ Byzantine Fault Tolerant (f &lt; n/3)&#xa;✓ Immutable &amp; Tamper-Proof&#xa;✓ Distributed Consensus (PBFT)&#xa;✓ Smart Contract Validation&#xa;✓ Complete Audit Trail" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=3;fontSize=13;fontStyle=1;fontColor=#B71C1C;align=left;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="60" y="810" width="740" height="130" as="geometry"/>
+        </mxCell>
+        
+        <!-- Performance Metrics -->
+        <mxCell id="45" value="PERFORMANCE METRICS:&#xa;• Throughput: 1,000-10,000 TPS&#xa;• Latency: 2-5 seconds per block&#xa;• Finality: Immediate (no forks)&#xa;• Storage: Distributed across all nodes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00695C;strokeWidth=3;fontSize=13;fontStyle=1;fontColor=#004D40;align=left;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="860" y="810" width="740" height="130" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

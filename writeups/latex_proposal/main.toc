@@ -1,67 +1,65 @@
-\contentsline {section}{CHAPTER 1: INTRODUCTION}{4}{Doc-Start}%
-\contentsline {subsection}{\numberline {0.1}Background of the Study}{4}{subsection.0.1}%
-\contentsline {subsection}{\numberline {0.2}Problem Statement}{5}{subsection.0.2}%
-\contentsline {subsection}{\numberline {0.3}Research Objectives}{5}{subsection.0.3}%
-\contentsline {subsubsection}{\numberline {0.3.1}Main Objective}{5}{subsubsection.0.3.1}%
-\contentsline {subsubsection}{\numberline {0.3.2}Specific Objectives}{5}{subsubsection.0.3.2}%
-\contentsline {subsection}{\numberline {0.4}Research Questions}{6}{subsection.0.4}%
-\contentsline {subsection}{\numberline {0.5}Significance of the Study}{6}{subsection.0.5}%
-\contentsline {subsection}{\numberline {0.6}Scope and Limitations}{7}{subsection.0.6}%
-\contentsline {subsubsection}{\numberline {0.6.1}Scope}{7}{subsubsection.0.6.1}%
-\contentsline {subsubsection}{\numberline {0.6.2}Limitations}{7}{subsubsection.0.6.2}%
-\contentsline {section}{CHAPTER 2: LITERATURE REVIEW}{8}{subsubsection.0.6.2}%
-\contentsline {subsection}{\numberline {0.7}Introduction}{8}{subsection.0.7}%
-\contentsline {subsection}{\numberline {0.8}Federated Learning and Privacy Preservation}{8}{subsection.0.8}%
-\contentsline {subsection}{\numberline {0.9}Trust and Verification Challenges}{8}{subsection.0.9}%
-\contentsline {subsection}{\numberline {0.10}Blockchain Integration for Verifiable Federated Learning}{9}{subsection.0.10}%
-\contentsline {subsection}{\numberline {0.11}Applications in Disease Prediction and Healthcare}{9}{subsection.0.11}%
-\contentsline {subsection}{\numberline {0.12}Resource-Constrained Environments and Computational Efficiency}{10}{subsection.0.12}%
-\contentsline {subsection}{\numberline {0.13}Summary of Reviewed Literature}{10}{subsection.0.13}%
-\contentsline {subsection}{\numberline {0.14}Summary of Research Gaps}{11}{subsection.0.14}%
-\contentsline {subsection}{\numberline {0.15}Chapter Summary}{12}{subsection.0.15}%
-\contentsline {section}{CHAPTER 3: RESEARCH METHODOLOGY}{13}{subsection.0.15}%
-\contentsline {subsection}{\numberline {0.16}Introduction}{13}{subsection.0.16}%
-\contentsline {subsection}{\numberline {0.17}Research Design}{13}{subsection.0.17}%
-\contentsline {subsection}{\numberline {0.18}Objective 1: Data Collection, Cleaning, and Preprocessing}{13}{subsection.0.18}%
-\contentsline {subsubsection}{\numberline {0.18.1}Data Source}{13}{subsubsection.0.18.1}%
-\contentsline {subsubsection}{\numberline {0.18.2}Data Cleaning Process}{13}{subsubsection.0.18.2}%
-\contentsline {subsubsection}{\numberline {0.18.3}Data Preprocessing}{14}{subsubsection.0.18.3}%
-\contentsline {subsection}{\numberline {0.19}Objective 2: System Architecture Design}{14}{subsection.0.19}%
-\contentsline {subsubsection}{\numberline {0.19.1}Layered Architecture}{14}{subsubsection.0.19.1}%
-\contentsline {subsubsection}{\numberline {0.19.2}Blockchain Integration Design}{15}{subsubsection.0.19.2}%
-\contentsline {subsection}{\numberline {0.20}Objective 3: Prototype Implementation}{15}{subsection.0.20}%
-\contentsline {subsubsection}{\numberline {0.20.1}Technology Stack}{15}{subsubsection.0.20.1}%
-\contentsline {subsubsection}{\numberline {0.20.2}Federated Training Process}{16}{subsubsection.0.20.2}%
-\contentsline {subsubsection}{\numberline {0.20.3}Privacy Mechanisms}{16}{subsubsection.0.20.3}%
-\contentsline {subsection}{\numberline {0.21}Objective 4: System Evaluation}{16}{subsection.0.21}%
-\contentsline {subsubsection}{\numberline {0.21.1}Accuracy Evaluation}{17}{subsubsection.0.21.1}%
-\contentsline {subsubsection}{\numberline {0.21.2}Efficiency Evaluation}{17}{subsubsection.0.21.2}%
-\contentsline {subsubsection}{\numberline {0.21.3}Security Evaluation}{17}{subsubsection.0.21.3}%
-\contentsline {subsection}{\numberline {0.22}Objective 5: Practical Effectiveness Assessment}{18}{subsection.0.22}%
-\contentsline {subsubsection}{\numberline {0.22.1}Simulation of District Nodes}{18}{subsubsection.0.22.1}%
-\contentsline {subsubsection}{\numberline {0.22.2}Realistic Conditions Testing}{18}{subsubsection.0.22.2}%
-\contentsline {subsubsection}{\numberline {0.22.3}Distribution Shift Detection}{18}{subsubsection.0.22.3}%
-\contentsline {subsubsection}{\numberline {0.22.4}Early Warning Dashboard Testing}{18}{subsubsection.0.22.4}%
-\contentsline {subsection}{\numberline {0.23}System Workflow}{19}{subsection.0.23}%
-\contentsline {subsection}{\numberline {0.24}Research Timeline}{19}{subsection.0.24}%
-\contentsline {subsection}{\numberline {0.25}Expected Contributions and Deliverables}{20}{subsection.0.25}%
-\contentsline {subsubsection}{\numberline {0.25.1}Scientific Contributions}{20}{subsubsection.0.25.1}%
-\contentsline {subsubsection}{\numberline {0.25.2}Technical Contributions}{20}{subsubsection.0.25.2}%
-\contentsline {subsubsection}{\numberline {0.25.3}Practical Impact for Uganda}{20}{subsubsection.0.25.3}%
-\contentsline {subsubsection}{\numberline {0.25.4}Global Relevance}{20}{subsubsection.0.25.4}%
-\contentsline {subsection}{\numberline {0.26}Evaluation Metrics}{21}{subsection.0.26}%
-\contentsline {subsubsection}{\numberline {0.26.1}Model Performance Metrics}{21}{subsubsection.0.26.1}%
-\contentsline {subsubsection}{\numberline {0.26.2}Privacy Metrics}{21}{subsubsection.0.26.2}%
-\contentsline {subsubsection}{\numberline {0.26.3}Fairness Metrics}{21}{subsubsection.0.26.3}%
-\contentsline {subsubsection}{\numberline {0.26.4}Efficiency Metrics}{21}{subsubsection.0.26.4}%
-\contentsline {subsubsection}{\numberline {0.26.5}Robustness Metrics}{21}{subsubsection.0.26.5}%
-\contentsline {section}{\numberline {1}Ethical Considerations}{22}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Data Privacy and Protection}{22}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Informed Consent and Participation}{22}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Responsible Use of Predictions}{22}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Equitable Access}{22}{subsection.1.4}%
-\contentsline {subsection}{\numberline {1.5}Environmental Impact}{22}{subsection.1.5}%
-\contentsline {section}{\numberline {2}Research Scope}{22}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Acknowledged Limitations}{23}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Future Research Directions}{23}{subsection.2.2}%
-\contentsline {section}{\numberline {3}Conclusion}{23}{section.3}%
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Background of the Study}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Problem Statement}{5}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Research Objectives}{5}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}Main Objective}{5}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}Specific Objectives}{5}{subsubsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.4}Research Questions}{6}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Significance of the Study}{6}{subsection.1.5}%
+\contentsline {subsection}{\numberline {1.6}Scope and Limitations}{7}{subsection.1.6}%
+\contentsline {subsubsection}{\numberline {1.6.1}Scope}{7}{subsubsection.1.6.1}%
+\contentsline {subsubsection}{\numberline {1.6.2}Limitations}{7}{subsubsection.1.6.2}%
+\contentsline {section}{\numberline {2}Literature Review}{8}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Federated Learning and Privacy Preservation}{8}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Trust and Verification Challenges}{8}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Blockchain Integration for Verifiable Federated Learning}{9}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Applications in Disease Prediction and Healthcare}{9}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Resource-Constrained Environments and Computational Efficiency}{10}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Summary of Reviewed Literature}{10}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Summary of Research Gaps}{10}{subsection.2.7}%
+\contentsline {section}{\numberline {3}Research Methodology}{12}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Research Design}{12}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Data Collection, Cleaning, and Preprocessing}{12}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Data Source}{12}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Data Cleaning Process}{12}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}Data Preprocessing}{13}{subsubsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.3}System Architecture Design}{13}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Layered Architecture}{13}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Blockchain Integration Design}{14}{subsubsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.4}Prototype Implementation}{14}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}Technology Stack}{15}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}Federated Training Process}{15}{subsubsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.3}Privacy Mechanisms}{16}{subsubsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.5}System Evaluation}{16}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}Accuracy Evaluation}{16}{subsubsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.2}Efficiency Evaluation}{16}{subsubsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.3}Security Evaluation}{17}{subsubsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.6}Practical Effectiveness Assessment}{17}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.1}Simulation of District Nodes}{17}{subsubsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.2}Realistic Conditions Testing}{17}{subsubsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.3}Distribution Shift Detection}{17}{subsubsection.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.6.4}Early Warning Dashboard Testing}{18}{subsubsection.3.6.4}%
+\contentsline {subsection}{\numberline {3.7}System Workflow}{18}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.8}Blockchain Transaction Flow}{19}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.9}Research Timeline}{20}{subsection.3.9}%
+\contentsline {subsection}{\numberline {3.10}Expected Contributions and Deliverables}{20}{subsection.3.10}%
+\contentsline {subsubsection}{\numberline {3.10.1}Scientific Contributions}{20}{subsubsection.3.10.1}%
+\contentsline {subsubsection}{\numberline {3.10.2}Technical Contributions}{21}{subsubsection.3.10.2}%
+\contentsline {subsubsection}{\numberline {3.10.3}Practical Impact for Uganda}{21}{subsubsection.3.10.3}%
+\contentsline {subsubsection}{\numberline {3.10.4}Global Relevance}{21}{subsubsection.3.10.4}%
+\contentsline {subsection}{\numberline {3.11}Evaluation Metrics}{21}{subsection.3.11}%
+\contentsline {subsubsection}{\numberline {3.11.1}Model Performance Metrics}{21}{subsubsection.3.11.1}%
+\contentsline {subsubsection}{\numberline {3.11.2}Privacy Metrics}{22}{subsubsection.3.11.2}%
+\contentsline {subsubsection}{\numberline {3.11.3}Fairness Metrics}{22}{subsubsection.3.11.3}%
+\contentsline {subsubsection}{\numberline {3.11.4}Efficiency Metrics}{22}{subsubsection.3.11.4}%
+\contentsline {subsubsection}{\numberline {3.11.5}Robustness Metrics}{22}{subsubsection.3.11.5}%
+\contentsline {section}{\numberline {4}Ethical Considerations}{22}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Data Privacy and Protection}{22}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Informed Consent and Participation}{23}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Responsible Use of Predictions}{23}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Equitable Access}{23}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Environmental Impact}{23}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Research Scope}{23}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Acknowledged Limitations}{24}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Future Research Directions}{24}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Conclusion}{24}{section.6}%
