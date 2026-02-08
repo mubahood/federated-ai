@@ -1,0 +1,283 @@
+%-------------------------
+% CV - Muhindo Mubaraka
+% Position: Manager, Information Systems
+% Muteesa I Royal University (MRU)
+%-------------------------
+
+\documentclass[10pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{array}
+
+% Page setup
+\geometry{left=1.4cm, right=1.4cm, top=1.2cm, bottom=1.2cm}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\small\color{secondary}Page \thepage\ of 3}
+
+% Colors
+\definecolor{primary}{RGB}{0, 82, 147}
+\definecolor{secondary}{RGB}{60, 60, 60}
+\definecolor{accent}{RGB}{0, 119, 181}
+\definecolor{lightbg}{RGB}{245, 245, 250}
+\definecolor{rulecol}{RGB}{0, 82, 147}
+
+% Hyperlink setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=accent,
+    urlcolor=accent,
+    pdfauthor={Muhindo Mubaraka},
+    pdftitle={Muhindo Mubaraka - Manager Information Systems CV}
+}
+
+% Section formatting
+\titleformat{\section}{\large\bfseries\color{primary}}{}{0em}{}[\titlerule]
+\titlespacing*{\section}{0pt}{10pt}{5pt}
+
+\titleformat{\subsection}{\normalsize\bfseries\color{secondary}}{}{0em}{}
+\titlespacing*{\subsection}{0pt}{6pt}{3pt}
+
+% Custom commands
+\newcommand{\cventry}[4]{
+    \noindent\textbf{#1} \hfill \textit{#2}\\
+    \textit{#3} \hfill #4
+    \vspace{2pt}
+}
+
+\newcommand{\projectentry}[3]{
+    \noindent\textbf{\textcolor{primary}{#1}} \hfill \textit{#2}\\
+    \textit{#3}
+    \vspace{2pt}
+}
+
+\newcommand{\projectitem}[2]{
+    \item \textbf{#1:} #2
+}
+
+\begin{document}
+
+%-------------------------
+% HEADER WITH PHOTO
+%-------------------------
+\begin{minipage}[c]{0.15\textwidth}
+    \begin{tikzpicture}
+        \clip (0,0) circle (1.3cm);
+        \node[anchor=center] at (0,0) {\includegraphics[width=2.6cm]{muhindo_mubaraka.png}};
+    \end{tikzpicture}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.83\textwidth}
+    {\Huge\bfseries\color{primary} MUHINDO MUBARAKA}\\[6pt]
+    {\Large\color{secondary} Manager, Information Systems}\\[8pt]
+    \begin{tabular}{@{}l@{\hspace{14pt}}l@{\hspace{14pt}}l@{}}
+        \faIcon{map-marker-alt}~Kampala, Uganda &
+        \faIcon{phone}~+256 783 204 665 / +256 706 638 484 &
+        \faIcon{envelope}~\href{mailto:mubahood360@gmail.com}{mubahood360@gmail.com} \\[3pt]
+        \faIcon{globe}~\href{https://www.learnitwithmuhindo.com}{learnitwithmuhindo.com} &
+        \faIcon{github}~\href{https://github.com/mubahood}{github.com/mubahood} &
+        \faIcon{envelope}~\href{mailto:muhindo@8technologies.net}{muhindo@8technologies.net}
+    \end{tabular}
+\end{minipage}
+
+\vspace{8pt}
+{\color{rulecol}\hrule height 0.8pt}
+\vspace{4pt}
+
+%-------------------------
+% PROFESSIONAL SUMMARY
+%-------------------------
+\section{Professional Summary}
+
+IT professional with \textbf{over 9 years of experience} in systems development, database administration, IT infrastructure management, and digital solutions delivery. Proven track record of leading the design and deployment of enterprise-level information systems for government ministries, universities, NGOs, and private organisations across Uganda. Skilled in \textbf{full-stack software engineering}, relational database management, server administration, network systems, cybersecurity best practices, and ICT project management.
+
+Currently completing a \textbf{Master of Science in Computer Science} at Makerere University, researching distributed systems, blockchain, and machine learning. Experienced in managing e-learning platforms, student information systems, and institutional ICT infrastructure. Strong capabilities in stakeholder engagement, staff training and capacity building, IT policy development, and digital transformation strategy.
+
+%-------------------------
+% EDUCATION
+%-------------------------
+\section{Education}
+
+\cventry{Master of Science in Computer Science}{2024 -- Present (In Progress)}{Makerere University, College of Computing \& Information Sciences, Kampala, Uganda}{}
+\textit{Research:} Blockchain-Based Federated Learning for Livestock Disease Early Warning Systems \\
+\textit{Supervisor:} Dr.\ Chongomweru Halimu. Key areas: Distributed Systems, Database Systems, Network Security, ML.
+
+\vspace{4pt}
+
+\cventry{Bachelor of Science in Computer Science and Engineering}{2019 -- 2020}{Islamic University of Technology (IUT), Dhaka, Bangladesh}{Second Class Upper Division}
+Specialisation in Software Engineering and Technical Education.
+
+\vspace{4pt}
+
+\cventry{Higher Diploma in Computer Science and Engineering}{2016 -- 2018}{Islamic University of Technology (IUT), Dhaka, Bangladesh}{Second Class Upper Division}
+Specialisation in Web Technologies and Systems Development.
+
+\vspace{4pt}
+
+\cventry{Uganda Advanced Certificate of Education (UACE)}{2014 -- 2015}{Rwenzori Saad Islamic Institute, Kasese, Uganda}{}
+Subjects: Physics, Mathematics, Computer Studies, Entrepreneurship.
+
+%-------------------------
+% PROFESSIONAL EXPERIENCE
+%-------------------------
+\section{Professional Experience}
+
+\subsection{Eight Tech Consults Ltd, Kampala, Uganda}
+\cventry{Full-Stack Developer \& Application Engineer}{January 2021 -- Present}{}{}
+
+\vspace{3pt}
+Lead technical architect responsible for designing, developing, deploying, and maintaining complex enterprise information systems for government agencies, NGOs, and private sector clients. Manage full software development lifecycle including requirements analysis, system architecture, development, testing, deployment, user training, and ongoing support.
+
+\vspace{3pt}
+\textbf{Selected Projects Relevant to Information Systems Management:}
+
+\begin{itemize}[leftmargin=14pt, itemsep=2pt, parsep=0pt, topsep=2pt]
+
+    \projectitem{Uganda Livestock Information Tracking System (ULITS)}{National information system for the Ministry of Agriculture. Designed multi-platform system (web, Android, iOS) for livestock registration, movement tracking, vaccination records, and disease surveillance. Implemented offline-first architecture, GPS/GIS integration, role-based access control, SMS/USSD notifications, and MySQL database administration. Conducted user training across multiple districts. \href{https://u-lits.com}{\textit{u-lits.com}}}
+
+    \projectitem{School Dynamics -- School Management Information System}{SaaS platform serving primary and secondary schools across Uganda. Built modules for student records, staff management, fee collection, examinations, timetabling, library, transport, and hostel. Developed role-based portals for parents, teachers, and administrators. Integrated Mobile Money/Visa payment gateways, SMS/email notifications, and reporting dashboards. \href{https://schooldynamics.ug}{\textit{schooldynamics.ug}}}
+
+    \projectitem{Hospital Management System}{End-to-end healthcare information system for patient records (EHR), appointments, laboratory, pharmacy, billing, and insurance claims. Role-based portals for medical staff and administrators with data security measures. \href{https://globalhealthrescue.com}{\textit{globalhealthrescue.com}}}
+
+    \projectitem{Wildlife Offenders Database}{Information management system for Uganda Wildlife Authority --- web dashboard and mobile app for wildlife crime data capture, offender tracking, case management, biometric integration, and enforcement analytics.}
+
+    \projectitem{National Seed Tracking \& Tracing System}{Digital platform for the Ministry of Agriculture to monitor seed distribution and quality control. Barcode/QR scanning for field verification, voucher management, and interoperable data exchange with government systems.}
+
+    \projectitem{ICT for Persons with Disabilities Observatory}{Nationwide database and resource platform developed with Uganda Communications Commission and NUDIPU. Data analytics dashboards for disability-inclusive policy formulation.}
+
+    \projectitem{Human Rights Reporting System}{Secure case documentation system for CEHURD with evidence capture, encrypted data storage, case tracking workflows, and trend analysis dashboards.}
+
+    \projectitem{E-Commerce \& Real Estate Platforms}{Scalable e-commerce platform (\href{https://afriinventions.com}{\textit{afriinventions.com}}) and real estate management system with inventory, payment integration, CRM, and administrative dashboards.}
+
+\end{itemize}
+
+\vspace{5pt}
+
+\subsection{M-Omulimisa Uganda Limited}
+\cventry{Lead Developer -- Agrihub Mobile Application}{2023 -- 2024}{}{}
+\vspace{1pt}
+Led development of an agricultural information platform integrating weather APIs, marketplace functionality, and mobile payment systems. Conducted user training across multiple districts.
+
+\vspace{5pt}
+
+\subsection{Earlier Roles (2018 -- 2021)}
+\begin{itemize}[leftmargin=14pt, itemsep=1pt, parsep=0pt, topsep=2pt]
+\item \textbf{Full-Stack Developer, Gonevas.com} (2019--2021) -- E-commerce web and Android app development, hosting and content management.
+\item \textbf{Freelance Web Developer} (2018--2021) -- Websites and systems for IUIU Alumni Association, Double Tree Tours, Lukman Primary School, UgNews24.
+\item \textbf{Programming Instructor, YouTube} (2018--2022) -- \href{https://youtube.com/@learnitwithmuhindo}{``Learn It With Muhindo''} channel with 23,000+ subscribers; 200+ tutorials on web/mobile development.
+\item \textbf{Computer Studies Teacher, Sudais Muslim Secondary School} -- Taught computer studies, served as S3 class teacher.
+\end{itemize}
+
+%-------------------------
+% TECHNICAL SKILLS
+%-------------------------
+\section{Technical Skills \& Competencies}
+
+\begin{tabularx}{\textwidth}{@{}>\bfseries p{3.8cm} X@{}}
+Systems \& Infrastructure & Linux/Unix server administration, Docker, Nginx, Apache, AWS, Firebase, DigitalOcean, network configuration \\[3pt]
+Database Administration & MySQL, PostgreSQL, MongoDB, Firebase, SQLite; schema design, query optimisation, backup \& recovery, data migration \\[3pt]
+Programming Languages & Python, PHP, JavaScript, Dart, Java, Kotlin, C\#, SQL \\[3pt]
+Backend Frameworks & Laravel (Expert), Django, CodeIgniter, ASP.NET, RESTful API design \& integration \\[3pt]
+Frontend \& Mobile & React.js, Vue.js, Bootstrap, Tailwind CSS; Flutter/Dart (Expert), Android (Java/Kotlin), iOS \\[3pt]
+IS/ERP Platforms & Student information systems, school management, e-learning, hospital IS, livestock traceability \\[3pt]
+Security & SSL/TLS, JWT, role-based access control, data encryption, secure API development \\[3pt]
+DevOps \& Integration & Docker, Git/GitHub, CI/CD; USSD/SMS gateways, GIS/GPS, payment gateways, barcode/QR, biometrics \\[3pt]
+Project Management & Agile/Scrum, stakeholder engagement, user training, technical documentation \\[3pt]
+Productivity Tools & MS Office Suite, Adobe Illustrator/Photoshop, Figma, WordPress, \LaTeX{} \\
+\end{tabularx}
+
+%-------------------------
+% RELEVANCE TO MIS MANAGER ROLE
+%-------------------------
+\section{Core Competencies for Information Systems Management}
+
+\begin{multicols}{2}
+\begin{itemize}[leftmargin=14pt, itemsep=2pt, parsep=0pt, topsep=0pt]
+  \item IT strategy \& digital transformation
+  \item Enterprise system design \& administration
+  \item Database management \& data governance
+  \item Network infrastructure \& cybersecurity
+  \item ICT policy formulation \& compliance
+  \item E-learning \& academic systems management
+  \item Student information system administration
+  \item Vendor \& stakeholder management
+  \item Staff ICT training \& capacity building
+  \item Disaster recovery \& business continuity
+  \item IT budgeting \& resource planning
+  \item System integration \& interoperability
+\end{itemize}
+\end{multicols}
+
+%-------------------------
+% LANGUAGES
+%-------------------------
+\section{Languages}
+
+\begin{tabularx}{\textwidth}{@{}l l l l@{}}
+\textbf{English:} C1 Proficient & \textbf{Luganda:} C1 Proficient & \textbf{Swahili:} C1 Proficient & \textbf{Lukonzo:} C1 Proficient (Native) \\
+\end{tabularx}
+
+\vspace{2pt}
+{\small\textit{Ref: Common European Framework of Reference for Languages (CEFR)}}
+
+%-------------------------
+% PROFESSIONAL DEVELOPMENT
+%-------------------------
+\section{Professional Development}
+
+\begin{itemize}[leftmargin=14pt, itemsep=1pt, parsep=0pt, topsep=0pt]
+    \item Advanced Laravel \& Full-Stack Development -- Continuous professional development through production project delivery
+    \item Flutter \& Cross-Platform Mobile Development -- State management, offline architecture, multi-platform deployment
+    \item RESTful API Design -- Practical expertise from designing and deploying APIs for 10+ enterprise systems
+    \item Database Administration -- Hands-on MySQL and PostgreSQL management for national-scale systems
+    \item Agile Project Management -- Applied Scrum methodologies across government and NGO projects
+    \item Technical Team Leadership -- Led teams and conducted user training workshops across Uganda
+\end{itemize}
+
+%-------------------------
+% REFERENCES
+%-------------------------
+\section{Professional References}
+
+\begin{tabularx}{\textwidth}{@{}X X@{}}
+\textbf{Dr.\ Drake Patrick Mirembe} & \textbf{Dr.\ Chongomweru Halimu} \\
+CTO, Eight Tech Consults Ltd & Lecturer, Makerere University \\
+\href{mailto:d.p.mirembe@gmail.com}{d.p.mirembe@gmail.com} & \href{mailto:halimkas@gmail.com}{halimkas@gmail.com} \\
+\href{https://www.drakemirembe.org}{www.drakemirembe.org} & +256 702 851 937 \\[10pt]
+
+\textbf{Masereka Nelson Sirikani} & \textbf{Baker Ssekitto} \\
+Executive Secretary, Uganda Seed Trade Association & COO, Eight Tech Consults Ltd \\
+\href{mailto:nelsonmasereka@gmail.com}{nelsonmasereka@gmail.com} & \href{mailto:coo@8technologies.net}{coo@8technologies.net} \\
++256 782 423 767 & \href{https://www.8technologies.net}{www.8technologies.net} \\
+\end{tabularx}
+
+%-------------------------
+% CERTIFICATION STATEMENT
+%-------------------------
+\vspace{8pt}
+\noindent{\color{rulecol}\rule{\linewidth}{0.4pt}}
+\vspace{4pt}
+
+\noindent I, the undersigned, certify that to the best of my knowledge and belief, this CV correctly describes myself, my qualifications, and my experience. I understand that any misrepresentation described herein may lead to my disqualification or dismissal, and I am available to undertake the assignment as required.
+
+\vspace{10pt}
+
+\noindent\textbf{Name:} Muhindo Mubaraka \hfill \textbf{Date:} \today\\[4pt]
+\textbf{Signature:} \includegraphics[height=1.2cm]{muhindo_signature.png}
+
+\end{document}
