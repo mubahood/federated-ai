@@ -1,0 +1,36 @@
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Purpose of This Document}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}What is ODeL?}{4}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Regulatory Context}{4}{subsection.1.3}%
+\contentsline {section}{\numberline {2}ODeL Across Ugandan Universities}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Peer Comparison}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Lessons from the Sector}{5}{subsection.2.2}%
+\contentsline {section}{\numberline {3}The Current Crisis at MRU}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Situation Assessment}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Impact Analysis}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}The Cost of Inaction}{7}{subsection.3.3}%
+\contentsline {section}{\numberline {4}The Proposed Solution}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Overview}{7}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Platform Branding}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Why Moodle?}{8}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Why Cloud VPS --- Not a Local Server}{8}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Platform Capabilities}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Core Moodle Features}{9}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Custom MRU Integrations}{10}{subsection.5.2}%
+\contentsline {section}{\numberline {6}Ensuring Adoption --- Institutional Policies}{10}{section.6}%
+\contentsline {section}{\numberline {7}Implementation Roadmap}{11}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Phase 1: Foundation \& Pilot (Months 1--3)}{12}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Phase 2: Training \& Expansion (Months 4--6)}{12}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Phase 3: Full University Rollout (Months 7--12)}{13}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Training \& Capacity Building}{13}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Faculty \& Lecturers}{13}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Students}{13}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}IT \& Administrative Staff}{13}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Budget \& Revenue Model}{14}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Annual Budget Breakdown}{14}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Revenue Model: Student Technology Fee}{14}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Financial Summary}{15}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Risk Analysis \& Mitigation}{15}{section.10}%
+\contentsline {section}{\numberline {11}Conclusion \& Immediate Next Steps}{16}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Conclusion}{16}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Immediate Next Steps}{17}{subsection.11.2}%
